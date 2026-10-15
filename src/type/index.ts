@@ -1,0 +1,177 @@
+export interface Order {
+  _id: string;
+  orderNumber: string;
+  user: string | null;
+  items: OrderItem[];
+  channel: "pos" | string;
+  pos?: PosOrderDetails;
+  subtotal: number;
+  discount: number;
+  deliveryFee: number;
+  total: number;
+  paymentMethod: string;
+  paymentStatus: "pending" | "paid" | "failed" | string;
+  orderStatus: "pending" | "processing" | "shipped" | "delivered" | "cancelled" | string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface OrderItem {
+  product: string;
+  name: string;
+  image: string;
+  unit: string;
+  sku: string;
+  price: number;
+  quantity: number;
+}
+
+export interface PosPayment {
+  method: string;
+  amount: number;
+}
+
+export interface PosOrderDetails {
+  cashier: string;
+  cashierName: string;
+  payments: PosPayment[];
+  tendered: number;
+  change: number;
+}
+
+export interface CreateOrderPayload {
+  user?: string | null;
+  items: OrderItem[];
+  channel: "pos" | string;
+  pos?: PosOrderDetails;
+  subtotal: number;
+  discount?: number;
+  deliveryFee?: number;
+  total: number;
+  paymentMethod: string;
+  paymentStatus?: string;
+  orderStatus?: string;
+}
+
+export interface Product {
+  _id: string;
+  name: string;
+  slug: string;
+  description: string;
+  shortDescription?: string;
+  category: string;
+  brand: string;
+  images: string[];
+  price: string;
+  sku: string;
+  stock: number;
+  unit: string;
+  specifications: ProductSpecification[];
+  tags: string[];
+  featured: boolean;
+  bestseller: boolean;
+  newArrival: boolean;
+  status: "published" | "draft" | string;
+  rating: number;
+  reviewCount: number;
+  soldCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProductQuery {
+  category?: string;
+  brand?: string;
+  featured?: boolean;
+  newArrival?: boolean;
+  bestseller?: boolean;
+}
+
+export interface ProductSpecification {
+  key: string;
+  value: string;
+  _id?: string;
+}
+
+export interface ProductPayload {
+  name: string;
+  slug: string;
+  description: string;
+  shortDescription: string;
+  category: string;
+  brand: string;
+  images: string[];
+  price: number;
+  sku: string;
+  stock: number;
+  unit: string;
+  specifications: ProductSpecification[];
+  tags: string[];
+  featured: boolean;
+  bestseller: boolean;
+  newArrival: boolean;
+  status: "published" | "draft" | string;
+  rating: number;
+  reviewCount: number;
+  soldCount: number;
+}
+
+
+export interface Subcategory {
+  subcategoryName: string;
+  subcategorySlug: string;
+  _id: string;
+}
+export interface CategoryHome {
+  id: string;
+  slug: string;
+  name: string;
+  icon: string;
+  color: string;
+}
+
+export interface Category {
+  _id: string;
+  name: string;
+  slug: string;
+  description: string;
+  image: string;
+  parent: string | null;
+  status: "active" | "inactive" | string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CategoryPayload {
+  name: string;
+  slug: string;
+  description: string;
+  image: string;
+  parent: string | null;
+  status: "active" | "inactive" | string;
+}
+
+export interface Brand {
+  _id: string;
+  name: string;
+  slug: string;
+  description: string;
+  logo: string;
+  status: "active" | "inactive" | string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface BrandPayload {
+  name: string;
+  slug: string;
+  description: string;
+  logo: string;
+  status: "active" | "inactive" | string;
+}
+
+export interface District {
+  id: string;
+  name: string;
+  districtSlug: string;
+}
