@@ -1,20 +1,29 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import ProductDetails from "@/components/modal/ProductDetails";
 import CompareModal from "@/components/modal/CompareModal";
 import { useCart } from "@/components/header/CartContext";
 import { useWishlist } from "@/components/header/WishlistContext";
-import { useCompare } from '@/components/header/CompareContext';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Link from 'next/link';
+import { useCompare } from "@/components/header/CompareContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
 
 interface BlogGridMainProps {
   Slug: string;
   ProductImage: string;
   ProductTitle?: string;
   Price?: string;
+  SalePrice?: string;
+  Unit?: string;
+  ShortDescription?: string;
+  SKU?: string;
+  CategoryName?: string;
+  Stock?: number;
+  Rating?: number;
+  ReviewCount?: number;
+  Tags?: string[];
 }
 
 const BlogGridMain: React.FC<BlogGridMainProps> = ({
@@ -22,8 +31,16 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
   ProductImage,
   ProductTitle,
   Price,
+  SalePrice,
+  Unit,
+  ShortDescription,
+  SKU,
+  CategoryName,
+  Stock,
+  Rating,
+  ReviewCount,
+  Tags,
 }) => {
-
   // ✅ Swiper Anti-Hydration Fix (safe version)
   const [domReady, setDomReady] = useState(false);
 
@@ -32,7 +49,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
   }, []);
 
   // Other hooks (must stay in order)
-  type ModalType = 'one' | 'two' | 'three' | null;
+  type ModalType = "one" | "two" | "three" | null;
   const [activeModal, setActiveModal] = useState<ModalType>(null);
   const handleClose = () => setActiveModal(null);
 
@@ -45,15 +62,15 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
 
   // quantity
   const [quantity, setQuantity] = useState(1);
-  const increase = () => setQuantity(prev => prev + 1);
-  const decrease = () => setQuantity(prev => prev > 1 ? prev - 1 : 1);
+  const increase = () => setQuantity((prev) => prev + 1);
+  const decrease = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
   const handleAdd = () => {
     addToCart({
       id: Date.now(),
       image: productImageSrc,
-      title: ProductTitle ?? 'Default Product Title',
-      price: parseFloat(Price ?? '0'),
+      title: ProductTitle ?? "Default Product Title",
+      price: parseFloat(Price ?? "0"),
       quantity,
       active: true,
     });
@@ -65,8 +82,8 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
     addToWishlist({
       id: Date.now(),
       image: productImageSrc,
-      title: ProductTitle ?? 'Default Product Title',
-      price: parseFloat(Price ?? '0'),
+      title: ProductTitle ?? "Default Product Title",
+      price: parseFloat(Price ?? "0"),
       quantity: 1,
     });
     setWishlisted(true);
@@ -76,20 +93,21 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
   const handleCompare = () => {
     addToCompare({
       image: productImageSrc,
-      name: ProductTitle ?? 'Default Product Title',
-      price: Price ?? '0',
-      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      name: ProductTitle ?? "Default Product Title",
+      price: Price ?? "0",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       rating: 5,
       ratingCount: 25,
-      weight: '500g',
+      weight: Unit ?? "1kg",
       inStock: true,
     });
   };
 
-  const compare = () => toast('Successfully Add To Compare !');
-  const addcart = () => toast('Successfully Add To Cart !');
-  const wishList = () => toast('Successfully Add To Wishlist !');
-  const productImageSrc = ProductImage.startsWith('http')
+  const compare = () => toast("Successfully Add To Compare !");
+  const addcart = () => toast("Successfully Add To Cart !");
+  const wishList = () => toast("Successfully Add To Wishlist !");
+  const productImageSrc = ProductImage.startsWith("http")
     ? ProductImage
     : `/assets/images/grocery/${ProductImage}`;
 
@@ -121,7 +139,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
               >
                 <i className="fa-light fa-heart" />
               </span>
-              <span
+              {/* <span
                 className="single-action openuptip"
                 data-flow="up"
                 title="Compare"
@@ -131,12 +149,12 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
                 }}
               >
                 <i className="fa-solid fa-arrows-retweet" />
-              </span>
+              </span> */}
               <span
                 className="single-action openuptip cta-quickview product-details-popup-btn"
                 data-flow="up"
                 title="Quick View"
-                onClick={() => setActiveModal('two')}
+                onClick={() => setActiveModal("two")}
               >
                 <i className="fa-regular fa-eye" />
               </span>
@@ -145,12 +163,14 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
 
           <div className="body-content">
             <Link href={`/shop/${Slug}`}>
-              <h4 className="title">{ProductTitle ?? 'How to growing your business'}</h4>
+              <h4 className="title">
+                {ProductTitle ?? "How to growing your business"}
+              </h4>
             </Link>
-            <span className="availability">500g Pack</span>
+            <span className="availability">{Unit ?? "1kg"}</span>
             <div className="price-area">
-              <span className="current">{`$${Price}`}</span>
-              <div className="previous">$36.00</div>
+              <span className="current">{`LKR ${SalePrice || Price}`}</span>
+              {SalePrice && <div className="previous">{`LKR ${Price}`}</div>}
             </div>
 
             <div className="cart-counter-action">
@@ -174,15 +194,21 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
               <Link
                 href="#"
                 className="rts-btn btn-primary add-to-card radious-sm with-icon"
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   handleAdd();
                   addcart();
                 }}
               >
-                <div className="btn-text">{added ? 'Added' : 'Add'}</div>
+                <div className="btn-text">{added ? "Added" : "Add"}</div>
                 <div className="arrow-icon">
-                  <i className={added ? "fa-solid fa-check" : "fa-regular fa-cart-shopping"} />
+                  <i
+                    className={
+                      added
+                        ? "fa-solid fa-check"
+                        : "fa-regular fa-cart-shopping"
+                    }
+                  />
                 </div>
               </Link>
             </div>
@@ -191,13 +217,21 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
       )}
 
       {/* Modals always mounted (does not affect swiper width) */}
-      <CompareModal show={activeModal === 'one'} handleClose={handleClose} />
+      <CompareModal show={activeModal === "one"} handleClose={handleClose} />
       <ProductDetails
-        show={activeModal === 'two'}
+        show={activeModal === "two"}
         handleClose={handleClose}
         productImage={productImageSrc}
-        productTitle={ProductTitle ?? 'Default Product Title'}
-        productPrice={Price ?? '0'}
+        productTitle={ProductTitle ?? "Default Product Title"}
+        productPrice={Price ?? "0"}
+        productSalePrice={SalePrice}
+        productShortDescription={ShortDescription ?? ""}
+        productSku={SKU}
+        categoryName={CategoryName}
+        stock={Stock}
+        rating={Rating}
+        reviewCount={ReviewCount}
+        tags={Tags}
       />
     </>
   );

@@ -126,7 +126,7 @@ function ShopContent() {
 
       if (!searchQuery) return true;
       const title = product.title?.toLowerCase() || '';
-      const category = product.category?.toLowerCase() || '';
+      const category = (typeof product.category === 'string' ? product.category : product.category?.name)?.toLowerCase() || '';
       return title.includes(searchQuery) || category.includes(searchQuery);
     });
 

@@ -25,6 +25,7 @@ function FeatureProduct() {
 
     void fetchProducts();
   }, []);
+  
   // number count up and down
   useEffect(() => {
     const handleQuantityClick = (e: Event) => {
@@ -106,10 +107,10 @@ function FeatureProduct() {
                       hide: true,
                     }}
                     autoplay={{
-                      delay: 3000, 
+                      delay: 3000,
                       disableOnInteraction: false, // Continue autoplay after user interactions
                     }}
-                    loop={true}
+                    loop={products.length >= 6}
                     navigation={{
                       nextEl: ".feature-product-next",
                       prevEl: ".feature-product-prev",
@@ -133,6 +134,14 @@ function FeatureProduct() {
                               ProductImage={post.images[0]}
                               ProductTitle={post.name}
                               Price={post.price}
+                              SalePrice={post.salePrice}
+                              Unit={post.unit}
+                              SKU={post.sku}
+                              CategoryName={typeof post.category === "string" ? post.category : post.category.name}
+                              Stock={post.stock}
+                              Rating={post.rating}
+                              ReviewCount={post.reviewCount}
+                              Tags={post.tags}
                             />
                           </div>
                         </div>

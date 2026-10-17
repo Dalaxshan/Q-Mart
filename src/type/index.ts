@@ -59,10 +59,11 @@ export interface Product {
   slug: string;
   description: string;
   shortDescription?: string;
-  category: string;
+  category: string | ProductCategory;
   brand: string;
   images: string[];
   price: string;
+  salePrice?: string;
   sku: string;
   stock: number;
   unit: string;
@@ -79,12 +80,19 @@ export interface Product {
   updatedAt: string;
 }
 
+export interface ProductCategory {
+  _id: string;
+  name: string;
+  slug: string;
+}
+
 export interface ProductQuery {
   category?: string;
   brand?: string;
   featured?: boolean;
   newArrival?: boolean;
   bestseller?: boolean;
+  limit?: number;
 }
 
 export interface ProductSpecification {

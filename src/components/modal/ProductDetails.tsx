@@ -13,6 +13,14 @@ interface ModalProps {
   productImage: string;
   productTitle: string;
   productPrice: string;
+  productSalePrice?: string;
+  productShortDescription: string;
+  productSku?: string;
+  categoryName?: string;
+  stock?: number;
+  rating?: number;
+  reviewCount?: number;
+  tags?: string[];
 }
 
 const ProductDetails: React.FC<ModalProps> = ({
@@ -20,7 +28,15 @@ const ProductDetails: React.FC<ModalProps> = ({
   handleClose,
   productImage,
   productTitle,
-  productPrice
+  productPrice,
+  productSalePrice,
+  productShortDescription,
+  productSku,
+  categoryName,
+  stock,
+  rating,
+  reviewCount,
+  tags,
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<string>('tab1');
@@ -29,8 +45,14 @@ const ProductDetails: React.FC<ModalProps> = ({
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
-  const priceNumber = parseFloat(productPrice) || 0;
-  const totalPrice = (priceNumber * quantity).toFixed(2);
+  const regularPrice = parseFloat(productPrice) || 0;
+  const salePrice = productSalePrice ? parseFloat(productSalePrice) : NaN;
+  const hasSalePrice = Number.isFinite(salePrice) && salePrice > 0 && salePrice < regularPrice;
+  const currentPrice = hasSalePrice ? salePrice : regularPrice;
+  const totalPrice = (currentPrice * quantity).toFixed(2);
+  const displayRating = rating ?? 3.5;
+  const displayReviewCount = reviewCount ?? 10;
+  const displayStock = stock ?? 1;
 
   const addcart = () => toast.success('Successfully Added To Cart!');
 
@@ -39,8 +61,9 @@ const ProductDetails: React.FC<ModalProps> = ({
       id: Date.now(),
       image: productImage,
       title: productTitle,
-      price: priceNumber,
+      price: currentPrice,
       quantity: quantity,
+      shortDescription:productShortDescription,
       active: true,
     };
 
@@ -99,26 +122,28 @@ const ProductDetails: React.FC<ModalProps> = ({
 
                 <div className="contents">
                   <div className="product-status">
-                    <span className="product-catagory">Dress</span>
+                    <span className="product-catagory">{categoryName ?? 'Category unavailable'}</span>
                     <div className="rating-stars-group">
-                      <div className="rating-star"><i className="fas fa-star" /></div>
-                      <div className="rating-star"><i className="fas fa-star" /></div>
-                      <div className="rating-star"><i className="fas fa-star-half-alt" /></div>
-                      <span>10 Reviews</span>
+                      {Array.from({ length: 5 }, (_, index) => (
+                        <div className="rating-star" key={index}>
+                          <i className={`fas ${index + 1 <= displayRating ? 'fa-star' : index < displayRating ? 'fa-star-half-alt' : 'fa-star'}`} />
+                        </div>
+                      ))}
+                      <span>{displayRating.toFixed(1)} ({displayReviewCount} Reviews)</span>
                     </div>
                   </div>
 
                   <h2 className="product-title">
-                    {productTitle} <span className="stock">In Stock</span>
+                    {productTitle} <span className="stock">{displayStock > 0 ? `In Stock (${displayStock})` : 'Out of Stock'}</span>
                   </h2>
 
                   <span className="product-price">
-                    <span className="old-price">$9.35</span> ${totalPrice}
+                    {hasSalePrice && <span className="old-price">LKR {regularPrice.toFixed(2)}</span>}
+                    LKR {totalPrice}
                   </span>
 
                   <p>
-                    Priyoshop has brought to you the Hijab 3 Pieces Combo Pack PS23.
-                    Priyoshop has brought to you the Hijab 3 Pieces Combo Pack PS23
+                    {productShortDescription}
                   </p>
 
                   <div className="product-bottom-action">
@@ -154,18 +179,9 @@ const ProductDetails: React.FC<ModalProps> = ({
                   </div>
 
                   <div className="product-uniques">
-                    <span className="sku product-unipue"><span>SKU: </span> BO1D0MX8SJ</span>
-                    <span className="catagorys product-unipue"><span>Categories: </span> T-Shirts, Tops, Mens</span>
-                    <span className="tags product-unipue"><span>Tags: </span> fashion, t-shirts, Men</span>
-                  </div>
-
-                  <div className="share-social">
-                    <span>Share:</span>
-                    <a className="platform" href="http://facebook.com" target="_blank"><i className="fab fa-facebook-f" /></a>
-                    <a className="platform" href="http://twitter.com" target="_blank"><i className="fab fa-twitter" /></a>
-                    <a className="platform" href="http://behance.com" target="_blank"><i className="fab fa-behance" /></a>
-                    <a className="platform" href="http://youtube.com" target="_blank"><i className="fab fa-youtube" /></a>
-                    <a className="platform" href="http://linkedin.com" target="_blank"><i className="fab fa-linkedin" /></a>
+                    <span className="sku product-unipue"><span>SKU: </span> {productSku ?? 'Unavailable'}</span>
+                    <span className="catagorys product-unipue"><span>Categories: </span> {categoryName ?.toUpperCase() ?? 'Unavailable'}</span>
+                    <span className="tags product-unipue"><span>Tags: </span> {tags?.length ? tags.toString().toUpperCase() : 'Unavailable'}</span>
                   </div>
                 </div>
               </div>
