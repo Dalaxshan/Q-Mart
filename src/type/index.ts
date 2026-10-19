@@ -60,7 +60,7 @@ export interface Product {
   description: string;
   shortDescription?: string;
   category: string | ProductCategory;
-  brand: string;
+  brand: string | ProductBrand;
   images: string[];
   price: string;
   salePrice?: string;
@@ -81,6 +81,13 @@ export interface Product {
 }
 
 export interface ProductCategory {
+  _id: string;
+  name: string;
+  slug: string;
+}
+
+export interface ProductBrand {
+  logo?: string;
   _id: string;
   name: string;
   slug: string;

@@ -16,16 +16,19 @@ interface CompareContextProps {
   compareItems: CompareItem[];
   addToCompare: (item: CompareItem) => void;
   removeFromCompare: (name: string) => void;
+  isLoaded: boolean;
 }
 
 export const CompareContext = createContext<CompareContextProps>({
   compareItems: [],
   addToCompare: () => {},
   removeFromCompare: () => {},
+  isLoaded: false,
 });
 
 export const CompareProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [compareItems, setCompareItems] = useState<CompareItem[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -33,12 +36,15 @@ export const CompareProvider: React.FC<{ children: ReactNode }> = ({ children })
     if (storedItems) {
       setCompareItems(JSON.parse(storedItems));
     }
+    setIsLoaded(true);
   }, []);
 
-  // Save to localStorage whenever compareItems changes
+  // Save to localStorage whenever compareItems changes (only after load)
   useEffect(() => {
-    localStorage.setItem("compareItems", JSON.stringify(compareItems));
-  }, [compareItems]);
+    if (isLoaded) {
+      localStorage.setItem("compareItems", JSON.stringify(compareItems));
+    }
+  }, [compareItems, isLoaded]);
 
   const addToCompare = (item: CompareItem) => {
     setCompareItems((prevItems) => {
@@ -53,7 +59,7 @@ export const CompareProvider: React.FC<{ children: ReactNode }> = ({ children })
   };
 
   return (
-    <CompareContext.Provider value={{ compareItems, addToCompare, removeFromCompare }}>
+    <CompareContext.Provider value={{ compareItems, addToCompare, removeFromCompare, isLoaded }}>
       {children}
     </CompareContext.Provider>
   );

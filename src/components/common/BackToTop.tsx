@@ -67,11 +67,6 @@ function BackToTop() {
                 >
                     <path
                         d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
-                        style={{
-                            transition: "stroke-dashoffset 10ms linear 0s",
-                            strokeDasharray: "307.919, 307.919",
-                            strokeDashoffset: "307.919"
-                        }}
                     />
                 </svg>
             </div>

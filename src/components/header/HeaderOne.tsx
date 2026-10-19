@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 function HeaderOne() {
-  const { compareItems } = useCompare();
+  const { compareItems, isLoaded: compareLoaded } = useCompare();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -332,7 +332,7 @@ function HeaderOne() {
                                         </Link>
                                         <Link href="/shop-compare" className="btn-border-only account compare-number">
                                             <i className="fa-regular fa-code-compare" />
-                                            <span className="number">{compareItems.length}</span>
+                                            <span className="number">{compareLoaded ? compareItems.length : 0}</span>
                                         </Link>
                                         <WishList />
                                         <Cart />
