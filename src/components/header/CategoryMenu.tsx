@@ -4,113 +4,96 @@ import Link from "next/link";
 import React, { useState, MouseEvent } from "react";
 
 type MenuItem = {
-    icon: string;
+  icon: string;
     label: string;
-    submenu: string[] | null;
+    slug: string;
+  submenu: string[] | null;
 };
 
 function CategoryMenu() {
-    const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-    const toggleMenu = (index: number) => {
-        setOpenIndex(openIndex === index ? null : index);
-    };
+  const toggleMenu = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
     const menuItems: MenuItem[] = [
-        {
-            icon: "01.svg",
-            label: "Breakfast & Dairy",
-            submenu: ["Breakfast", "Dinner", "Pumking"],
+  
+       {
+      icon: "01.svg",
+            label: "Fruits & Vegetables",
+      slug:"fruits-vegetables",
+      submenu: null,
         },
-        {
-            icon: "02.svg",
-            label: "Meats & Seafood",
-            submenu: ["Breakfast", "Dinner", "Pumking"],
-        },
-        {
-            icon: "03.svg",
-            label: "Breads & Bakery",
-            submenu: null,
-        },
-        {
-            icon: "04.svg",
-            label: "Chips & Snacks",
-            submenu: ["Breakfast", "Dinner", "Pumking"],
-        },
-        {
-            icon: "05.svg",
-            label: "Medical Healthcare",
-            submenu: null,
-        },
-        {
-            icon: "06.svg",
-            label: "Breads & Bakery",
-            submenu: null,
-        },
-        {
-            icon: "07.svg",
-            label: "Biscuits & Snacks",
-            submenu: ["Breakfast", "Dinner", "Pumking"],
-        },
-        {
-            icon: "08.svg",
-            label: "Frozen Foods",
-            submenu: null,
-        },
-        {
-            icon: "09.svg",
-            label: "Grocery & Staples",
-            submenu: null,
-        },
-        {
-            icon: "10.svg",
-            label: "Other Items",
-            submenu: null,
-        },
-    ];
+    {
+      icon: "02.svg",
+        label: "Meat & Seafood",
+        slug:"meat-seafood",
+      submenu: null,
+    },
+    {
+      icon: "07.svg",
+        label: "Beverages",
+      slug:"beverages",
+      submenu: null,
+    },
+    {
+      icon: "04.svg",
+        label: "Snacks",
+        slug:"snacks",
+      submenu: null,
+    },
+    {
+      icon: "03.svg",
+        label: "Cooking Essentials",
+        slug:"cooking-essentials",
+      submenu: null,
+    },
+    {
+      icon: "06.svg",
+        label: "Frozen Foods",
+      slug:"frozen-foods",
+      submenu: null,
+    },
+    {
+      icon: "09.svg",
+      label: "Household",
+      submenu: null,
+    },
+    {
+      icon: "05.svg",
+        label: "Personal Care",
+      slug:"personal-care",
+      submenu: null,
+    },
+    {
+      icon: "10.svg",
+        label: "Baby Products",
+      slug:"baby-products",
+      submenu: null,
+    },
+    
+ 
+  ];
 
-    return (
-        <div>
-            <ul className="category-sub-menu" id="category-active-four">
-                {menuItems.map((item, index) => (
-                    <li key={index}>
-                        <Link
-                            href="#"
-                            className="menu-item"
-                            onClick={(e: MouseEvent<HTMLAnchorElement>) => {
-                                e.preventDefault();
-                                if (item.submenu) toggleMenu(index);
-                            }}
-                        >
-                            <img src={`/assets/images/icons/${item.icon}`} alt="icons" />
-                            <span>{item.label}</span>
-                            {item.submenu && (
-                                <i
-                                    className={`fa-regular ${openIndex === index ? "fa-minus" : "fa-plus"
-                                        }`}
-                                />
-                            )}
-                        </Link>
-
-                        {item.submenu && (
-                            <ul
-                                className={`submenu mm-collapse ${openIndex === index ? "mm-show" : ""
-                                    }`}
-                            >
-                                {item.submenu.map((subItem, subIdx) => (
-                                    <li key={subIdx}>
-                                        <Link className="mobile-menu-link" href="/shop">
-                                            {subItem}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+  return (
+    <div>
+      <ul className="category-sub-menu" id="category-active-four">
+        {menuItems.map((cat, index) => (
+          <li key={cat.label}>
+            <Link href={`/shop?search=${cat.slug}`} className="menu-item">
+            
+                <img
+                  src={`/assets/images/icons/${cat.icon}`}
+                  alt={cat.label}
+                />
+              <span>{cat.label}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default CategoryMenu;

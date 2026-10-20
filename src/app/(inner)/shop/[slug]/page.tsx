@@ -13,14 +13,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Product } from "@/type";
 import { productApi } from "@/app/api/products/route";
+import HeaderTwo from "@/components/header/HeaderTwo";
 
 const getRelationName = (
   relation: string | { name: string } | undefined,
-): string => (typeof relation === "string" ? relation : relation?.name ?? "");
+): string => (typeof relation === "string" ? relation : (relation?.name ?? ""));
 
 const CompareElements: React.FC = () => {
   const { slug } = useParams();
-
   const [product, setProduct] = useState<Product | null>(null);
   const [added, setAdded] = useState(false);
   const [activeTab, setActiveTab] = useState<string>("tab1");
@@ -28,6 +28,8 @@ const CompareElements: React.FC = () => {
 
   const { addToCart } = useCart();
 
+
+  //f
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -49,7 +51,7 @@ const CompareElements: React.FC = () => {
   const categoryName = getRelationName(product.category);
   const brandName = getRelationName(product.brand);
 
-  console.log("product detail:", product);
+
 
   const handleAdd = () => {
     addToCart({
@@ -64,10 +66,10 @@ const CompareElements: React.FC = () => {
     toast("Successfully Added To Cart!");
     setTimeout(() => setAdded(false), 5000);
   };
- 
+
   return (
     <div>
-      {/* <HeaderOne /> */}
+      <HeaderTwo />
       <div className="rts-navigation-area-breadcrumb bg_light-1">
         <div className="container">
           <div className="row">
@@ -83,13 +85,11 @@ const CompareElements: React.FC = () => {
           </div>
         </div>
       </div>
-
       <div className="section-seperator bg_light-1">
         <div className="container">
           <hr className="section-seperator" />
         </div>
       </div>
-
       <div className="rts-chop-details-area rts-section-gap bg_light-1">
         <div className="container">
           <div className="shopdetails-style-1-wrapper">
@@ -106,12 +106,13 @@ const CompareElements: React.FC = () => {
                               <img src={activeImage} alt={product.name} />
                             </div>
                           </div>
-                         
                         </div>
 
                         <div className="contents">
                           <div className="product-status">
-                            <span className="product-catagory">{categoryName}</span>
+                            <span className="product-catagory">
+                              {categoryName}
+                            </span>
                             <div className="rating-stars-group">
                               <div className="rating-star">
                                 <i className="fas fa-star" />
@@ -127,15 +128,17 @@ const CompareElements: React.FC = () => {
                           </div>
                           <h2 className="product-title">{product.name}</h2>
                           <p className="mt--20 mb--20">
-                          {product.shortDescription}
+                            {product.shortDescription}
                           </p>
                           <span
                             className="product-price mb--15 d-block"
                             style={{ color: "#DC2626", fontWeight: 600 }}
                           >
-                            LKR {product.salePrice ?? product.price}
+                            LKR  {product.salePrice ?? product.price}
                             {product.salePrice && (
-                              <span className="old-price ml--15">LKR {product.price}</span>
+                              <span className="old-price ml--15">
+                                LKR  {product.price}
+                              </span>
                             )}
                           </span>
 
@@ -174,10 +177,9 @@ const CompareElements: React.FC = () => {
                             <span className="tags product-unipue mb--10">
                               <strong>Stock:</strong> {product.stock}
                             </span>
-                           
                           </div>
 
-                          <div className="share-option-shop-details">
+                          {/* <div className="share-option-shop-details">
                             <div className="single-share-option">
                               <div className="icon">
                                 <i className="fa-regular fa-heart" />
@@ -196,7 +198,7 @@ const CompareElements: React.FC = () => {
                               </div>
                               <span>Compare</span>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </div>
@@ -207,25 +209,18 @@ const CompareElements: React.FC = () => {
                     <li className="nav-item" role="presentation">
                       <button
                         onClick={() => setActiveTab("tab1")}
-                        className={`nav-link ${activeTab === "tab1" ? "active" : ""}`}
+                        className={`nav-link LKR {activeTab === "tab1" ? "active" : ""}`}
                       >
                         Product Details
                       </button>
                     </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        onClick={() => setActiveTab("tab2")}
-                        className={`nav-link ${activeTab === "tab2" ? "active" : ""}`}
-                      >
-                        Additional Information
-                      </button>
-                    </li>
+
                     <li className="nav-item" role="presentation">
                       <button
                         onClick={() => setActiveTab("tab3")}
-                        className={`nav-link ${activeTab === "tab3" ? "active" : ""}`}
+                        className={`nav-link LKR {activeTab === "tab3" ? "active" : ""}`}
                       >
-                        Customer Reviews (01)
+                        Customer Reviews ({product.reviewCount})
                       </button>
                     </li>
                   </ul>
@@ -233,242 +228,17 @@ const CompareElements: React.FC = () => {
                     {activeTab === "tab1" && (
                       <div>
                         <div className="single-tab-content-shop-details">
-                          <p className="disc">
-                            Uninhibited carnally hired played in whimpered dear
-                            gorilla koala depending and much yikes off far
-                            quetzal goodness and from for grimaced goodness
-                            unaccountably and meadowlark near unblushingly
-                            crucial scallop tightly neurotic hungrily some and
-                            dear furiously this apart.
-                          </p>
-                          <div className="details-row-2">
-                            <div className="left-area">
-                              <img
-                                src="/assets/images/shop/06.jpg"
-                                alt="shop"
-                              />
-                            </div>
-                            <div className="right">
-                              <h4 className="title">
-                                All Natural Italian-Style Chicken Meatballs
-                              </h4>
-                              <p className="mb--25">
-                                Pellentesque habitant morbi tristique senectus
-                                et netus et malesuada fames ac turpis egestas
-                                Vestibulum tortor quam, feugiat vitae, ultricies
-                                eget, tempor sit amet, ante. ibero sit amet quam
-                                egestas semperAenean ultricies mi vitae est
-                                Mauris placerat eleifend.
-                              </p>
-                              <ul className="bottom-ul">
-                                <li>
-                                  Elementum sociis rhoncus aptent auctor urna
-                                  justo
-                                </li>
-                                <li>
-                                  Habitasse venenatis gravida nisl, sollicitudin
-                                  posuere
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
+                          <p className="disc">{product.description}</p>
                         </div>
                       </div>
                     )}
-                    {activeTab === "tab2" && (
-                      <div>
-                        <div className="single-tab-content-shop-details">
-                          <p className="disc">
-                            Uninhibited carnally hired played in whimpered dear
-                            gorilla koala depending and much yikes off far
-                            quetzal goodness and from for grimaced goodness
-                            unaccountably and meadowlark near unblushingly
-                            crucial scallop tightly neurotic hungrily some and
-                            dear furiously this apart.
-                          </p>
-                          <div className="table-responsive table-shop-details-pd">
-                            <table className="table">
-                              <thead>
-                                <tr>
-                                  <th>Kitchen Fade Defy</th>
-                                  <th>5KG</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>PRAN Full Cream Milk Powder</td>
-                                  <td>3KG</td>
-                                </tr>
-                                <tr>
-                                  <td>Net weight</td>
-                                  <td>8KG</td>
-                                </tr>
-                                <tr>
-                                  <td>Brand</td>
-                                  <td>Reactheme</td>
-                                </tr>
-                                <tr>
-                                  <td>Item code</td>
-                                  <td>4000000005</td>
-                                </tr>
-                                <tr>
-                                  <td>Product type</td>
-                                  <td>Powder milk</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                          <p className="cansellation mt--20">
-                            <span> Return/cancellation:</span> No change will be
-                            applicable which are already delivered to customer.
-                            If product quality or quantity problem found then
-                            customer can return/cancel their order on delivery
-                            time with presence of delivery person.
-                          </p>
-                          <p className="note">
-                            <span>Note:</span> Product delivery duration may
-                            vary due to product availability in stock.
-                          </p>
-                        </div>
-                      </div>
-                    )}
+                   
 
                     {activeTab === "tab3" && (
                       <div>
                         <div className="single-tab-content-shop-details">
                           <div className="product-details-review-product-style">
-                            <div className="average-stars-area-left">
-                              <div className="top-stars-wrapper">
-                                <h4 className="review">5.0</h4>
-                                <div className="rating-disc">
-                                  <span>Average Rating</span>
-                                  <div className="stars">
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-solid fa-star" />
-                                    <span>(1 Reviews &amp; 0 Ratings)</span>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="average-stars-area">
-                                <h4 className="average">66.7%</h4>
-                                <span>Recommended (2 of 3)</span>
-                              </div>
-                              <div className="review-charts-details">
-                                <div className="single-review">
-                                  <div className="stars">
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-solid fa-star" />
-                                  </div>
-                                  <div className="single-progress-area-incard">
-                                    <div className="progress">
-                                      <div
-                                        className="progress-bar wow fadeInLeft"
-                                        role="progressbar"
-                                        style={{ width: "80%" }}
-                                        aria-valuenow={25}
-                                        aria-valuemin={0}
-                                        aria-valuemax={100}
-                                      />
-                                    </div>
-                                  </div>
-                                  <span className="pac">100%</span>
-                                </div>
-                                <div className="single-review">
-                                  <div className="stars">
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-regular fa-star" />
-                                  </div>
-                                  <div className="single-progress-area-incard">
-                                    <div className="progress">
-                                      <div
-                                        className="progress-bar wow fadeInLeft"
-                                        role="progressbar"
-                                        style={{ width: "80%" }}
-                                        aria-valuenow={25}
-                                        aria-valuemin={0}
-                                        aria-valuemax={100}
-                                      />
-                                    </div>
-                                  </div>
-                                  <span className="pac">80%</span>
-                                </div>
-                                <div className="single-review">
-                                  <div className="stars">
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-regular fa-star" />
-                                    <i className="fa-regular fa-star" />
-                                  </div>
-                                  <div className="single-progress-area-incard">
-                                    <div className="progress">
-                                      <div
-                                        className="progress-bar wow fadeInLeft"
-                                        role="progressbar"
-                                        style={{ width: "60%" }}
-                                        aria-valuenow={25}
-                                        aria-valuemin={0}
-                                        aria-valuemax={100}
-                                      />
-                                    </div>
-                                  </div>
-                                  <span className="pac">60%</span>
-                                </div>
-                                <div className="single-review">
-                                  <div className="stars">
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-regular fa-star" />
-                                    <i className="fa-regular fa-star" />
-                                    <i className="fa-regular fa-star" />
-                                  </div>
-                                  <div className="single-progress-area-incard">
-                                    <div className="progress">
-                                      <div
-                                        className="progress-bar wow fadeInLeft"
-                                        role="progressbar"
-                                        style={{ width: "80%" }}
-                                        aria-valuenow={25}
-                                        aria-valuemin={0}
-                                        aria-valuemax={100}
-                                      />
-                                    </div>
-                                  </div>
-                                  <span className="pac">40%</span>
-                                </div>
-                                <div className="single-review">
-                                  <div className="stars">
-                                    <i className="fa-solid fa-star" />
-                                    <i className="fa-regular fa-star" />
-                                    <i className="fa-regular fa-star" />
-                                    <i className="fa-regular fa-star" />
-                                    <i className="fa-regular fa-star" />
-                                  </div>
-                                  <div className="single-progress-area-incard">
-                                    <div className="progress">
-                                      <div
-                                        className="progress-bar wow fadeInLeft"
-                                        role="progressbar"
-                                        style={{ width: "80%" }}
-                                        aria-valuenow={25}
-                                        aria-valuemin={0}
-                                        aria-valuemax={100}
-                                      />
-                                    </div>
-                                  </div>
-                                  <span className="pac">30%</span>
-                                </div>
-                              </div>
-                            </div>
+                           
                             <div className="submit-review-area">
                               <form action="#" className="submit-review-area">
                                 <h5 className="title">Submit Your Review</h5>
@@ -526,7 +296,7 @@ const CompareElements: React.FC = () => {
                       <div className="details">
                         <p>
                           Get 5% instant discount for the 1st Flipkart Order
-                          using Ekomart UPI
+                          using QuickMart UPI
                         </p>
                       </div>
                     </div>
@@ -536,8 +306,8 @@ const CompareElements: React.FC = () => {
                       </div>
                       <div className="details">
                         <p>
-                          Flat $250 off on Citi Credit Card EMI Transactions
-                          over $30
+                          Flat LKR 250 off on Citi Credit Card EMI Transactions
+                          over LKR 30
                         </p>
                       </div>
                     </div>
@@ -546,7 +316,7 @@ const CompareElements: React.FC = () => {
                         <img src="/assets/images/shop/03.svg" alt="icon" />
                       </div>
                       <div className="details">
-                        <p>Free Worldwide Shipping on all orders over $100</p>
+                        <p>Free Worldwide Shipping on all orders over LKR 100</p>
                       </div>
                     </div>
                   </div>
@@ -561,10 +331,10 @@ const CompareElements: React.FC = () => {
         </div>
       </div>
       
-      <RelatedProduct />
+      <RelatedProduct categoryName={categoryName} />
       <ShortService />
       <FooterOne />
-      <ToastContainer /> 
+      <ToastContainer />
     </div>
   );
 };

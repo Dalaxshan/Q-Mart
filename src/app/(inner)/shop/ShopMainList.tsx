@@ -1,14 +1,16 @@
-"use client"
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 import { useCart } from "@/components/header/CartContext";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface BlogGridMainProps {
   Slug: string;
   ProductImage: string;
   ProductTitle?: string;
   Price?: string;
+  SalePrice?: string;
+  Unit?: string;
 }
 
 const ShopMainList: React.FC<BlogGridMainProps> = ({
@@ -16,12 +18,17 @@ const ShopMainList: React.FC<BlogGridMainProps> = ({
   ProductImage,
   ProductTitle,
   Price,
+  SalePrice,
+  Unit,
 }) => {
+  const productImageSrc = ProductImage?.startsWith("http")
+    ? ProductImage
+    : `/assets/images/grocery/${ProductImage}`;
 
   // 🔥 FIXED QUANTITY (React State Only)
   const [qty, setQty] = useState(1);
-  const increaseQty = () => setQty(prev => prev + 1);
-  const decreaseQty = () => setQty(prev => (prev > 1 ? prev - 1 : 1));
+  const increaseQty = () => setQty((prev) => prev + 1);
+  const decreaseQty = () => setQty((prev) => (prev > 1 ? prev - 1 : 1));
 
   // cart item
   const { addToCart } = useCart();
@@ -29,13 +36,13 @@ const ShopMainList: React.FC<BlogGridMainProps> = ({
   const handleAdd = () => {
     addToCart({
       id: Date.now(),
-      image: `/assets/images/grocery/${ProductImage}`,
-      title: ProductTitle ?? 'Default Product Title',
-      price: parseFloat(Price ?? '0'),
+      image: productImageSrc,
+      title: ProductTitle ?? "Default Product Title",
+      price: parseFloat(Price ?? "0"),
       quantity: qty, // 👈 FIXED
       active: true,
     });
-    toast('Successfully Add To Cart !');
+    toast("Successfully Add To Cart !");
   };
 
   return (
@@ -48,20 +55,22 @@ const ShopMainList: React.FC<BlogGridMainProps> = ({
             </span>
             <i className="fa-solid fa-bookmark" />
           </div>
-          <img src={`/assets/images/grocery/${ProductImage}`} alt="grocery" />
+          <img src={productImageSrc} alt="grocery" />
         </a>
 
         <div className="body-content">
           <div className="title-area-left">
             <a href={`/shop/${Slug}`}>
-              <h4 className="title">{ProductTitle ?? 'How to growing your business'}</h4>
+              <h4 className="title">
+                {ProductTitle ?? "How to growing your business"}
+              </h4>
             </a>
 
-            <span className="availability">500g Pack</span>
+            <span className="availability">{Unit ?? "1kg"}</span>
 
             <div className="price-area">
-              <span className="current">${Price}</span>
-              <div className="previous">$36.00</div>
+              <span className="current">LKR {SalePrice || Price}</span>
+              {SalePrice && <div className="previous">LKR {Price}</div>}
             </div>
 
             <div className="cart-counter-action">
@@ -94,16 +103,6 @@ const ShopMainList: React.FC<BlogGridMainProps> = ({
                 </div>
               </a>
             </div>
-          </div>
-
-          <div className="natural-value">
-            <h6 className="title">Nutritional Values</h6>
-
-            <div className="single"><span>Energy(kcal):</span><span>211</span></div>
-            <div className="single"><span>Protein(g):</span><span>211</span></div>
-            <div className="single"><span>magnetiam(kcal):</span><span>211</span></div>
-            <div className="single"><span>Calory(kcal):</span><span>211</span></div>
-            <div className="single"><span>Vitamine(kcal):</span><span>211</span></div>
           </div>
         </div>
       </div>

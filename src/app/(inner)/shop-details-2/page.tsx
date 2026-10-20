@@ -534,7 +534,7 @@ export default function Home() {
                       <div className="details">
                         <p>
                           Get %5 instant discount for the 1st Flipkart Order using
-                          Ekomart UPI T&amp;C
+                          QuickMart UPI T&amp;C
                         </p>
                       </div>
                     </div>

@@ -1,19 +1,16 @@
-"use client"
-import { useState, useEffect, useRef } from 'react';
-import Nav from './Nav';
-import CategoryMenu from './CategoryMenu';
-import Cart from './Cart';
-import WishList from './WishList';
+"use client";
+import { useState, useEffect, useRef } from "react";
+import Nav from "./Nav";
+import CategoryMenu from "./CategoryMenu";
+import Cart from "./Cart";
+import WishList from "./WishList";
 import BackToTop from "@/components/common/BackToTop";
-import Sidebar from './Sidebar';
-import { useCompare } from '@/components/header/CompareContext';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-
+import Sidebar from "./Sidebar";
+import { useCompare } from "@/components/header/CompareContext";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function HeaderFive() {
-
-
   const { compareItems } = useCompare();
   // header sticky
   const [isSticky, setIsSticky] = useState(false);
@@ -26,38 +23,31 @@ function HeaderFive() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     // Clean up the event listener on component unmount
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-
-
-
   const handleMenuClick = () => {
-    const sidebar = document.querySelector('.side-bar.header-two');
+    const sidebar = document.querySelector(".side-bar.header-two");
     if (sidebar) {
-      sidebar.classList.toggle('show');
+      sidebar.classList.toggle("show");
     }
   };
-
-
 
   const handleSearchOpen = () => {
-    const sidebar = document.querySelector('.search-input-area');
+    const sidebar = document.querySelector(".search-input-area");
     if (sidebar) {
-      sidebar.classList.toggle('show');
+      sidebar.classList.toggle("show");
     }
   };
-
-
 
   // filter search action js start
   const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -83,13 +73,13 @@ function HeaderFive() {
     "Super Fresh Meat",
     "Original Fresh fruit",
     "Organic Fresh fruit",
-    "Lite Fresh fruit"
+    "Lite Fresh fruit",
   ];
 
   useEffect(() => {
     if (searchTerm.trim().length > 0) {
-      const filtered = allSuggestions.filter(item =>
-        item.toLowerCase().includes(searchTerm.toLowerCase())
+      const filtered = allSuggestions.filter((item) =>
+        item.toLowerCase().includes(searchTerm.toLowerCase()),
       );
       setSuggestions(filtered.slice(0, 5));
       setShowSuggestions(true);
@@ -107,12 +97,15 @@ function HeaderFive() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (inputRef.current && !inputRef.current.contains(event.target as Node)) {
+      if (
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node)
+      ) {
         setShowSuggestions(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -121,16 +114,14 @@ function HeaderFive() {
       router.push(`/shop?search=${encodeURIComponent(searchTerm.trim())}`);
       setShowSuggestions(false);
     } else {
-      router.push('/shop');
+      router.push("/shop");
     }
   };
 
   // filter search action js end
 
-
   return (
     <div>
-
       <>
         {/* rts header area start */}
         <div className="rts-header-one-area-one">
@@ -179,7 +170,7 @@ function HeaderFive() {
                           <div className="logo-search-category-wrapper style-five-call-us">
                             <a href="/" className="logo-area">
                               <img
-                                src="assets/images/logo/logo-01.svg"
+                                src="assets/images/logo/logo-02.png"
                                 alt="logo-main"
                                 className="logo"
                               />
@@ -196,17 +187,29 @@ function HeaderFive() {
                                   </a>
                                 </div>
                               </div>
-                              <form onSubmit={handleSubmit} className="search-header" autoComplete="off">
+                              <form
+                                onSubmit={handleSubmit}
+                                className="search-header"
+                                autoComplete="off"
+                              >
                                 <input
                                   ref={inputRef}
                                   type="text"
                                   placeholder="Search for products, categories or brands"
                                   required
                                   value={searchTerm}
-                                  onChange={(e) => setSearchTerm(e.target.value)}
-                                  onFocus={() => searchTerm.length > 0 && setShowSuggestions(true)}
+                                  onChange={(e) =>
+                                    setSearchTerm(e.target.value)
+                                  }
+                                  onFocus={() =>
+                                    searchTerm.length > 0 &&
+                                    setShowSuggestions(true)
+                                  }
                                 />
-                                <button type="submit" className="rts-btn btn-primary radious-sm with-icon">
+                                <button
+                                  type="submit"
+                                  className="rts-btn btn-primary radious-sm with-icon"
+                                >
                                   <div className="btn-text">Search</div>
                                   <div className="arrow-icon">
                                     <i className="fa-light fa-magnifying-glass" />
@@ -215,26 +218,31 @@ function HeaderFive() {
 
                                 {/* Autocomplete dropdown */}
                                 {showSuggestions && suggestions.length > 0 && (
-                                  <ul className="autocomplete-suggestions" style={{
-                                    position: 'absolute',
-                                    backgroundColor: '#fff',
-                                    border: '1px solid #ccc',
-                                    marginTop: '4px',
-                                    width: '100%',
-                                    maxHeight: '200px',
-                                    overflowY: 'auto',
-                                    zIndex: 1000,
-                                    listStyleType: 'none',
-                                    padding: 0,
-                                    borderRadius: '4px',
-                                  }}>
+                                  <ul
+                                    className="autocomplete-suggestions"
+                                    style={{
+                                      position: "absolute",
+                                      backgroundColor: "#fff",
+                                      border: "1px solid #ccc",
+                                      marginTop: "4px",
+                                      width: "100%",
+                                      maxHeight: "200px",
+                                      overflowY: "auto",
+                                      zIndex: 1000,
+                                      listStyleType: "none",
+                                      padding: 0,
+                                      borderRadius: "4px",
+                                    }}
+                                  >
                                     {suggestions.map((suggestion, index) => (
                                       <li
                                         key={index}
-                                        onClick={() => handleSuggestionClick(suggestion)}
+                                        onClick={() =>
+                                          handleSuggestionClick(suggestion)
+                                        }
                                         style={{
-                                          padding: '8px 12px',
-                                          cursor: 'pointer',
+                                          padding: "8px 12px",
+                                          cursor: "pointer",
                                         }}
                                         onMouseDown={(e) => e.preventDefault()} // prevent input blur
                                       >
@@ -253,9 +261,14 @@ function HeaderFive() {
                                 <i className="fa-light fa-user" />
                                 Account
                               </Link>
-                              <Link href="/shop-compare" className="btn-border-only account compare-number">
+                              <Link
+                                href="/shop-compare"
+                                className="btn-border-only account compare-number"
+                              >
                                 <i className="fa-regular fa-code-compare"></i>
-                                <span className="number">{compareItems.length}</span>
+                                <span className="number">
+                                  {compareItems.length}
+                                </span>
                               </Link>
                               <WishList />
                               <Cart />
@@ -269,7 +282,9 @@ function HeaderFive() {
               </div>
             </div>
           </div>
-          <div className={`rts-header-nav-area-one  header-four header--sticky  ${isSticky ? 'sticky' : ''}`}>
+          <div
+            className={`rts-header-nav-area-one  header-four header--sticky  ${isSticky ? "sticky" : ""}`}
+          >
             <div className="container">
               <div className="row">
                 <div className="col-lg-12">
@@ -320,65 +335,95 @@ function HeaderFive() {
                         <ul className="category-sub-menu">
                           <li>
                             <a href="#" className="menu-item">
-                              <img src="assets/images/icons/01.svg" alt="icons" />
+                              <img
+                                src="assets/images/icons/01.svg"
+                                alt="icons"
+                              />
                               <span>Breakfast &amp; Dairy</span>
                               <i className="fa-regular fa-plus" />
                             </a>
                           </li>
                           <li>
                             <a href="#" className="menu-item">
-                              <img src="assets/images/icons/02.svg" alt="icons" />
+                              <img
+                                src="assets/images/icons/02.svg"
+                                alt="icons"
+                              />
                               <span>Meats &amp; Seafood</span>
                               <i className="fa-regular fa-plus" />
                             </a>
                           </li>
                           <li>
                             <a href="#" className="menu-item">
-                              <img src="assets/images/icons/03.svg" alt="icons" />
+                              <img
+                                src="assets/images/icons/03.svg"
+                                alt="icons"
+                              />
                               <span>Breads &amp; Bakery</span>
                             </a>
                           </li>
                           <li>
                             <a href="#" className="menu-item">
-                              <img src="assets/images/icons/04.svg" alt="icons" />
+                              <img
+                                src="assets/images/icons/04.svg"
+                                alt="icons"
+                              />
                               <span>Chips &amp; Snacks</span>
                               <i className="fa-regular fa-plus" />
                             </a>
                           </li>
                           <li>
                             <a href="#" className="menu-item">
-                              <img src="assets/images/icons/05.svg" alt="icons" />
+                              <img
+                                src="assets/images/icons/05.svg"
+                                alt="icons"
+                              />
                               <span>Medical Healthcare</span>
                             </a>
                           </li>
                           <li>
                             <a href="#" className="menu-item">
-                              <img src="assets/images/icons/06.svg" alt="icons" />
+                              <img
+                                src="assets/images/icons/06.svg"
+                                alt="icons"
+                              />
                               <span>Breads &amp; Bakery</span>
                             </a>
                           </li>
                           <li>
                             <a href="#" className="menu-item">
-                              <img src="assets/images/icons/07.svg" alt="icons" />
+                              <img
+                                src="assets/images/icons/07.svg"
+                                alt="icons"
+                              />
                               <span>Biscuits &amp; Snacks</span>
                               <i className="fa-regular fa-plus" />
                             </a>
                           </li>
                           <li>
                             <a href="#" className="menu-item">
-                              <img src="assets/images/icons/08.svg" alt="icons" />
+                              <img
+                                src="assets/images/icons/08.svg"
+                                alt="icons"
+                              />
                               <span>Frozen Foods</span>
                             </a>
                           </li>
                           <li>
                             <a href="#" className="menu-item">
-                              <img src="assets/images/icons/09.svg" alt="icons" />
+                              <img
+                                src="assets/images/icons/09.svg"
+                                alt="icons"
+                              />
                               <span>Grocery &amp; Staples</span>
                             </a>
                           </li>
                           <li>
                             <a href="#" className="menu-item">
-                              <img src="assets/images/icons/10.svg" alt="icons" />
+                              <img
+                                src="assets/images/icons/10.svg"
+                                alt="icons"
+                              />
                               <span>Other Items</span>
                             </a>
                           </li>
@@ -402,11 +447,17 @@ function HeaderFive() {
                     </div>
                     <div className="main-wrapper-action-2 d-flex">
                       <div className="accont-wishlist-cart-area-header">
-                        <Link href="/account" className="btn-border-only account">
+                        <Link
+                          href="/account"
+                          className="btn-border-only account"
+                        >
                           <i className="fa-light fa-user" />
                           Account
                         </Link>
-                        <Link href="/wishlist" className="btn-border-only wishlist">
+                        <Link
+                          href="/wishlist"
+                          className="btn-border-only wishlist"
+                        >
                           <i className="fa-regular fa-heart" />
                           Wishlist
                         </Link>
@@ -420,7 +471,10 @@ function HeaderFive() {
                             <div className="cart-item-1 border-top">
                               <div className="img-name">
                                 <div className="thumbanil">
-                                  <img src="assets/images/shop/cart-1.png" alt="" />
+                                  <img
+                                    src="assets/images/shop/cart-1.png"
+                                    alt=""
+                                  />
                                 </div>
                                 <div className="details">
                                   <Link href="/shop">
@@ -504,7 +558,10 @@ function HeaderFive() {
                                 </p>
                               </div>
                               <div className="button-wrapper d-flex align-items-center justify-content-between">
-                                <Link href="/cart" className="rts-btn btn-primary ">
+                                <Link
+                                  href="/cart"
+                                  className="rts-btn btn-primary "
+                                >
                                   View Cart
                                 </Link>
                                 <Link
@@ -520,7 +577,11 @@ function HeaderFive() {
                         </div>
                       </div>
                       <div className="actions-area">
-                        <div className="search-btn" id="search" onClick={handleSearchOpen}>
+                        <div
+                          className="search-btn"
+                          id="search"
+                          onClick={handleSearchOpen}
+                        >
                           <svg
                             width={17}
                             height={16}
@@ -534,7 +595,11 @@ function HeaderFive() {
                             />
                           </svg>
                         </div>
-                        <div className="menu-btn" id="menu-btn" onClick={handleMenuClick}>
+                        <div
+                          className="menu-btn"
+                          id="menu-btn"
+                          onClick={handleMenuClick}
+                        >
                           <svg
                             width={20}
                             height={16}

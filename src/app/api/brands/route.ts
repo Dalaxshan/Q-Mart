@@ -4,7 +4,7 @@ import { Brand, BrandPayload } from "@/type";
 export const brandApi = {
   async getAllBrands(): Promise<Brand[]> {
     const res = await api.get("/brands");
-    return res.data;
+    return res.data.data;
   },
 
   async getOneBrand(slug: string): Promise<Brand> {

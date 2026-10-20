@@ -14,7 +14,7 @@ interface ModalProps {
   productTitle: string;
   productPrice: string;
   productSalePrice?: string;
-  productShortDescription: string;
+  productShortDescription?: string;
   productSku?: string;
   categoryName?: string;
   stock?: number;

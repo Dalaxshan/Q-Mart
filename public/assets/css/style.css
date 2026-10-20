@@ -22672,6 +22672,7 @@ body.modal-open {
 .product-area-wrapper-shopgrid-list.with-list .body-content {
   background: #F3F4F6;
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: space-between;
 }
@@ -22691,7 +22692,7 @@ body.modal-open {
 }
 
 .product-area-wrapper-shopgrid-list.with-list .body-content .title-area-left {
-  flex-basis: 53%;
+  width: 100%;
 }
 
 .product-area-wrapper-shopgrid-list.with-list .body-content .natural-value .title {
@@ -23673,9 +23674,13 @@ body.modal-open {
 }
 
 .registration-wrapper-1 .logo-area img {
-  max-width: 57px;
+  max-width: 180px;
   margin: auto;
-  margin-bottom: 30px;
+
+}
+
+.registration-wrapper-1 .logo-area {
+  background-color: #000000;
 }
 
 .registration-form {

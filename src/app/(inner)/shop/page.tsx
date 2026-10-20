@@ -1,142 +1,105 @@
 "use client";
-import HeaderOne from "@/components/header/HeaderOne";
-import { useState, Suspense } from 'react';
+import { useState, useEffect, Suspense, useCallback } from "react";
+import HeaderTwo from "@/components/header/HeaderTwo";
+import FooterOne from "@/components/footer/FooterOne";
 import ShopMain from "./ShopMain";
 import ShopMainList from "./ShopMainList";
-import Product from '@/data/Product.json';
-import FooterOne from "@/components/footer/FooterOne";
-import { useSearchParams } from 'next/navigation';
+import { productApi } from "@/app/api/products/route";
+import { categoryApi } from "@/app/api/categories/route";
+import { brandApi } from "@/app/api/brands/route";
+import { Product, Category, Brand } from "@/type";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-
-interface PostType {
-  category?: string;
-  slug: string;
-  image: string;
-  title?: string;
-  author?: string;
-  publishedDate?: string;
-  price?: string;
-}
 
 function ShopContent() {
   const searchParams = useSearchParams();
-  const searchQuery = searchParams.get('search')?.toLowerCase() || '';
-  
-  const [activeTab, setActiveTab] = useState<string>('tab1');
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const searchQuery = searchParams.get("search") || "";
+  const categoryQuery = searchParams.get("category") || "";
+
+  const [activeTab, setActiveTab] = useState<"tab1" | "tab2">("tab1");
+  const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [brands, setBrands] = useState<Brand[]>([]);
+
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(
+    categoryQuery ? [categoryQuery] : [],
+  );
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [minPrice, setMinPrice] = useState<number>(0);
-  const [maxPrice, setMaxPrice] = useState<number>(150);
+  const [maxPrice, setMaxPrice] = useState<number>(9000);
+  const [appliedMin, setAppliedMin] = useState<number>(0);
+  const [appliedMax, setAppliedMax] = useState<number>(9000);
 
-  const allCategories = ["Beverages", "Biscuits & Snacks", "Breads & Bakery"];
-  const allBrands = ["Frito Lay", "Nespresso", "Oreo", "Quaker", "Welch's"];
+  // Fetch categories and brands once
+  useEffect(() => {
+    setSelectedCategories(categoryQuery ? [categoryQuery] : []);
+  }, [categoryQuery]);
 
-  const categoryProductIndices: { [key: string]: number[] } = {
-    "Beverages": [1, 3, 4, 5, 6, 7],
-    "Biscuits & Snacks": [8, 9, 10, 12, 16],
-    "Breads & Bakery": [15, 1, 2, 3],
-  };
+  useEffect(() => {
+    categoryApi.getAllCategory().then(setCategories).catch(console.error);
+    brandApi.getAllBrands().then(setBrands).catch(console.error);
+  }, []);
 
-  const brandProductIndices: { [key: string]: number[] } = {
-    "Frito Lay": [1, 3, 4],
-    "Nespresso": [3, 1, 4],
-    "Oreo": [8, 9, 10],
-    "Quaker": [3, 4, 10],
-    "Welch's": [8, 9, 1],
-  };
+  // Fetch products whenever filters change
+  const fetchProducts = useCallback(async () => {
+    try {
+      const query: Parameters<typeof productApi.getAllProducts>[0] = {};
+      if (selectedCategories.length === 1)
+        query.category = selectedCategories[0];
+      if (selectedBrands.length === 1) query.brand = selectedBrands[0];
+      if (appliedMin > 0) query.minPrice = appliedMin;
+      if (appliedMax < 9000) query.maxPrice = appliedMax;
+      if (searchQuery) query.search = searchQuery;
+      const data = await productApi.getAllProducts(query);
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  }, [selectedCategories, selectedBrands, appliedMin, appliedMax, searchQuery]);
 
-  const handleCategoryChange = (category: string) => {
-    setSelectedCategories(prev =>
-      prev.includes(category)
-        ? prev.filter(cat => cat !== category)
-        : [...prev, category]
+  useEffect(() => {
+    void fetchProducts();
+  }, [fetchProducts]);
+
+  const handleCategoryChange = (slug: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(slug) ? prev.filter((c) => c !== slug) : [...prev, slug],
     );
   };
 
-  const handleBrandChange = (brand: string) => {
-    setSelectedBrands(prev =>
-      prev.includes(brand)
-        ? prev.filter(b => b !== brand)
-        : [...prev, brand]
+  const handleBrandChange = (slug: string) => {
+    setSelectedBrands((prev) =>
+      prev.includes(slug) ? prev.filter((b) => b !== slug) : [...prev, slug],
     );
   };
-
-  const handleMinPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = parseFloat(e.target.value);
-    if (!isNaN(val)) setMinPrice(val);
-  };
-  
-  const handleMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = parseFloat(e.target.value);
-    if (!isNaN(val)) setMaxPrice(val);
-  };
-
-  const getFilteredByCategoryProducts = (): PostType[] => {
-    if (selectedCategories.length === 0) {
-      const allIndices = Object.values(categoryProductIndices).flat();
-      const uniqueIndices = Array.from(new Set(allIndices));
-      return uniqueIndices.map(i => Product[i]).filter(Boolean);
-    }
-
-    const selectedIndices = selectedCategories
-      .map(cat => categoryProductIndices[cat] || [])
-      .flat();
-    const uniqueSelectedIndices = Array.from(new Set(selectedIndices));
-    return uniqueSelectedIndices.map(i => Product[i]).filter(Boolean);
-  };
-
-  const getFilteredByBrandProducts = (): PostType[] => {
-    if (selectedBrands.length === 0) {
-      return Product;
-    }
-
-    const selectedIndices = selectedBrands
-      .map(brand => brandProductIndices[brand] || [])
-      .flat();
-    const uniqueSelectedIndices = Array.from(new Set(selectedIndices));
-    return uniqueSelectedIndices.map(i => Product[i]).filter(Boolean);
-  };
-
-  const productsByCategory = getFilteredByCategoryProducts();
-  const productsByBrand = getFilteredByBrandProducts();
-
-  const categorySlugs = new Set(productsByCategory.map(p => p.slug));
-  const brandSlugs = new Set(productsByBrand.map(p => p.slug));
-
-  let combinedFilteredProducts = [];
-
-  if (selectedCategories.length > 0 && selectedBrands.length > 0) {
-    combinedFilteredProducts = productsByCategory.filter(p => brandSlugs.has(p.slug));
-  } else if (selectedCategories.length > 0) {
-    combinedFilteredProducts = productsByCategory;
-  } else if (selectedBrands.length > 0) {
-    combinedFilteredProducts = productsByBrand;
-  } else {
-    const allIndices = Object.values(categoryProductIndices).flat();
-    const uniqueIndices = Array.from(new Set(allIndices));
-    combinedFilteredProducts = uniqueIndices.map(i => Product[i]).filter(Boolean);
-  }
-
-  const filteredProducts: PostType[] = combinedFilteredProducts
-    .filter(product => {
-      const productPrice = product.price ? parseFloat(product.price) : 0;
-      if (productPrice < minPrice || productPrice > maxPrice) {
-        return false;
-      }
-
-      if (!searchQuery) return true;
-      const title = product.title?.toLowerCase() || '';
-      const category = (typeof product.category === 'string' ? product.category : product.category?.name)?.toLowerCase() || '';
-      return title.includes(searchQuery) || category.includes(searchQuery);
-    });
 
   const handlePriceFilterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setAppliedMin(minPrice);
+    setAppliedMax(maxPrice);
   };
+
+  // Client-side filter for multiple selections (API may only support single values)
+  const filteredProducts = products.filter((p) => {
+    const price = parseFloat(p.price ?? "0");
+    if (price < appliedMin || price > appliedMax) return false;
+
+    if (selectedCategories.length > 1) {
+      const catId =
+        typeof p.category === "object" ? p.category.slug : p.category;
+      if (!selectedCategories.includes(catId)) return false;
+    }
+
+    if (selectedBrands.length > 1) {
+      const brandId = typeof p.brand === "object" ? p.brand.slug : p.brand;
+      if (!selectedBrands.includes(brandId)) return false;
+    }
+
+    return true;
+  });
 
   return (
     <div className="shop-page">
-      {/* Breadcrumb */}
       <div className="rts-navigation-area-breadcrumb bg_light-1">
         <div className="container">
           <div className="row">
@@ -144,7 +107,9 @@ function ShopContent() {
               <div className="navigator-breadcrumb-wrapper">
                 <Link href="/">Home</Link>
                 <i className="fa-regular fa-chevron-right" />
-                <a className="current" href="#">Shop</a>
+                <a className="current" href="#">
+                  Shop
+                </a>
               </div>
             </div>
           </div>
@@ -180,7 +145,9 @@ function ShopContent() {
                             type="number"
                             value={minPrice}
                             min={0}
-                            onChange={handleMinPriceChange}
+                            onChange={(e) =>
+                              setMinPrice(parseFloat(e.target.value) || 0)
+                            }
                           />
                         </div>
                         <div className="single">
@@ -190,7 +157,9 @@ function ShopContent() {
                             type="number"
                             value={maxPrice}
                             min={0}
-                            onChange={handleMaxPriceChange}
+                            onChange={(e) =>
+                              setMaxPrice(parseFloat(e.target.value) || 0)
+                            }
                           />
                         </div>
                       </div>
@@ -198,14 +167,14 @@ function ShopContent() {
                         type="range"
                         className="range"
                         min={0}
-                        max={150}
+                        max={9000}
                         value={maxPrice}
-                        onChange={(e) => setMaxPrice(parseInt(e.target.value, 10))}
+                        onChange={(e) =>
+                          setMaxPrice(parseInt(e.target.value, 10))
+                        }
                       />
                       <div className="filter-value-min-max">
-                        <span>
-                          Price: ${minPrice} — ${maxPrice}
-                        </span>
+                       
                         <button type="submit" className="rts-btn btn-primary">
                           Filter
                         </button>
@@ -218,16 +187,16 @@ function ShopContent() {
                 <div className="single-filter-box">
                   <h5 className="title">Product Categories</h5>
                   <div className="filterbox-body">
-                    <div className="category-wrapper ">
-                      {allCategories.map((cat, i) => (
-                        <div className="single-category" key={i}>
+                    <div className="category-wrapper">
+                      {categories.map((cat) => (
+                        <div className="single-category" key={cat._id}>
                           <input
-                            id={`cat${i + 1}`}
+                            id={`cat-${cat._id}`}
                             type="checkbox"
-                            checked={selectedCategories.includes(cat)}
-                            onChange={() => handleCategoryChange(cat)}
+                            checked={selectedCategories.includes(cat.slug)}
+                            onChange={() => handleCategoryChange(cat.slug)}
                           />
-                          <label htmlFor={`cat${i + 1}`}>{cat}</label>
+                          <label htmlFor={`cat-${cat._id}`}>{cat.name}</label>
                         </div>
                       ))}
                     </div>
@@ -239,15 +208,17 @@ function ShopContent() {
                   <h5 className="title">Select Brands</h5>
                   <div className="filterbox-body">
                     <div className="category-wrapper">
-                      {allBrands.map((brand, i) => (
-                        <div className="single-category" key={i}>
+                      {brands.map((brand) => (
+                        <div className="single-category" key={brand._id}>
                           <input
-                            id={`brand${i + 1}`}
+                            id={`brand-${brand._id}`}
                             type="checkbox"
-                            checked={selectedBrands.includes(brand)}
-                            onChange={() => handleBrandChange(brand)}
+                            checked={selectedBrands.includes(brand.slug)}
+                            onChange={() => handleBrandChange(brand.slug)}
                           />
-                          <label htmlFor={`brand${i + 1}`}>{brand}</label>
+                          <label htmlFor={`brand-${brand._id}`}>
+                            {brand.name}
+                          </label>
                         </div>
                       ))}
                     </div>
@@ -267,27 +238,91 @@ function ShopContent() {
                       <ul className="nav nav-tabs" id="myTab" role="tablist">
                         <li className="nav-item" role="presentation">
                           <button
-                            onClick={() => setActiveTab('tab1')}
-                            className={`nav-link single-button ${activeTab === 'tab1' ? 'active' : ''}`}
+                            onClick={() => setActiveTab("tab1")}
+                            className={`nav-link single-button ${activeTab === "tab1" ? "active" : ""}`}
                           >
-                            <svg width={16} height={16} viewBox="0 0 16 16" fill="none">
-                              <rect x="0.5" y="0.5" width={6} height={6} rx="1.5" stroke="#2C3B28" />
-                              <rect x="0.5" y="9.5" width={6} height={6} rx="1.5" stroke="#2C3B28" />
-                              <rect x="9.5" y="0.5" width={6} height={6} rx="1.5" stroke="#2C3B28" />
-                              <rect x="9.5" y="9.5" width={6} height={6} rx="1.5" stroke="#2C3B28" />
+                            <svg
+                              width={16}
+                              height={16}
+                              viewBox="0 0 16 16"
+                              fill="none"
+                            >
+                              <rect
+                                x="0.5"
+                                y="0.5"
+                                width={6}
+                                height={6}
+                                rx="1.5"
+                                stroke="#2C3B28"
+                              />
+                              <rect
+                                x="0.5"
+                                y="9.5"
+                                width={6}
+                                height={6}
+                                rx="1.5"
+                                stroke="#2C3B28"
+                              />
+                              <rect
+                                x="9.5"
+                                y="0.5"
+                                width={6}
+                                height={6}
+                                rx="1.5"
+                                stroke="#2C3B28"
+                              />
+                              <rect
+                                x="9.5"
+                                y="9.5"
+                                width={6}
+                                height={6}
+                                rx="1.5"
+                                stroke="#2C3B28"
+                              />
                             </svg>
                           </button>
                         </li>
                         <li className="nav-item" role="presentation">
                           <button
-                            onClick={() => setActiveTab('tab2')}
-                            className={`nav-link single-button ${activeTab === 'tab2' ? 'active' : ''}`}
+                            onClick={() => setActiveTab("tab2")}
+                            className={`nav-link single-button ${activeTab === "tab2" ? "active" : ""}`}
                           >
-                            <svg width={16} height={16} viewBox="0 0 16 16" fill="none">
-                              <rect x="0.5" y="0.5" width={6} height={6} rx="1.5" stroke="#2C3C28" />
-                              <rect x="0.5" y="9.5" width={6} height={6} rx="1.5" stroke="#2C3C28" />
-                              <rect x={9} y={3} width={7} height={1} fill="#2C3C28" />
-                              <rect x={9} y={12} width={7} height={1} fill="#2C3C28" />
+                            <svg
+                              width={16}
+                              height={16}
+                              viewBox="0 0 16 16"
+                              fill="none"
+                            >
+                              <rect
+                                x="0.5"
+                                y="0.5"
+                                width={6}
+                                height={6}
+                                rx="1.5"
+                                stroke="#2C3C28"
+                              />
+                              <rect
+                                x="0.5"
+                                y="9.5"
+                                width={6}
+                                height={6}
+                                rx="1.5"
+                                stroke="#2C3C28"
+                              />
+                              <rect
+                                x={9}
+                                y={3}
+                                width={7}
+                                height={1}
+                                fill="#2C3C28"
+                              />
+                              <rect
+                                x={9}
+                                y={12}
+                                width={7}
+                                height={1}
+                                fill="#2C3C28"
+                              />
                             </svg>
                           </button>
                         </li>
@@ -297,20 +332,24 @@ function ShopContent() {
                 </div>
               </div>
 
-              {/* Grid or List view */}
               <div className="tab-content" id="myTabContent">
-                <div className="product-area-wrapper-shopgrid-list mt--20 tab-pane fade show active">
-                  {activeTab === 'tab1' && (
+                {activeTab === "tab1" && (
+                  <div className="product-area-wrapper-shopgrid-list mt--20">
                     <div className="row g-4">
                       {filteredProducts.length > 0 ? (
-                        filteredProducts.map((post: PostType, index: number) => (
-                          <div key={index} className="col-lg-20 col-lg-4 col-md-6 col-sm-6 col-12">
+                        filteredProducts.map((product: Product) => (
+                          <div
+                            key={product._id}
+                            className="col-lg-4 col-md-6 col-sm-6 col-12"
+                          >
                             <div className="single-shopping-card-one">
                               <ShopMain
-                                Slug={post.slug}
-                                ProductImage={post.image}
-                                ProductTitle={post.title}
-                                Price={post.price}
+                                Slug={product.slug}
+                                ProductImage={product.images[0]}
+                                ProductTitle={product.name}
+                                Price={product.price}
+                                SalePrice={product.salePrice}
+                                Unit={product.unit}
                               />
                             </div>
                           </div>
@@ -321,21 +360,23 @@ function ShopContent() {
                         </div>
                       )}
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
 
-                <div className="product-area-wrapper-shopgrid-list with-list mt--20">
-                  {activeTab === 'tab2' && (
+                {activeTab === "tab2" && (
+                  <div className="product-area-wrapper-shopgrid-list with-list mt--20">
                     <div className="row">
                       {filteredProducts.length > 0 ? (
-                        filteredProducts.map((post: PostType, index: number) => (
-                          <div key={index} className="col-lg-6">
+                        filteredProducts.map((product: Product) => (
+                          <div key={product._id} className="col-lg-6">
                             <div className="single-shopping-card-one discount-offer">
                               <ShopMainList
-                                Slug={post.slug}
-                                ProductImage={post.image}
-                                ProductTitle={post.title}
-                                Price={post.price}
+                                Slug={product.slug}
+                                ProductImage={product.images[0]}
+                                ProductTitle={product.name}
+                                Price={product.price}
+                                SalePrice={product.salePrice}
+                                Unit={product.unit}
                               />
                             </div>
                           </div>
@@ -346,8 +387,8 @@ function ShopContent() {
                         </div>
                       )}
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -360,15 +401,8 @@ function ShopContent() {
 export default function Home() {
   return (
     <>
-      <HeaderOne />
-      <Suspense fallback={
-        <div className="text-center py-20">
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-          <p className="mt-3">Loading products...</p>
-        </div>
-      }>
+      <HeaderTwo />
+      <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
         <ShopContent />
       </Suspense>
       <FooterOne />

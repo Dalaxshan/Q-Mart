@@ -1,15 +1,13 @@
-
 import HeaderOne from "@/components/header/HeaderOne";
 import ShortService from "@/components/service/ShortService";
 
 import FooterOne from "@/components/footer/FooterOne";
+import HeaderTwo from "@/components/header/HeaderTwo";
 
 export default function Home() {
   return (
     <div className="demo-one">
-      <HeaderOne />
-
-
+      <HeaderTwo />
       <>
         <div className="rts-navigation-area-breadcrumb bg_light-1">
           <div className="container">
@@ -40,7 +38,7 @@ export default function Home() {
                   <div className="logo-area mb--0">
                     <img
                       className="mb--10"
-                      src="assets/images/logo/fav.png"
+                      src="assets/images/logo/logo-01.png"
                       alt="logo"
                     />
                   </div>
@@ -58,19 +56,14 @@ export default function Home() {
                       <label htmlFor="password">Password*</label>
                       <input type="password" id="password" />
                     </div>
-                    <button className="rts-btn btn-primary">Register Account</button>
+                    <button className="rts-btn btn-primary">
+                      Register Account
+                    </button>
                     <div className="another-way-to-registration">
                       <div className="registradion-top-text">
-                        <span>Or Register With</span>
+                        <span>Or</span>
                       </div>
-                      <div className="login-with-brand">
-                        <a href="#" className="single">
-                          <img src="assets/images/form/google.svg" alt="login" />
-                        </a>
-                        <a href="#" className="single">
-                          <img src="assets/images/form/facebook.svg" alt="login" />
-                        </a>
-                      </div>
+                   
                       <p>
                         Already Have Account? <a href="#">Login</a>
                       </p>
@@ -84,12 +77,8 @@ export default function Home() {
         {/* rts register area end */}
       </>
 
-
-
-
       <ShortService />
       <FooterOne />
-
     </div>
   );
 }

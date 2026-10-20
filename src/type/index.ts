@@ -100,6 +100,9 @@ export interface ProductQuery {
   newArrival?: boolean;
   bestseller?: boolean;
   limit?: number;
+  minPrice?: number;
+  maxPrice?: number;
+  search?: string;
 }
 
 export interface ProductSpecification {

@@ -348,6 +348,7 @@
     .body-content{
         background: #F3F4F6;
         display: flex;
+        flex: 1;
         align-items: center;
         justify-content: space-between;
         @media #{$large-mobile} {
@@ -359,8 +360,7 @@
                 gap: 15px;
         }
         .title-area-left {
-            flex-basis: 53%;
-
+            width: 100%;
         }
         .natural-value{
             .title{

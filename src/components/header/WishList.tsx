@@ -13,7 +13,7 @@ const WishList: React.FC = () => {
     const { wishlistItems, removeFromWishlist } = useWishlist();
 
     const total = wishlistItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const freeShippingThreshold = 125;
+    const freeShippingThreshold = 5000;
     const remaining = freeShippingThreshold - total;
 
 
@@ -71,7 +71,7 @@ const WishList: React.FC = () => {
                         </div>
                         {total < freeShippingThreshold && (
                             <p>
-                                Spend More <span>${remaining.toFixed(2)}</span> to reach{' '}
+                                Spend More <span>LKR {remaining.toFixed(2)}</span> to reach{' '}
                                 <span>Free Shipping</span>
                             </p>
                         )}
