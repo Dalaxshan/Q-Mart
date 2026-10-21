@@ -17,6 +17,7 @@ interface BlogGridMainProps {
   Price?: string;
   SalePrice?: string;
   Unit?: string;
+  SKU?: string;
 }
 
 const BlogGridMain: React.FC<BlogGridMainProps> = ({
@@ -26,6 +27,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
   Price,
   SalePrice,
   Unit,
+  SKU,
 }) => {
   type ModalType = "one" | "two" | "three" | null;
   const [activeModal, setActiveModal] = useState<ModalType>(null);
@@ -54,6 +56,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
       title: ProductTitle ?? "Default Product Title",
       price: parseFloat(Price ?? "0"),
       quantity: quantity,
+      sku: SKU,
       active: true,
     });
 
@@ -70,6 +73,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
       title: ProductTitle ?? "Default Product Title",
       price: parseFloat(Price ?? "0"),
       quantity: 1,
+      sku: SKU,
     });
   };
 

@@ -74,7 +74,7 @@ function ComponentName() {
                             <div className="logo-search-category-wrapper after-md-device-header">
                                 <Link href="/" className="logo-area">
                                     <img
-                                        src="/assets/images/logo/logo-01.svg"
+                                        src="/assets/images/logo/logo-01.png"
                                         alt="logo-main"
                                         className="logo"
                                     />
@@ -201,7 +201,7 @@ function ComponentName() {
                                                             </a>
                                                             <div className="number">
                                                                 1 <i className="fa-regular fa-x" />
-                                                                <span>$36.00</span>
+                                                                <span>LKR 36.00</span>
                                                             </div>
                                                         </div>
                                                     </div>

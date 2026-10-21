@@ -2,21 +2,49 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-interface CartItem {
-  id: number;
+export interface CartItem {
+  id: string;
   image: string;
   title: string;
   price: number;
   quantity: number;
-  active: boolean; // true = cart, false = wishlist
+  sku?: string;
+  active: boolean;
 }
+
+type CartItemInput = Omit<CartItem, "id" | "active"> & {
+  id?: string | number;
+  _id?: string | number;
+  active?: boolean;
+};
+
+const normalizeCartItem = (
+  item: CartItemInput,
+  activeOverride?: boolean,
+): CartItem | null => {
+  const id = item.id ?? item._id;
+  if (id === undefined || id === null || String(id).length === 0) {
+    console.error("Cannot add cart item without an id:", item);
+    return null;
+  }
+
+  return {
+    id: String(id),
+    image: item.image,
+    title: item.title,
+    price: Number(item.price) || 0,
+    quantity: Math.max(1, Number(item.quantity) || 1),
+    ...(item.sku ? { sku: item.sku } : {}),
+    active: activeOverride ?? item.active ?? true,
+  };
+};
 
 interface CartContextProps {
   cartItems: CartItem[];
-  addToCart: (item: CartItem) => void;
-  addToWishlist: (item: CartItem) => void;
-  removeFromCart: (id: number) => void;
-  updateItemQuantity: (id: number, quantity: number) => void;
+  addToCart: (item: CartItemInput) => void;
+  addToWishlist: (item: CartItemInput) => void;
+  removeFromCart: (id: string) => void;
+  updateItemQuantity: (id: string, quantity: number) => void;
   isCartLoaded: boolean;
 }
 
@@ -32,12 +60,14 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartLoaded, setIsCartLoaded] = useState(false);
 
-  // Load from localStorage on first mount
   useEffect(() => {
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
       try {
-        setCartItems(JSON.parse(storedCart));
+        const storedItems = JSON.parse(storedCart) as CartItemInput[];
+        setCartItems(storedItems
+          .map(normalizeCartItem)
+          .filter((item): item is CartItem => item !== null));
       } catch (error) {
         console.error('Failed to parse cart from localStorage:', error);
         localStorage.removeItem('cart');
@@ -46,52 +76,51 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     setIsCartLoaded(true);
   }, []);
 
-  // Save to localStorage whenever cart changes
   useEffect(() => {
     if (isCartLoaded) {
       localStorage.setItem('cart', JSON.stringify(cartItems));
     }
   }, [cartItems, isCartLoaded]);
 
-  // Add item to cart (active: true)
-  const addToCart = (item: CartItem) => {
+  const addToCart = (item: CartItemInput) => {
+    const normalizedItem = normalizeCartItem(item, true);
+    if (!normalizedItem) return;
+
     setCartItems((prev) => {
-      const existing = prev.find((i) => i.id === item.id && i.active === true);
+      const existing = prev.find((i) => i.id === normalizedItem.id && i.active);
       if (existing) {
         return prev.map((i) =>
-          i.id === item.id && i.active === true
-            ? { ...i, quantity: i.quantity + item.quantity }
+          i.id === normalizedItem.id && i.active
+            ? { ...i, quantity: i.quantity + normalizedItem.quantity }
             : i
         );
-      } else {
-        return [...prev, item];
       }
+      return [...prev, normalizedItem];
     });
   };
 
-  // Add item to wishlist (active: false)
-  const addToWishlist = (item: CartItem) => {
+  const addToWishlist = (item: CartItemInput) => {
+    const normalizedItem = normalizeCartItem(item, false);
+    if (!normalizedItem) return;
+
     setCartItems((prev) => {
-      const existing = prev.find((i) => i.id === item.id && i.active === false);
+      const existing = prev.find((i) => i.id === normalizedItem.id && !i.active);
       if (existing) {
         return prev.map((i) =>
-          i.id === item.id && i.active === false
-            ? { ...i, quantity: i.quantity + item.quantity }
+          i.id === normalizedItem.id && !i.active
+            ? { ...i, quantity: i.quantity + normalizedItem.quantity }
             : i
         );
-      } else {
-        return [...prev, item];
       }
+      return [...prev, normalizedItem];
     });
   };
 
-  // Remove item by ID
-  const removeFromCart = (id: number) => {
+  const removeFromCart = (id: string) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // Update quantity (cart or wishlist)
-  const updateItemQuantity = (id: number, quantity: number) => {
+  const updateItemQuantity = (id: string, quantity: number) => {
     setCartItems((prev) =>
       prev.map((item) =>
         item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item

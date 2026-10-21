@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 
 interface BlogGridMainProps {
+  
   Slug: string;
   ProductImage: string;
   ProductTitle?: string;
@@ -67,7 +68,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
 
   const handleAdd = () => {
     addToCart({
-      id: Date.now(),
+      _id: Slug,
       image: productImageSrc,
       title: ProductTitle ?? "Default Product Title",
       price: parseFloat(Price ?? "0"),
@@ -80,7 +81,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
 
   const handleWishlist = () => {
     addToWishlist({
-      id: Date.now(),
+      _id: Slug,
       image: productImageSrc,
       title: ProductTitle ?? "Default Product Title",
       price: parseFloat(Price ?? "0"),

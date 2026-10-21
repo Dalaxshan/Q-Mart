@@ -170,7 +170,7 @@ function HeaderFive() {
                           <div className="logo-search-category-wrapper style-five-call-us">
                             <a href="/" className="logo-area">
                               <img
-                                src="assets/images/logo/logo-02.png"
+                                src="assets/images/logo/logo-01.png"
                                 alt="logo-main"
                                 className="logo"
                               />
@@ -319,7 +319,7 @@ function HeaderFive() {
                   <div className="logo-search-category-wrapper after-md-device-header header-mid-five-call">
                     <a href="/" className="logo-area">
                       <img
-                        src="assets/images/logo/logo-01.svg"
+                        src="assets/images/logo/logo-01.png"
                         alt="logo-main"
                         className="logo"
                       />

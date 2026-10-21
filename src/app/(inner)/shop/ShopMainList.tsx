@@ -11,6 +11,7 @@ interface BlogGridMainProps {
   Price?: string;
   SalePrice?: string;
   Unit?: string;
+  SKU?: string;
 }
 
 const ShopMainList: React.FC<BlogGridMainProps> = ({
@@ -20,6 +21,7 @@ const ShopMainList: React.FC<BlogGridMainProps> = ({
   Price,
   SalePrice,
   Unit,
+  SKU,
 }) => {
   const productImageSrc = ProductImage?.startsWith("http")
     ? ProductImage
@@ -35,11 +37,12 @@ const ShopMainList: React.FC<BlogGridMainProps> = ({
 
   const handleAdd = () => {
     addToCart({
-      id: Date.now(),
+      _id: Date.now().toString(),
       image: productImageSrc,
       title: ProductTitle ?? "Default Product Title",
       price: parseFloat(Price ?? "0"),
       quantity: qty, // 👈 FIXED
+      sku: SKU,
       active: true,
     });
     toast("Successfully Add To Cart !");

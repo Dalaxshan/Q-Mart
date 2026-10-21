@@ -20,7 +20,7 @@ function FooterOne() {
                       <div className="info">
                         <span>Have Question? Call Us 24/7</span>
                         <a href="#" className="number">
-                          0112501109 / 0701507075
+                          011 (250) 1109 / 070 (150) 7075
                         </a>
                       </div>
                     </div>

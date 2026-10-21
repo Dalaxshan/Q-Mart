@@ -1,7 +1,7 @@
 import api from "@/app/lib/axios";
 import { CreateOrderPayload, Order } from "@/type";
 
-export const orderService = {
+export const orderApi = {
   async createOrder(data: CreateOrderPayload): Promise<Order> {
     const res = await api.post("/orders", data);
     return res.data;
@@ -9,7 +9,7 @@ export const orderService = {
 
   async getMyOrders(): Promise<Order[]> {
     const res = await api.get("/orders/my");
-    return res.data;
+    return res.data.data;
   },
 
   async getOneOrder(id: string): Promise<Order> {
@@ -19,14 +19,6 @@ export const orderService = {
 
   async getAllOrders(): Promise<Order[]> {
     const res = await api.get("/orders");
-    return res.data;
-  },
-
-  async verifyPayment(
-    id: string,
-    paymentStatus: "pending" | "paid" | "failed",
-  ): Promise<Order> {
-    const res = await api.patch(`/orders/${id}/payment`, { paymentStatus });
-    return res.data;
+    return res.data.data;
   },
 };

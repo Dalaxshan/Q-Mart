@@ -1,6 +1,3 @@
-// header area start
-
-
 .header-top-area {
     background: var(--color-primary);
     padding: 10px 0;
@@ -606,6 +603,9 @@ a.over_link {
 
                     .thumbanil {
                         max-width: 75px;
+                        img {
+                            border-radius: 25px;
+                        }
                     }
 
                     .details {

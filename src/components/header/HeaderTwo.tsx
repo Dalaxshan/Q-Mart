@@ -151,7 +151,7 @@ function HeaderTwo() {
                   <div className="logo-search-category-wrapper">
                     <a href="/" className="logo-area">
                       <img
-                        src="assets/images/logo/logo-01.png"
+                        src="/assets/images/logo/logo-01.png"
                         alt="logo-main"
                         className="logo"
                       />
@@ -160,7 +160,7 @@ function HeaderTwo() {
                       <div className="category-btn category-hover-header">
                         <img
                           className="parent"
-                          src="assets/images/icons/bar-1.svg"
+                          src="/assets/images/icons/bar-1.svg"
                           alt="icons"
                         />
                         <span>Categories</span>
@@ -257,7 +257,7 @@ function HeaderTwo() {
                     <div className="right-location-area">
                       <i className="fa-solid fa-location-dot" />
                       <p>
-                        Delivery: <a href="#">Havelock Rd, Colombo -05</a>
+                        Delivery: Havelock Rd, Colombo -05
                       </p>
                     </div>
                     {/* button-area end */}
@@ -265,7 +265,7 @@ function HeaderTwo() {
                   <div className="logo-search-category-wrapper">
                     <Link href="/" className="logo-area">
                       <img
-                        src="assets/images/logo/logo-02.png"
+                        src="/assets/images/logo/logo-01.png"
                         alt="logo-main"
                         className="logo"
                       />

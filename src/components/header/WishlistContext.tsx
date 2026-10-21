@@ -8,6 +8,7 @@ interface WishlistItem {
   title: string;
   price: number;
   quantity: number;
+  sku?: string;
 }
 
 interface WishlistContextProps {

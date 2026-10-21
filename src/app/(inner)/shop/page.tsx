@@ -350,6 +350,7 @@ function ShopContent() {
                                 Price={product.price}
                                 SalePrice={product.salePrice}
                                 Unit={product.unit}
+                                SKU={product.sku}
                               />
                             </div>
                           </div>
@@ -377,6 +378,7 @@ function ShopContent() {
                                 Price={product.price}
                                 SalePrice={product.salePrice}
                                 Unit={product.unit}
+                                SKU={product.sku}
                               />
                             </div>
                           </div>

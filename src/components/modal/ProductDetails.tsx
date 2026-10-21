@@ -58,12 +58,12 @@ const ProductDetails: React.FC<ModalProps> = ({
 
   const handleAdd = () => {
     const item = {
-      id: Date.now(),
+      _id: productSku ?? String(Date.now()),
       image: productImage,
       title: productTitle,
       price: currentPrice,
       quantity: quantity,
-      shortDescription:productShortDescription,
+      sku: productSku,
       active: true,
     };
 

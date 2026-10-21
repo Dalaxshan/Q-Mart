@@ -28,7 +28,6 @@ const CompareElements: React.FC = () => {
 
   const { addToCart } = useCart();
 
-
   //f
   useEffect(() => {
     const fetchProduct = async () => {
@@ -60,6 +59,7 @@ const CompareElements: React.FC = () => {
       title: product.name,
       price: parseFloat(product.price ?? "0"),
       quantity: 1,
+      sku: product.sku,
       active: true,
     });
     setAdded(true);
@@ -134,10 +134,10 @@ const CompareElements: React.FC = () => {
                             className="product-price mb--15 d-block"
                             style={{ color: "#DC2626", fontWeight: 600 }}
                           >
-                            LKR  {product.salePrice ?? product.price}
+                            LKR {product.salePrice ?? product.price}
                             {product.salePrice && (
                               <span className="old-price ml--15">
-                                LKR  {product.price}
+                                LKR {product.price}
                               </span>
                             )}
                           </span>
@@ -232,13 +232,11 @@ const CompareElements: React.FC = () => {
                         </div>
                       </div>
                     )}
-                   
 
                     {activeTab === "tab3" && (
                       <div>
                         <div className="single-tab-content-shop-details">
                           <div className="product-details-review-product-style">
-                           
                             <div className="submit-review-area">
                               <form action="#" className="submit-review-area">
                                 <h5 className="title">Submit Your Review</h5>
@@ -316,7 +314,9 @@ const CompareElements: React.FC = () => {
                         <img src="/assets/images/shop/03.svg" alt="icon" />
                       </div>
                       <div className="details">
-                        <p>Free Worldwide Shipping on all orders over LKR 100</p>
+                        <p>
+                          Free Worldwide Shipping on all orders over LKR 100
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -330,7 +330,7 @@ const CompareElements: React.FC = () => {
           </div>
         </div>
       </div>
-      
+
       <RelatedProduct categoryName={categoryName} />
       <ShortService />
       <FooterOne />

@@ -36,7 +36,7 @@ const CartMain = () => {
 
   const clearCart = () => {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('cartItems');
+      localStorage.removeItem('cart');
       localStorage.removeItem('coupon');
       localStorage.removeItem('discount');
     }
@@ -86,10 +86,10 @@ const CartMain = () => {
                     </div>
                     <div className="information">
                       <h6 className="title">{item.title}</h6>
-                      <span>SKU:SKUZNFER</span>
+                      <span>SKU:{item.sku}</span>
                     </div>
                   </div>
-                  <div className="price"><p>${item.price.toFixed(2)}</p></div>
+                  <div className="price"><p>LKR {item.price.toFixed(2)}</p></div>
                   <div className="quantity">
                     <div className="quantity-edit">
                       <input type="text" className="input" value={item.quantity} readOnly />
@@ -111,7 +111,7 @@ const CartMain = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="subtotal"><p>${(item.price * item.quantity).toFixed(2)}</p></div>
+                  <div className="subtotal"><p>LKR {(item.price * item.quantity).toFixed(2)}</p></div>
                 </div>
               ))}
 
@@ -143,7 +143,7 @@ const CartMain = () => {
               <h5 className="title">Cart Totals</h5>
               <div className="subtotal">
                 <span>Subtotal</span>
-                <h6 className="price">${subtotal.toFixed(2)}</h6>
+                <h6 className="price">LKR {subtotal.toFixed(2)}</h6>
               </div>
               <div className="shipping">
                 <span>Shipping</span>
@@ -157,7 +157,7 @@ const CartMain = () => {
               <div className="bottom">
                 <div className="wrapper">
                   <span>Total</span>
-                  <h6 className="price">${finalTotal.toFixed(2)}</h6>
+                  <h6 className="price">LKR {finalTotal.toFixed(2)}</h6>
                 </div>
                 <div className="button-area">
                   <button className="rts-btn btn-primary">Proceed To Checkout</button>

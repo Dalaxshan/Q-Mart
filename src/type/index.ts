@@ -24,6 +24,12 @@ export interface OrderItem {
   sku: string;
   price: number;
   quantity: number;
+  listPrice?: number;
+  costPrice?: number;
+  lineDiscount?: number;
+  taxRate?: number;
+  tax?: number;
+  lineTotal?: number;
 }
 
 export interface PosPayment {
@@ -32,18 +38,17 @@ export interface PosPayment {
 }
 
 export interface PosOrderDetails {
-  cashier: string;
-  cashierName: string;
+  cashier?: string;
+  cashierName?: string;
   payments: PosPayment[];
-  tendered: number;
-  change: number;
+  tendered?: number;
+  change?: number;
 }
 
 export interface CreateOrderPayload {
   user?: string | null;
   items: OrderItem[];
-  channel: "pos" | string;
-  pos?: PosOrderDetails;
+  channel: "online" | "pos" | string;
   subtotal: number;
   discount?: number;
   deliveryFee?: number;
@@ -51,6 +56,21 @@ export interface CreateOrderPayload {
   paymentMethod: string;
   paymentStatus?: string;
   orderStatus?: string;
+  shippingAddress?: ShippingAddress;
+}
+
+export interface ShippingAddress {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  company?: string;
+  country: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+  orderNotes?: string;
 }
 
 export interface Product {

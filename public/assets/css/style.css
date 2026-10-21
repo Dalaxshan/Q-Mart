@@ -15875,6 +15875,10 @@ a.over_link {
   max-width: 75px;
 }
 
+.category-hover-header .category-sub-menu.card-number-show .cart-item-1 .img-name .thumbanil img {
+  border-radius: 10px;
+}
+
 .category-hover-header .category-sub-menu.card-number-show .cart-item-1 .img-name .details .title {
   margin-bottom: 7px;
   font-weight: 600;
@@ -16889,7 +16893,7 @@ li.with-megamenu:hover .rts-megamenu {
 
 .index-bg-gray .cover-card-main-over {
   background: #fff;
-  border-radius: 6px;
+  border-radius: 15px;
 }
 
 .index-bg-gray .cover-card-main-over .single-shopping-card-one {
@@ -23317,6 +23321,10 @@ body.modal-open {
   max-width: 65px;
 }
 
+.single-cart-area-list.main .product-main-cart .thumbnail img {
+  border-radius: 15px;
+}
+
 .single-cart-area-list.main .product-main-cart .information .title {
   margin-bottom: 7px;
 }
@@ -24468,7 +24476,10 @@ body.modal-open {
 }
 
 .right-card-sidebar-checkout .single-shop-list .left-area img {
-  max-width: 150px
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 15px;
 }
 
 .coupon-input-area-1 .inner {
