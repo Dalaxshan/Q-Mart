@@ -43,7 +43,7 @@ const CartMain = () => {
     setCoupon('');
     setDiscount(0);
     setCouponMessage('');
-    cartItems.forEach(item => removeFromCart(item.id));
+    cartItems.forEach(item => removeFromCart(item._id));
   };
 
   const finalTotal = subtotal - subtotal * discount;
@@ -76,9 +76,9 @@ const CartMain = () => {
               </div>
 
               {cartItems.map(item => (
-                <div className="single-cart-area-list main item-parent" key={item.id}>
+                <div className="single-cart-area-list main item-parent" key={item._id}>
                   <div className="product-main-cart">
-                    <div className="close section-activation" onClick={() => removeFromCart(item.id)}>
+                    <div className="close section-activation" onClick={() => removeFromCart(item._id)}>
                       <i className="fa-regular fa-x" />
                     </div>
                     <div className="thumbnail">
@@ -97,14 +97,14 @@ const CartMain = () => {
                         <button
                           className="button minus"
                           onClick={() =>
-                            item.quantity > 1 && updateItemQuantity(item.id, item.quantity - 1)
+                            item.quantity > 1 && updateItemQuantity(item._id, item.quantity - 1)
                           }
                         >
                           <i className="fa-regular fa-chevron-down" />
                         </button>
                         <button
                           className="button plus"
-                          onClick={() => updateItemQuantity(item.id, item.quantity + 1)}
+                          onClick={() => updateItemQuantity(item._id, item.quantity + 1)}
                         >
                           <i className="fa-regular fa-chevron-up" />
                         </button>

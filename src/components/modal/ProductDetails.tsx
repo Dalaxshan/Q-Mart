@@ -15,6 +15,7 @@ interface ModalProps {
   productPrice: string;
   productSalePrice?: string;
   productShortDescription?: string;
+  productId?: string;
   productSku?: string;
   categoryName?: string;
   stock?: number;
@@ -31,6 +32,7 @@ const ProductDetails: React.FC<ModalProps> = ({
   productPrice,
   productSalePrice,
   productShortDescription,
+  productId,
   productSku,
   categoryName,
   stock,
@@ -58,7 +60,7 @@ const ProductDetails: React.FC<ModalProps> = ({
 
   const handleAdd = () => {
     const item = {
-      _id: productSku ?? String(Date.now()),
+      _id: productId ?? "",
       image: productImage,
       title: productTitle,
       price: currentPrice,

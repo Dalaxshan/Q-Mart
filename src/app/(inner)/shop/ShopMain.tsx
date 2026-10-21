@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface BlogGridMainProps {
+  ProductId: string;
   Slug: string;
   ProductImage: string;
   ProductTitle?: string;
@@ -21,6 +22,7 @@ interface BlogGridMainProps {
 }
 
 const BlogGridMain: React.FC<BlogGridMainProps> = ({
+  ProductId,
   Slug,
   ProductImage,
   ProductTitle,
@@ -51,7 +53,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
 
   const handleAdd = () => {
     addToCart({
-      id: Date.now(),
+      _id: ProductId,
       image: productImageSrc,
       title: ProductTitle ?? "Default Product Title",
       price: parseFloat(Price ?? "0"),
@@ -68,7 +70,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
   const { addToWishlist } = useWishlist();
   const handleWishlist = () => {
     addToWishlist({
-      id: Date.now(),
+      _id: ProductId,
       image: productImageSrc,
       title: ProductTitle ?? "Default Product Title",
       price: parseFloat(Price ?? "0"),
@@ -180,6 +182,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
       <CompareModal show={activeModal === "one"} handleClose={handleClose} />
 
       <ProductDetails
+        productId={ProductId}
         show={activeModal === "two"}
         handleClose={handleClose}
         productImage={productImageSrc}

@@ -54,7 +54,7 @@ const CompareElements: React.FC = () => {
 
   const handleAdd = () => {
     addToCart({
-      id: Date.now(),
+      _id: product._id,
       image: product.images?.[0] ?? "",
       title: product.name,
       price: parseFloat(product.price ?? "0"),

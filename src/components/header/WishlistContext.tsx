@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface WishlistItem {
-  id: number;
+  _id: string;
   image: string;
   title: string;
   price: number;
@@ -14,8 +14,8 @@ interface WishlistItem {
 interface WishlistContextProps {
   wishlistItems: WishlistItem[];
   addToWishlist: (item: WishlistItem) => void;
-  removeFromWishlist: (id: number) => void;
-  updateItemQuantity: (id: number, quantity: number) => void;
+  removeFromWishlist: (id: string) => void;
+  updateItemQuantity: (id: string, quantity: number) => void;
   isWishlistLoaded: boolean;
 }
 
@@ -38,7 +38,10 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
     const storedWishlist = localStorage.getItem('wishlist');
     if (storedWishlist) {
       try {
-        setWishlistItems(JSON.parse(storedWishlist));
+        const storedItems = JSON.parse(storedWishlist) as WishlistItem[];
+        setWishlistItems(storedItems
+          .map((item) => ({ ...item, _id: String(item._id) }))
+          .filter((item) => item._id && item._id !== "undefined"));
       } catch (error) {
         console.error('Failed to parse wishlist from localStorage:', error);
         localStorage.removeItem('wishlist');
@@ -57,22 +60,22 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
   // Add to wishlist (no duplicates)
   const addToWishlist = (item: WishlistItem) => {
     setWishlistItems((prev) => {
-      const existing = prev.find((i) => i.id === item.id);
+      const existing = prev.find((i) => i._id === item._id);
       if (existing) return prev;
       return [...prev, item];
     });
   };
 
   // Remove from wishlist
-  const removeFromWishlist = (id: number) => {
-    setWishlistItems((prev) => prev.filter((item) => item.id !== id));
+  const removeFromWishlist = (id: string) => {
+    setWishlistItems((prev) => prev.filter((item) => item._id !== id));
   };
 
   // Update quantity
-  const updateItemQuantity = (id: number, quantity: number) => {
+  const updateItemQuantity = (id: string, quantity: number) => {
     setWishlistItems((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
+        item._id === id ? { ...item, quantity: Math.max(1, quantity) } : item
       )
     );
   };

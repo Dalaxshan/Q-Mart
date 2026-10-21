@@ -67,7 +67,7 @@ export default function CheckOutMain() {
       await orderApi.createOrder({
         channel: "online",
         items: cartItems.map((item) => ({
-          product: String(item.id),
+          product: item._id,
           name: item.title,
           image: item.image,
           unit: "1",
@@ -98,7 +98,7 @@ export default function CheckOutMain() {
         },
       });
 
-      cartItems.forEach((item) => removeFromCart(item.id));
+      cartItems.forEach((item) => removeFromCart(item._id));
       toast.success("Order placed successfully!");
       router.push("/");
     } catch (error) {
@@ -201,7 +201,7 @@ export default function CheckOutMain() {
                 <p>Your cart is empty.</p>
               ) : (
                 cartItems.map((item) => (
-                  <div className="single-shop-list" key={item.id}>
+                  <div className="single-shop-list" key={item._id}>
                     <div className="left-area">
                       <img src={item.image} alt={item.title} />
                       <span className="title">

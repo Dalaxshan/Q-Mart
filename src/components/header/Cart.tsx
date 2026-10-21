@@ -28,11 +28,11 @@ const CartDropdown: React.FC = () => {
         </h5>
 
         {activeItems.map((item) => (
-          <div key={item.id} className="cart-item-1 border-top">
+          <div key={item._id} className="cart-item-1 border-top">
             <div className="img-name">
               <div
                 className="close section-activation"
-                onClick={() => removeFromCart(item.id)}
+                onClick={() => removeFromCart(item._id)}
               >
                 <i className="fa-regular fa-x" />
               </div>

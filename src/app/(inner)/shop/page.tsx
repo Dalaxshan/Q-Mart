@@ -344,6 +344,7 @@ function ShopContent() {
                           >
                             <div className="single-shopping-card-one">
                               <ShopMain
+                                ProductId={product._id}
                                 Slug={product.slug}
                                 ProductImage={product.images[0]}
                                 ProductTitle={product.name}
@@ -372,6 +373,7 @@ function ShopContent() {
                           <div key={product._id} className="col-lg-6">
                             <div className="single-shopping-card-one discount-offer">
                               <ShopMainList
+                                ProductId={product._id}
                                 Slug={product.slug}
                                 ProductImage={product.images[0]}
                                 ProductTitle={product.name}

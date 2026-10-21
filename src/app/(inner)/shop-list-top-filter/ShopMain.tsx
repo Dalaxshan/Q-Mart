@@ -38,7 +38,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
 
     const handleAdd = () => {
         addToCart({
-            id: Date.now(),
+            _id: Date.now().toString(),
             image: `/assets/images/grocery/${ProductImage}`,
             title: ProductTitle ?? 'Default Product Title',
             price: parseFloat(Price ?? '0'),
@@ -66,7 +66,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
     const { addToWishlist } = useWishlist();
     const handleWishlist = () => {
         addToWishlist({
-            id: Date.now(),
+            _id: Date.now().toString(),
             image: `/assets/images/grocery/${ProductImage}`,
             title: ProductTitle ?? 'Default Product Title',
             price: parseFloat(Price ?? '0'),

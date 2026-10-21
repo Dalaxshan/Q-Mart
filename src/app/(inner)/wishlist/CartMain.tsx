@@ -28,7 +28,7 @@ const CartMain = () => {
       localStorage.removeItem("discount");
     }
     setDiscount(0);
-    wishlistItems.forEach((item) => removeFromWishlist(item.id));
+    wishlistItems.forEach((item) => removeFromWishlist(item._id));
   };
 
   const finalTotal = subtotal - subtotal * discount;
@@ -39,7 +39,7 @@ const CartMain = () => {
   const { addToCart } = useCart();
   const handleAdd = (item: any) => {
     addToCart({
-      id: item._id,
+      _id: item._id,
       image: item.image,
       title: item.name ?? "Default Product Title",
       price: parseFloat(item.price ?? "0"),
@@ -98,12 +98,12 @@ const CartMain = () => {
               {wishlistItems.map((item) => (
                 <div
                   className="single-cart-area-list main item-parent"
-                  key={item.id}
+                  key={item._id}
                 >
                   <div className="product-main-cart">
                     <div
                       className="close section-activation"
-                      onClick={() => removeFromWishlist(item.id)}
+                      onClick={() => removeFromWishlist(item._id)}
                     >
                       <i className="fa-regular fa-x" />
                     </div>
@@ -136,7 +136,7 @@ const CartMain = () => {
                           className="button minus"
                           onClick={() =>
                             item.quantity > 1 &&
-                            updateItemQuantity(item.id, item.quantity - 1)
+                            updateItemQuantity(item._id, item.quantity - 1)
                           }
                         >
                           <i className="fa-regular fa-chevron-down" />
@@ -144,7 +144,7 @@ const CartMain = () => {
                         <button
                           className="button plus"
                           onClick={() =>
-                            updateItemQuantity(item.id, item.quantity + 1)
+                            updateItemQuantity(item._id, item.quantity + 1)
                           }
                         >
                           <i className="fa-regular fa-chevron-up" />

@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 export interface CartItem {
-  id: string;
+  _id: string;
   image: string;
   title: string;
   price: number;
@@ -12,7 +12,7 @@ export interface CartItem {
   active: boolean;
 }
 
-type CartItemInput = Omit<CartItem, "id" | "active"> & {
+type CartItemInput = Omit<CartItem, "_id" | "active"> & {
   id?: string | number;
   _id?: string | number;
   active?: boolean;
@@ -22,14 +22,18 @@ const normalizeCartItem = (
   item: CartItemInput,
   activeOverride?: boolean,
 ): CartItem | null => {
-  const id = item.id ?? item._id;
+  const id = item._id ?? item.id;
   if (id === undefined || id === null || String(id).length === 0) {
     console.error("Cannot add cart item without an id:", item);
     return null;
   }
+  if (/^\d{13}$/.test(String(id))) {
+    console.error("Cannot use a generated timestamp as a product id:", item);
+    return null;
+  }
 
   return {
-    id: String(id),
+    _id: String(id),
     image: item.image,
     title: item.title,
     price: Number(item.price) || 0,
@@ -87,10 +91,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     if (!normalizedItem) return;
 
     setCartItems((prev) => {
-      const existing = prev.find((i) => i.id === normalizedItem.id && i.active);
+      const existing = prev.find((i) => i._id === normalizedItem._id && i.active);
       if (existing) {
         return prev.map((i) =>
-          i.id === normalizedItem.id && i.active
+          i._id === normalizedItem._id && i.active
             ? { ...i, quantity: i.quantity + normalizedItem.quantity }
             : i
         );
@@ -104,10 +108,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     if (!normalizedItem) return;
 
     setCartItems((prev) => {
-      const existing = prev.find((i) => i.id === normalizedItem.id && !i.active);
+      const existing = prev.find((i) => i._id === normalizedItem._id && !i.active);
       if (existing) {
         return prev.map((i) =>
-          i.id === normalizedItem.id && !i.active
+          i._id === normalizedItem._id && !i.active
             ? { ...i, quantity: i.quantity + normalizedItem.quantity }
             : i
         );
@@ -117,13 +121,13 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const removeFromCart = (id: string) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+    setCartItems((prev) => prev.filter((item) => item._id !== id));
   };
 
   const updateItemQuantity = (id: string, quantity: number) => {
     setCartItems((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
+        item._id === id ? { ...item, quantity: Math.max(1, quantity) } : item
       )
     );
   };

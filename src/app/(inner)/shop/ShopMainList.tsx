@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface BlogGridMainProps {
+  ProductId: string;
   Slug: string;
   ProductImage: string;
   ProductTitle?: string;
@@ -15,6 +16,7 @@ interface BlogGridMainProps {
 }
 
 const ShopMainList: React.FC<BlogGridMainProps> = ({
+  ProductId,
   Slug,
   ProductImage,
   ProductTitle,
@@ -37,7 +39,7 @@ const ShopMainList: React.FC<BlogGridMainProps> = ({
 
   const handleAdd = () => {
     addToCart({
-      _id: Date.now().toString(),
+      _id: ProductId,
       image: productImageSrc,
       title: ProductTitle ?? "Default Product Title",
       price: parseFloat(Price ?? "0"),
