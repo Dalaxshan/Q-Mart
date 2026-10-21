@@ -15,6 +15,7 @@ const emptyForm = {
   province: "",
   city: "",
   streetAddress: "",
+  postalcode: "",
 };
 
 const AccountTabs = () => {
@@ -40,6 +41,7 @@ const AccountTabs = () => {
         country: data.country || "",
         province: data.province || "",
         city: data.city || "",
+        postalcode: data.postalcode || "",
         streetAddress: data.streetAddress || "",
       }));
     } catch (err) {
@@ -56,9 +58,16 @@ const AccountTabs = () => {
     e.preventDefault();
     setMessage("");
     try {
-      const { fullName, phoneNo, country, province, city, streetAddress } = form;
+      const { fullName, phoneNo, country, province, city, streetAddress,postalcode } =
+        form;
       const updated = await customerApi.updateProfile(user!._id, {
-        fullName, phoneNo, country, province, city, streetAddress,
+        fullName,
+        phoneNo,
+        country,
+        province,
+        city,
+        streetAddress,
+        postalcode,
       });
       const updatedUser = { ...user, ...updated };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedUser));
@@ -159,7 +168,7 @@ const AccountTabs = () => {
                         name="email"
                         value={form.email}
                         onChange={handleChange}
-                      disabled
+                        disabled
                       />
                     </div>
                   </div>
@@ -188,14 +197,28 @@ const AccountTabs = () => {
                       />
                     </div>
                   </div>
-                    <label htmlFor="streetAddress">Street Address</label>
-                  <input
-                    type="text"
-                    id="streetAddress"
-                    name="streetAddress"
-                    value={form.streetAddress}
-                    onChange={handleChange}
-                  />
+                  <div className="input-half-area">
+                    <div className="single-input">
+                      <label htmlFor="streetAddress">Street Address</label>
+                      <input
+                        type="text"
+                        id="streetAddress"
+                        name="streetAddress"
+                        value={form.streetAddress}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="single-input">
+                      <label htmlFor="postalcode">Postal Code</label>
+                      <input
+                        type="text"
+                        id="postalcode"
+                        name="postalcode"
+                        value={form.postalcode}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
 
                   <div className="input-half-area">
                     <div className="single-input">

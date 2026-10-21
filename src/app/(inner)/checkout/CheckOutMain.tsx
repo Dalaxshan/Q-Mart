@@ -120,14 +120,12 @@ export default function CheckOutMain() {
               <form onSubmit={handlePlaceOrder}>
                 {[
                   { id: "email", label: "Email Address*" },
-                  { id: "firstName", label: "First Name*" },
-                  { id: "lastName", label: "Last Name*" },
-                  { id: "company", label: "Company Name (Optional)" },
+                  { id: "fullName", label: "Full Name*" },
                   { id: "country", label: "Country / Region*" },
                   { id: "street", label: "Street Address*" },
                   { id: "city", label: "Town / City*" },
                   { id: "state", label: "State*" },
-                  { id: "zip", label: "Zip Code*" },
+                  { id: "postalcode", label: "Postal Code*" },
                   { id: "phone", label: "Phone*" },
                 ].map(({ id, label }) => (
                   <div className="single-input" key={id}>
@@ -139,23 +137,16 @@ export default function CheckOutMain() {
                     />
                   </div>
                 ))}
-                <div className="single-input">
-                  <label htmlFor="orderNotes">Order Notes (Optional)</label>
-                  <textarea
-                    id="orderNotes"
-                    value={billingInfo.orderNotes}
-                    onChange={handleInputChange}
-                  />
-                </div>
+              
 
                 {/* Payment methods */}
                 <div className="cottom-cart-right-area mt--30">
                   <ul>
                     {[
                       { id: "bank", value: "bank", label: "Direct Bank Transfer" },
-                      { id: "check", value: "check", label: "Check Payments" },
+                      { id: "check", value: "check", label: "Card Payments" },
                       { id: "cod", value: "cod", label: "Cash On Delivery" },
-                      { id: "paypal", value: "paypal", label: "Paypal" },
+                   
                     ].map((opt) => (
                       <li key={opt.id}>
                         <input

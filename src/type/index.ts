@@ -154,12 +154,12 @@ export interface ProductPayload {
   soldCount: number;
 }
 
-
 export interface Subcategory {
   subcategoryName: string;
   subcategorySlug: string;
   _id: string;
 }
+
 export interface CategoryHome {
   id: string;
   slug: string;
@@ -222,6 +222,7 @@ export interface CustomerPayload {
   province?: string;
   city?: string;
   streetAddress?: string;
+  postalcode?: string;
   password: string;
 }
 
@@ -234,6 +235,7 @@ export interface Customer {
   province?: string;
   city?: string;
   streetAddress?: string;
+  postalcode?: string;
   createdAt: string;
   updatedAt: string;
 }

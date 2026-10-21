@@ -10,7 +10,7 @@ export default function Home() {
   const router = useRouter();
   const [form, setForm] = useState({
     fullName: "", email: "", phoneNo: "", country: "",
-    province: "", city: "", streetAddress: "", password: "",
+    province: "", city: "", streetAddress: "",postalcode: "", password: "",
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -114,10 +114,17 @@ export default function Home() {
                         </div>
                       </div>
 
-                      <div className="col-lg-12">
+                      <div className="col-lg-6 col-md-6 col-12">
                         <div className="input-wrapper">
                           <label htmlFor="streetAddress">Street Address</label>
                           <input type="text" id="streetAddress" value={form.streetAddress} onChange={handleChange} />
+                        </div>
+                      </div>
+
+                       <div className="col-lg-6 col-md-6 col-12">
+                        <div className="input-wrapper">
+                          <label htmlFor="postalcode">Postal Code</label>
+                          <input type="text" id="postalcode" value={form.postalcode} onChange={handleChange} />
                         </div>
                       </div>
 
