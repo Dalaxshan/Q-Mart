@@ -65,6 +65,7 @@ const WeeklyBestSelling: React.FC = () => {
             >
               <div className="single-shopping-card-one">
                 <WeeklyBestSellingMain
+                  ProductId={product._id}
                   Slug={product.slug}
                   ProductImage={product.images[0]}
                   ProductTitle={product.name}

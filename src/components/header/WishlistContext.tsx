@@ -19,6 +19,8 @@ interface WishlistContextProps {
   isWishlistLoaded: boolean;
 }
 
+const isObjectId = (value: string) => /^[a-f\d]{24}$/i.test(value);
+
 const WishlistContext = createContext<WishlistContextProps | undefined>(undefined);
 
 export const useWishlist = (): WishlistContextProps => {
@@ -39,9 +41,7 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
     if (storedWishlist) {
       try {
         const storedItems = JSON.parse(storedWishlist) as WishlistItem[];
-        setWishlistItems(storedItems
-          .map((item) => ({ ...item, _id: String(item._id) }))
-          .filter((item) => item._id && item._id !== "undefined"));
+        setWishlistItems(storedItems.filter((item) => isObjectId(item._id)));
       } catch (error) {
         console.error('Failed to parse wishlist from localStorage:', error);
         localStorage.removeItem('wishlist');
@@ -59,6 +59,11 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
 
   // Add to wishlist (no duplicates)
   const addToWishlist = (item: WishlistItem) => {
+    if (!isObjectId(item._id)) {
+      console.error("Cannot add wishlist item without a MongoDB ObjectId:", item);
+      return;
+    }
+
     setWishlistItems((prev) => {
       const existing = prev.find((i) => i._id === item._id);
       if (existing) return prev;

@@ -130,6 +130,7 @@ function FeatureProduct() {
                         <div>
                           <div className="single-shopping-card-one">
                             <WeeklyBestSellingMain
+                              ProductId={post._id}
                               Slug={post.slug}
                               ProductImage={post.images[0]}
                               ProductTitle={post.name}

@@ -69,6 +69,7 @@ function RelatedProduct({ categoryName }: RelatedProductProps) {
                   <SwiperSlide key={product._id}>
                     <div className="single-shopping-card-one">
                       <WeeklyBestSellingMain
+                        ProductId={product._id}
                         Slug={product.slug}
                         ProductImage={product.images[0]}
                         ProductTitle={product.name}
