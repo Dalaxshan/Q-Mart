@@ -1,19 +1,43 @@
-import HeaderOne from "@/components/header/HeaderOne";
-import AboutBanner from "@/components/banner/AboutBanner";
-import CounterOne from "@/components/counterup/CounterOne";
-import AboutOne from "@/components/about/AboutOne";
-import Team from "@/components/about/Team";
-import ServiceOne from "@/components/service/ServiceOne";
-import TestimonilsOne from "@/components/testimonials/TestimonilsOne";
-import ShortService from "@/components/service/ShortService";
+"use client";
 
+import ShortService from "@/components/service/ShortService";
 import FooterOne from "@/components/footer/FooterOne";
 import Link from "next/link";
 import HeaderTwo from "@/components/header/HeaderTwo";
+import { customerApi } from "@/app/api/customers/routes";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setForm((current) => ({ ...current, [e.target.id]: e.target.value }));
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError("");
+    setIsSubmitting(true);
+
+    try {
+      const loginResponse = await customerApi.login(form);
+      localStorage.setItem("customer", JSON.stringify(loginResponse.customer));
+      localStorage.setItem("authToken", loginResponse.token);
+      router.push("/account");
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Login failed. Please try again.";
+      setError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <div className="demo-one">
+    <div className="demo-one register-page login-page">
       <HeaderTwo />
 
       <>
@@ -22,11 +46,11 @@ export default function Home() {
             <div className="row">
               <div className="col-lg-12">
                 <div className="navigator-breadcrumb-wrapper">
-                  <a href="index.html">Home</a>
+                  <Link href="/">Home</Link>
                   <i className="fa-regular fa-chevron-right" />
-                  <a className="current" href="register.html">
+                  <Link className="current" href="/login">
                     Log In
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -37,7 +61,6 @@ export default function Home() {
             <hr className="section-seperator" />
           </div>
         </div>
-        {/* rts register area start */}
         <div className="rts-register-area rts-section-gap bg_light-1">
           <div className="container">
             <div className="row">
@@ -51,17 +74,18 @@ export default function Home() {
                     />
                   </div>
                   <h3 className="title">Login Into Your Account</h3>
-                  <form action="#" className="registration-form">
+                  <form onSubmit={handleSubmit} className="registration-form">
                     <div className="input-wrapper">
                       <label htmlFor="email">Email*</label>
-                      <input type="email" id="email" />
+                      <input type="email" id="email" value={form.email} onChange={handleChange} required />
                     </div>
                     <div className="input-wrapper">
                       <label htmlFor="password">Password*</label>
-                      <input type="password" id="password" />
+                      <input type="password" id="password" value={form.password} onChange={handleChange} required />
                     </div>
-                    <button className="rts-btn btn-primary">
-                      Login Account
+                    {error && <p className="login-error" role="alert">{error}</p>}
+                    <button type="submit" className="rts-btn btn-primary" disabled={isSubmitting}>
+                      {isSubmitting ? "Logging In..." : "Login Account"}
                     </button>
                     <div className="another-way-to-registration">
                       <div className="registradion-top-text">
@@ -69,7 +93,7 @@ export default function Home() {
                       </div>
                     
                       <p>
-                        Don't have Acocut?{" "}
+                        Don't have an account?{" "}
                         <Link href="/register">Registration</Link>
                       </p>
                     </div>

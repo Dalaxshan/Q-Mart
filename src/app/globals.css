@@ -40,3 +40,41 @@ a {
     color-scheme: dark;
   }
 }
+
+.register-page .rts-register-area {
+  padding: 32px 0;
+}
+
+.register-page .registration-wrapper-1 {
+  padding: 48px 64px;
+}
+
+.register-page .registration-wrapper-1 .logo-area img {
+  max-width: 130px;
+}
+
+.register-page .registration-form > .row > .col-lg-12:last-child {
+  margin-top: 12px;
+}
+
+.login-page .registration-form .login-error {
+  margin: -8px 0 16px;
+  color: #c62828;
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .register-page .rts-register-area {
+    padding: 24px 0;
+  }
+
+  .register-page .registration-wrapper-1 {
+    padding: 36px 32px;
+  }
+}
+
+@media (max-width: 575px) {
+  .register-page .registration-wrapper-1 {
+    padding: 28px 16px;
+  }
+}

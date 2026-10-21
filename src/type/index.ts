@@ -213,3 +213,27 @@ export interface District {
   name: string;
   districtSlug: string;
 }
+
+export interface CustomerPayload {
+  fullName: string;
+  email: string;
+  phoneNo: string;
+  country: string;
+  province?: string;
+  city?: string;
+  streetAddress?: string;
+  password: string;
+}
+
+export interface Customer {
+  _id: string;
+  fullName: string;
+  email: string;
+  phoneNo: string;
+  country: string;
+  province?: string;
+  city?: string;
+  streetAddress?: string;
+  createdAt: string;
+  updatedAt: string;
+}
