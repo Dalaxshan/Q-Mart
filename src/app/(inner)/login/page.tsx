@@ -66,13 +66,13 @@ export default function Home() {
             <div className="row">
               <div className="col-lg-12">
                 <div className="registration-wrapper-1">
-                  <div className="logo-area mb--0">
+                  {/* <div className="logo-area mb--0">
                     <img
                       className="mb--10"
                       src="assets/images/logo/logo-01.png"
                       alt="logo"
                     />
-                  </div>
+                  </div> */}
                   <h3 className="title">Login Into Your Account</h3>
                   <form onSubmit={handleSubmit} className="registration-form">
                     <div className="input-wrapper">

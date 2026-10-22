@@ -24,6 +24,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media only screen and (max-width: 767px) {
+  .header-style-two .mobile-only-search-button {
+    display: none;
+  }
+
+  .side-bar.header-two .mobile-sidebar-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .side-bar.header-two .mobile-sidebar-actions > .cart {
+    flex: 1;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .header-style-two .rts-header-nav-area-one.mobile-nav-background {
+    background-color: #22351E !important;
+  }
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
