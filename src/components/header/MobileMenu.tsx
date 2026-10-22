@@ -16,13 +16,7 @@ const MobileMenu = () => {
             Shop
           </Link>
         </li>
-        <li>
-          <Link className="main" href="/about">
-            About
-          </Link>
-        </li>
 
-        {/* Contact */}
         <li>
           <Link className="main" href="/contact">
             Contact Us

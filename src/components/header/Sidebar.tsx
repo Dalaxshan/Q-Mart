@@ -2,6 +2,7 @@
 import Link from "next/link";
 import CategoryMenu from "./CategoryMenu";
 import MobileMenu from "./MobileMenu";
+import Cart from "./Cart";
 import { useState } from "react";
 
 const Sidebar = () => {
@@ -25,7 +26,12 @@ const Sidebar = () => {
   return (
     <div>
       <div id="side-bar" className="side-bar header-two">
-        <button className="close-icon-menu" onClick={handleMenuClickClose}>
+        <button
+          type="button"
+          className="close-icon-menu"
+          aria-label="Close menu"
+          onClick={handleMenuClickClose}
+        >
           <i className="far fa-times" />
         </button>
         <form action="#" className="search-input-area-menu mt--30">
@@ -38,12 +44,20 @@ const Sidebar = () => {
           <nav>
             <div className="nav nav-tabs" id="nav-tab" role="tablist">
               <button
+                type="button"
+                id="menu-tab"
+                role="tab"
+                aria-selected={activeTab === "tab1"}
                 onClick={() => setActiveTab("tab1")}
                 className={`nav-link ${activeTab === "tab1" ? "active" : ""}`}
               >
                 Menu
               </button>
               <button
+                type="button"
+                id="category-tab"
+                role="tab"
+                aria-selected={activeTab === "tab2"}
                 onClick={() => setActiveTab("tab2")}
                 className={`nav-link ${activeTab === "tab2" ? "active" : ""}`}
               >
@@ -69,6 +83,9 @@ const Sidebar = () => {
               </div>
             )}
           </div>
+        </div>
+        <div className="mobile-sidebar-actions">
+          <Cart />
         </div>
         {/* button area wrapper start */}
         <div className="button-area-main-wrapper-menuy-sidebar mt--50">

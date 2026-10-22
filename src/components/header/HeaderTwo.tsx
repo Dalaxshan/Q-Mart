@@ -188,7 +188,7 @@ function HeaderTwo() {
             className={`rts-header-nav-area-one mobile-nav-background header--sticky  ${isSticky ? "sticky" : ""}`}
           >
             <div className="container-2">
-              <div className="row" >
+              <div className="row">
                 <div className="col-lg-12">
                   <div className="nav-and-btn-wrapper">
                     <div className="nav-area">
@@ -201,7 +201,7 @@ function HeaderTwo() {
                     </div>
                     {/* button-area end */}
                   </div>
-                  <div className="logo-search-category-wrapper" >
+                  <div className="logo-search-category-wrapper">
                     <Link
                       href="/"
                       className="logo-area"
@@ -214,7 +214,6 @@ function HeaderTwo() {
                       />
                     </Link>
                     <div className="category-search-wrapper">
-                     
                       <form action="#" className="search-header">
                         <input
                           type="text"
@@ -236,7 +235,6 @@ function HeaderTwo() {
                       </form>
                     </div>
                     <div className="main-wrapper-action-2 d-flex">
-                     
                       <div className="actions-area">
                         <div
                           className="menu-btn"
