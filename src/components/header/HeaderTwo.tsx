@@ -11,9 +11,12 @@ import { useCompare } from "@/components/header/CompareContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+const CUSTOMER_STORAGE_KEY = "customer";
+
 function HeaderTwo() {
   const { compareItems } = useCompare();
   const [isSticky, setIsSticky] = useState(false);
+  const [customerName, setCustomerName] = useState("");
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 150) {
@@ -29,6 +32,26 @@ function HeaderTwo() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+
+  useEffect(() => {
+    try {
+      const rawCustomer = localStorage.getItem(CUSTOMER_STORAGE_KEY);
+      if (!rawCustomer) return;
+
+      const parsedCustomer = JSON.parse(rawCustomer) as Record<string, unknown>;
+      const customer: Record<string, unknown> =
+        parsedCustomer.user && typeof parsedCustomer.user === "object"
+          ? (parsedCustomer.user as Record<string, unknown>)
+          : parsedCustomer;
+      const fullName = customer.fullName;
+
+      if (typeof fullName === "string") {
+        setCustomerName(fullName);
+      }
+    } catch (error) {
+      console.error("Could not read customer from localStorage", error);
+    }
   }, []);
 
   const handleMenuClick = () => {
@@ -48,71 +71,18 @@ function HeaderTwo() {
   // filter search action js start
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const allSuggestions = [
-    "Profitable business makes your profit Best Solution",
-    "Details Profitable business makes your profit",
-    "One Profitable business makes your profit",
-    "Me Profitable business makes your profit",
-    "Details business makes your profit",
-    "Firebase business makes your profit",
-    "Netlyfy business makes your profit",
-    "Profitable business makes your profit",
-    "Valuable business makes your profit",
-    "System business makes your profit",
-    "Profitables business makes your profit",
-    "Content business makes your profit",
-    "Dalivaring business makes your profit",
-    "Staning business makes your profit",
-    "Best business makes your profit",
-    "cooler business makes your profit",
-    "Best-one Profitable business makes your profit",
-    "Super Fresh Meat",
-    "Original Fresh frut",
-    "Organic Fresh frut",
-    "Lite Fresh frut",
-  ];
-
-  useEffect(() => {
-    if (searchTerm.trim().length > 0) {
-      const filtered = allSuggestions.filter((item) =>
-        item.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-      setSuggestions(filtered.slice(0, 5));
-      setShowSuggestions(true);
-    } else {
-      setSuggestions([]);
-      setShowSuggestions(false);
-    }
-  }, [searchTerm]);
 
   const handleSuggestionClick = (suggestion: string) => {
     setSearchTerm(suggestion);
-    setShowSuggestions(false);
+
     router.push(`/shop?search=${encodeURIComponent(suggestion)}`);
   };
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        inputRef.current &&
-        !inputRef.current.contains(event.target as Node)
-      ) {
-        setShowSuggestions(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
       router.push(`/shop?search=${encodeURIComponent(searchTerm.trim())}`);
-      setShowSuggestions(false);
     } else {
       router.push("/shop");
     }
@@ -130,15 +100,21 @@ function HeaderTwo() {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="hader-top-between-two">
-                    <p>Welcome to our store QuickMart!</p>
-                    <ul className="nav-header-top">
-                      <li>
-                        <Link href="/register">Register</Link>
-                      </li>
-                      <li>
-                        <Link href="/login">Login</Link>
-                      </li>
-                    </ul>
+                    <p>
+                      {customerName
+                        ? `Welcome ${customerName} To Our Quick-Mart!`
+                        : "Welcome To Our Quick-Mart!"}
+                    </p>
+                    {!customerName && (
+                      <ul className="nav-header-top">
+                        <li>
+                          <Link href="/register">Register</Link>
+                        </li>
+                        <li>
+                          <Link href="/login">Login</Link>
+                        </li>
+                      </ul>
+                    )}
                   </div>
                 </div>
               </div>
@@ -149,7 +125,11 @@ function HeaderTwo() {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="logo-search-category-wrapper">
-                    <a href="/" className="logo-area">
+                    <a
+                      href="/"
+                      className="logo-area"
+                      style={{ maxWidth: "200px" }}
+                    >
                       <img
                         src="/assets/images/logo/logo-01.png"
                         alt="logo-main"
@@ -178,9 +158,7 @@ function HeaderTwo() {
                           required
                           value={searchTerm}
                           onChange={(e) => setSearchTerm(e.target.value)}
-                          onFocus={() =>
-                            searchTerm.length > 0 && setShowSuggestions(true)
-                          }
+                         
                         />
                         <button
                           type="submit"
@@ -191,42 +169,6 @@ function HeaderTwo() {
                             <i className="fa-light fa-magnifying-glass" />
                           </div>
                         </button>
-
-                        {/* Autocomplete dropdown */}
-                        {showSuggestions && suggestions.length > 0 && (
-                          <ul
-                            className="autocomplete-suggestions"
-                            style={{
-                              position: "absolute",
-                              backgroundColor: "#fff",
-                              border: "1px solid #ccc",
-                              marginTop: "4px",
-                              width: "100%",
-                              maxHeight: "200px",
-                              overflowY: "auto",
-                              zIndex: 1000,
-                              listStyleType: "none",
-                              padding: 0,
-                              borderRadius: "4px",
-                            }}
-                          >
-                            {suggestions.map((suggestion, index) => (
-                              <li
-                                key={index}
-                                onClick={() =>
-                                  handleSuggestionClick(suggestion)
-                                }
-                                style={{
-                                  padding: "8px 12px",
-                                  cursor: "pointer",
-                                }}
-                                onMouseDown={(e) => e.preventDefault()} // prevent input blur
-                              >
-                                {suggestion}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
                       </form>
                     </div>
                     <div className="accont-wishlist-cart-area-header">
@@ -256,14 +198,16 @@ function HeaderTwo() {
                     {/* button-area */}
                     <div className="right-location-area">
                       <i className="fa-solid fa-location-dot" />
-                      <p>
-                        Delivery: Havelock Rd, Colombo -05
-                      </p>
+                      <p>Delivery: Havelock Rd, Colombo -05</p>
                     </div>
                     {/* button-area end */}
                   </div>
                   <div className="logo-search-category-wrapper">
-                    <Link href="/" className="logo-area">
+                    <Link
+                      href="/"
+                      className="logo-area"
+                      style={{ maxWidth: "120px" }}
+                    >
                       <img
                         src="/assets/images/logo/logo-01.png"
                         alt="logo-main"

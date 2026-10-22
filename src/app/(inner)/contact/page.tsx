@@ -65,7 +65,7 @@ export default function Home() {
                         +94 (11) 250 1109 / +94 (70) 150 7075
                       </a>
                       <a href="#" className="email">
-                        info@examp.com
+                        info@quickmart.com
                       </a>
                     </div>
                   </div>

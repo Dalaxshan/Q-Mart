@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import DiscountProductMain from "@/components/product-main/DiscountProductMain";
-// import Product from "@/data/Product.json";
 import { Product } from "@/type";
 import { productApi } from "@/app/api/products/route";
 interface PostType {
@@ -15,30 +14,24 @@ interface PostType {
 }
 
 function DiscountProduct() {
-     const [products, setProducts] = useState<Product[]>([]);
-    
-      useEffect(() => {
-        const fetchProducts = async () => {
-          try {
-            const fetchedProducts = await productApi.getAllProducts({
-              featured: true,
-            });
-            setProducts(fetchedProducts);
-          } catch (error) {
-            console.error("Error fetching products:", error);
-          }
-        };
-    
-        void fetchProducts();
-      }, []);
-    
-  // product content
-  const selectedPosts = products.slice(1, 11);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const fetchedProducts = await productApi.getAllProducts({
+          featured: true,
+        });
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    void fetchProducts();
+  }, []);
 
   const postIndicesSection1 = [1, 5, 6, 4];
-  const postIndicesSection2 = [5, 6, 4, 7, 8, 5, 6, 5, 8, 9, 18, 12];
-  const postIndicesSection3 = [5, 6, 8, 7, 3, 2, 1, 5, 8, 9, 13, 2];
-  const postIndicesSection4 = [1, 2, 6, 7, 10, 2, 1, 5, 8, 11, 12, 16];
 
   // Helper function to get posts from indices
   const getPostsByIndices = (indices: number[]): Product[] =>
@@ -46,9 +39,6 @@ function DiscountProduct() {
 
   // Prepare post groups
   const postsSection1 = getPostsByIndices(postIndicesSection1);
-  const postsSection2 = getPostsByIndices(postIndicesSection2);
-  const postsSection3 = getPostsByIndices(postIndicesSection3);
-  const postsSection4 = getPostsByIndices(postIndicesSection4);
 
   return (
     <div>
@@ -59,9 +49,7 @@ function DiscountProduct() {
             <div className="col-lg-12">
               <div className="title-area-between">
                 <h2 className="title-left">Products With Discounts</h2>
-                <div className="countdown">
-                  <div className="countDown">7/05/2025 10:20:00</div>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -107,7 +95,7 @@ function DiscountProduct() {
                         <div key={index} className="col-lg-6">
                           <div className="single-shopping-card-one discount-offer">
                             <DiscountProductMain
-                             Slug={post.slug}
+                              Slug={post.slug}
                               ProductImage={post.images[0]}
                               ProductTitle={post.name}
                               Price={post.price}
