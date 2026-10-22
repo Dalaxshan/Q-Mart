@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { customerApi } from "@/app/api/customers/routes";
 import { useEffect, useState } from "react";
+import { orderApi } from "@/app/api/orders/route";
+import { Customer } from "@/type";
 
 // Change this to the key you used when saving the user in localStorage
 const STORAGE_KEY = "customer";
@@ -20,7 +22,9 @@ const emptyForm = {
 
 const AccountTabs = () => {
   const [activeTab, setActiveTab] = useState("account");
-  const [user, setUser] = useState<Record<string, any> | null>(null);
+  const [user, setUser] = useState<Customer | null>(null);
+  const [orders, setOrders] = useState<any[]>([]);
+  const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [message, setMessage] = useState("");
 
@@ -58,8 +62,16 @@ const AccountTabs = () => {
     e.preventDefault();
     setMessage("");
     try {
-      const { fullName, phoneNo, country, province, city, streetAddress,postalcode } =
-        form;
+      const {
+        fullName,
+        phoneNo,
+        country,
+        province,
+        city,
+        streetAddress,
+        postalcode,
+      } = form;
+
       const updated = await customerApi.updateProfile(user!._id, {
         fullName,
         phoneNo,
@@ -77,6 +89,24 @@ const AccountTabs = () => {
       setMessage(err.response?.data?.message || "Update failed.");
     }
   };
+
+  //getAll orders for the logged-in user
+  useEffect(() => {
+    if (!user) return;
+
+    const fetchOrders = async () => {
+      try {
+        const orders = await orderApi.getAllOrders({ user: user._id });
+        setOrders(orders);
+      } catch (err) {
+        console.error("Could not fetch orders", err);
+      }
+    };
+
+    fetchOrders();
+  }, [user]);
+
+  console.log("orders:", orders);
 
   const handleLogout = () => {
     localStorage.removeItem(STORAGE_KEY);
@@ -118,26 +148,67 @@ const AccountTabs = () => {
                     <table className="table">
                       <thead>
                         <tr>
-                          <th>Order</th>
-                          <th>Date</th>
-                          <th>Status</th>
+                          <th>Order Number</th>
+                          <th>Order Date</th>
+                          <th>Sub Total</th>
+                          <th>Delivery fees</th>
                           <th>Total</th>
-                          <th>Actions</th>
+                          <th>Order Status</th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        {/* Replace with real orders from your API */}
-                        <tr>
-                          <td>#1357</td>
-                          <td>March 05, 2020</td>
-                          <td>Processing</td>
-                          <td>$125.00 for 2 item</td>
-                          <td>
-                            <a href="#" className="btn-small d-block">
-                              View
-                            </a>
-                          </td>
-                        </tr>
+                        {orders.map((order) => (
+                          <>
+                            <tr key={order._id}>
+                              <td>{order.orderNumber}</td>
+                              <td>{new Date(order.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}</td>
+                              <td>LKR {order.subtotal.toFixed(2)}</td>
+                              <td>LKR {order.deliveryFee.toFixed(2)}</td>
+                              <td>LKR {order.total.toFixed(2)}</td>
+                              <td>{order.orderStatus?.toUpperCase()}</td>
+                              <td>
+                                <button
+                                  className="rts-btn btn-primary"
+                                  style={{ padding: "4px 12px", fontSize: "12px" }}
+                                  onClick={() => setExpandedOrder(expandedOrder === order._id ? null : order._id)}
+                                >
+                                  {expandedOrder === order._id ? "Hide" : "View Items"}
+                                </button>
+                              </td>
+                            </tr>
+                            {expandedOrder === order._id && (
+                              <tr key={`${order._id}-items`}>
+                                <td colSpan={7} style={{ background: "#f9f9f9", padding: "12px 20px" }}>
+                                  <table className="table" style={{ marginBottom: 0 }}>
+                                    <thead>
+                                      <tr>
+                                        <th>Image</th>
+                                        <th>Product</th>
+                                        <th>SKU</th>
+                                        <th>Qty</th>
+                                        <th>Unit Price</th>
+                                        <th>Line Total</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {order.items.map((item: any) => (
+                                        <tr key={item.product}>
+                                          <td><img src={item.image} alt={item.name} style={{ width: 48, height: 48, objectFit: "cover" }} /></td>
+                                          <td>{item.name}</td>
+                                          <td>{item.sku}</td>
+                                          <td>{item.quantity}</td>
+                                          <td>LKR {item.price.toFixed(2)}</td>
+                                          <td>LKR {(item.price * item.quantity).toFixed(2)}</td>
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            )}
+                          </>
+                        ))}
                       </tbody>
                     </table>
                   </div>

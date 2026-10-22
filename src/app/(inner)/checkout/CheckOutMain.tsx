@@ -1,33 +1,58 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCart } from "@/components/header/CartContext";
 import { orderApi } from "@/app/api/orders/route";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import { ShippingAddress } from "@/type";
 
 const DEFAULT_SHIPPING_COST = 350;
+const STORAGE_KEY = "customer";
+
+const emptyBillingInfo: ShippingAddress = {
+  email: "",
+  fullName: "",
+  country: "",
+  street: "",
+  city: "",
+  state: "",
+  postalcode: "",
+  phoneNo: "",
+};
 
 export default function CheckOutMain() {
   const { cartItems, removeFromCart } = useCart();
+  const [user, setUser] = useState<Record<string, string> | null>(null);
   const router = useRouter();
   const [discount] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const [isPlacing, setIsPlacing] = useState(false);
+  const [billingInfo, setBillingInfo] =
+    useState<ShippingAddress>(emptyBillingInfo);
 
-  const [billingInfo, setBillingInfo] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
-    company: "",
-    country: "",
-    street: "",
-    city: "",
-    state: "",
-    zip: "",
-    phone: "",
-    orderNotes: "",
-  });
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+
+      const parsed = JSON.parse(raw);
+      const data = parsed.user || parsed;
+      setUser(data);
+      setBillingInfo({
+        email: data.email || "",
+        fullName: data.fullName || "",
+        country: data.country || "",
+        street: data.streetAddress || "",
+        city: data.city || "",
+        state: data.province || data.state || "",
+        postalcode: data.postalcode || "",
+        phoneNo: data.phoneNo || "",
+      });
+    } catch (err) {
+      console.error("Could not read user from localStorage", err);
+    }
+  }, []);
 
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -53,7 +78,14 @@ export default function CheckOutMain() {
     }
 
     const requiredFields: (keyof typeof billingInfo)[] = [
-      "email", "firstName", "lastName", "country", "street", "city", "state", "zip", "phone",
+      "email",
+      "fullName",
+      "country",
+      "street",
+      "city",
+      "state",
+      "postalcode",
+      "phoneNo",
     ];
     for (const field of requiredFields) {
       if (!billingInfo[field].trim()) {
@@ -65,6 +97,7 @@ export default function CheckOutMain() {
     setIsPlacing(true);
     try {
       await orderApi.createOrder({
+        user: user?._id || null,
         channel: "online",
         items: cartItems.map((item) => ({
           product: item._id,
@@ -84,17 +117,14 @@ export default function CheckOutMain() {
         paymentStatus: "pending",
         orderStatus: "pending",
         shippingAddress: {
-          firstName: billingInfo.firstName,
-          lastName: billingInfo.lastName,
+          fullName: billingInfo.fullName,
           email: billingInfo.email,
-          phone: billingInfo.phone,
-          company: billingInfo.company,
+          phoneNo: billingInfo.phoneNo,
           country: billingInfo.country,
           street: billingInfo.street,
           city: billingInfo.city,
           state: billingInfo.state,
-          zip: billingInfo.zip,
-          orderNotes: billingInfo.orderNotes,
+          postalcode: billingInfo.postalcode,
         },
       });
 
@@ -116,7 +146,7 @@ export default function CheckOutMain() {
           {/* Left: Billing Details */}
           <div className="col-lg-8 pr--40 order-2 order-xl-1">
             <div className="rts-billing-details-area">
-              <h3 className="title">Billing Details</h3>
+              <h3 className="title">Shipping Details</h3>
               <form onSubmit={handlePlaceOrder}>
                 {[
                   { id: "email", label: "Email Address*" },
@@ -126,55 +156,17 @@ export default function CheckOutMain() {
                   { id: "city", label: "Town / City*" },
                   { id: "state", label: "State*" },
                   { id: "postalcode", label: "Postal Code*" },
-                  { id: "phone", label: "Phone*" },
+                  { id: "phoneNo", label: "Phone*" },
                 ].map(({ id, label }) => (
                   <div className="single-input" key={id}>
                     <label htmlFor={id}>{label}</label>
                     <input
                       id={id}
-                      value={(billingInfo as Record<string, string>)[id]}
+                      value={billingInfo[id as keyof ShippingAddress]}
                       onChange={handleInputChange}
                     />
                   </div>
                 ))}
-              
-
-                {/* Payment methods */}
-                <div className="cottom-cart-right-area mt--30">
-                  <ul>
-                    {[
-                      { id: "bank", value: "bank", label: "Direct Bank Transfer" },
-                      { id: "check", value: "check", label: "Card Payments" },
-                      { id: "cod", value: "cod", label: "Cash On Delivery" },
-                   
-                    ].map((opt) => (
-                      <li key={opt.id}>
-                        <input
-                          type="radio"
-                          id={opt.id}
-                          name="payment"
-                          value={opt.value}
-                          checked={paymentMethod === opt.value}
-                          onChange={() => setPaymentMethod(opt.value)}
-                        />
-                        <label htmlFor={opt.id}>{opt.label}</label>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="single-category mb--30">
-                    <input id="terms" type="checkbox" required />
-                    <label htmlFor="terms">
-                      I have read and agree to terms and conditions *
-                    </label>
-                  </div>
-                  <button
-                    type="submit"
-                    className="rts-btn btn-primary"
-                    disabled={isPlacing}
-                  >
-                    {isPlacing ? "Placing Order..." : "Place Order"}
-                  </button>
-                </div>
               </form>
             </div>
           </div>
@@ -207,30 +199,68 @@ export default function CheckOutMain() {
               )}
 
               <div className="single-shop-list">
-                <div className="left-area"><span>Subtotal</span></div>
+                <div className="left-area">
+                  <span>Subtotal</span>
+                </div>
                 <span className="price">LKR {subtotal.toFixed(2)}</span>
               </div>
 
               {discount > 0 && (
                 <div className="single-shop-list">
-                  <div className="left-area"><span>Discount</span></div>
-                  <span className="price">LKR {discountAmount.toFixed(2)}</span>
+                  <div className="left-area">
+                    <span>Discount (25%)</span>
+                  </div>
+                  <span className="price">-${discountAmount.toFixed(2)}</span>
                 </div>
               )}
 
               <div className="single-shop-list">
-                <div className="left-area"><span>Shipping</span></div>
+                <div className="left-area">
+                  <span>Shipping</span>
+                </div>
                 <span className="price">LKR {shippingCost.toFixed(2)}</span>
               </div>
 
               <div className="single-shop-list">
                 <div className="left-area">
-                  <span style={{ fontWeight: 600, color: "#2C3C28" }}>Total Price:</span>
+                  <span style={{ fontWeight: 600, color: "#2C3C28" }}>
+                    Total Price:
+                  </span>
                 </div>
                 <span className="price" style={{ color: "#629D23" }}>
                   LKR {total.toFixed(2)}
                 </span>
               </div>
+
+              {/* Payment methods */}
+              <form onSubmit={handlePlaceOrder}>
+              <div className="cottom-cart-right-area">
+                <ul>
+                  {[
+                    { id: "bank", label: "Direct Bank Transfer" },
+                  
+                    { id: "cod", label: "Cash On Delivery" },
+                   
+                  ].map(({ id, label }) => (
+                    <li key={id}>
+                      <input
+                        type="radio"
+                        id={id}
+                        name="payment"
+                        value={id}
+                        checked={paymentMethod === id}
+                        onChange={() => setPaymentMethod(id)}
+                      />
+                      <label htmlFor={id}>{label}</label>
+                    </li>
+                  ))}
+                </ul>
+               
+                <button type="submit" className="rts-btn btn-primary" disabled={isPlacing}>
+                  {isPlacing ? "Placing Order..." : "Place Order"}
+                </button>
+              </div>
+              </form>
             </div>
           </div>
         </div>

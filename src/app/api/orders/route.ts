@@ -1,5 +1,5 @@
 import api from "@/app/lib/axios";
-import { CreateOrderPayload, Order } from "@/type";
+import { CreateOrderPayload, Order, OrderItem, OrderQuery } from "@/type";
 
 export const orderApi = {
   async createOrder(data: CreateOrderPayload): Promise<Order> {
@@ -17,8 +17,8 @@ export const orderApi = {
     return res.data;
   },
 
-  async getAllOrders(): Promise<Order[]> {
-    const res = await api.get("/orders");
+  async getAllOrders(Query:OrderQuery): Promise<Order[]> {
+    const res = await api.get("/orders", { params: Query });
     return res.data.data;
   },
 };

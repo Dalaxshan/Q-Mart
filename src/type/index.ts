@@ -11,7 +11,13 @@ export interface Order {
   total: number;
   paymentMethod: string;
   paymentStatus: "pending" | "paid" | "failed" | string;
-  orderStatus: "pending" | "processing" | "shipped" | "delivered" | "cancelled" | string;
+  orderStatus:
+    | "pending"
+    | "processing"
+    | "shipped"
+    | "delivered"
+    | "cancelled"
+    | string;
   createdAt: string;
   updatedAt: string;
 }
@@ -30,6 +36,13 @@ export interface OrderItem {
   taxRate?: number;
   tax?: number;
   lineTotal?: number;
+}
+
+export interface OrderQuery {
+  user?: string;
+  orderStatus?: string;
+  paymentStatus?: string;
+
 }
 
 export interface PosPayment {
@@ -60,17 +73,14 @@ export interface CreateOrderPayload {
 }
 
 export interface ShippingAddress {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
-  phone: string;
-  company?: string;
-  country: string;
+  phoneNo: string;
   street: string;
+  country: string;
   city: string;
   state: string;
-  zip: string;
-  orderNotes?: string;
+  postalcode: string;
 }
 
 export interface Product {
