@@ -5,8 +5,7 @@ import ProductDetails from "@/components/modal/ProductDetails";
 import CompareModal from "@/components/modal/CompareModal";
 import { useCart } from "@/components/header/CartContext";
 import { useWishlist } from "@/components/header/WishlistContext";
-import { useCompare } from "@/components/header/CompareContext";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 
@@ -57,7 +56,6 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
 
   const { addToCart } = useCart();
   const { addToWishlist } = useWishlist();
-  const { addToCompare } = useCompare();
 
   const [added, setAdded] = useState(false);
   const [wishlisted, setWishlisted] = useState(false);
@@ -90,20 +88,6 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
     });
     setWishlisted(true);
     setTimeout(() => setWishlisted(false), 3000);
-  };
-
-  const handleCompare = () => {
-    addToCompare({
-      image: productImageSrc,
-      name: ProductTitle ?? "Default Product Title",
-      price: Price ?? "0",
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      rating: 5,
-      ratingCount: 25,
-      weight: Unit ?? "1kg",
-      inStock: true,
-    });
   };
 
   const compare = () => toast("Successfully Add To Compare !");

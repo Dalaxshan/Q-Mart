@@ -1,5 +1,4 @@
 "use client"
-import HeaderOne from "@/components/header/HeaderOne";
 import ShortService from "@/components/service/ShortService";
 import FooterOne from "@/components/footer/FooterOne";
 import Posts from "@/data/Posts.json";
@@ -19,7 +18,6 @@ export default function Home() {
 
   return (
     <div className="demo-one">
-      <HeaderOne />
 
       <div className="blog-sidebar-area rts-section-gap">
         <div className="container">

@@ -7,14 +7,12 @@ import Cart from "./Cart";
 import WishList from "./WishList";
 import BackToTop from "@/components/common/BackToTop";
 import Sidebar from "./Sidebar";
-import { useCompare } from "@/components/header/CompareContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const CUSTOMER_STORAGE_KEY = "customer";
 
 function HeaderTwo() {
-  const { compareItems } = useCompare();
   const [isSticky, setIsSticky] = useState(false);
   const [customerName, setCustomerName] = useState("");
   useEffect(() => {
@@ -61,23 +59,12 @@ function HeaderTwo() {
     }
   };
 
-  const handleSearchOpen = () => {
-    const sidebar = document.querySelector(".search-input-area");
-    if (sidebar) {
-      sidebar.classList.toggle("show");
-    }
-  };
 
   // filter search action js start
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleSuggestionClick = (suggestion: string) => {
-    setSearchTerm(suggestion);
-
-    router.push(`/shop?search=${encodeURIComponent(suggestion)}`);
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,8 +74,6 @@ function HeaderTwo() {
       router.push("/shop");
     }
   };
-
-  // filter search action js end
 
   return (
     <div>

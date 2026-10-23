@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
 import { CartProvider } from "../components/header/CartContext";
 import { WishlistProvider } from "../components/header/WishlistContext";
-import { CompareProvider } from "../components/header/CompareContext";
 
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
@@ -42,14 +40,12 @@ export default function RootLayout({
       </head>
 
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <CompareProvider>
-          <WishlistProvider>
-            <CartProvider>
-              {children}
-              <ToastContainer position="top-right" autoClose={3000} />
-            </CartProvider>
-          </WishlistProvider>
-        </CompareProvider>
+        <WishlistProvider>
+          <CartProvider>
+            {children}
+            <ToastContainer position="top-right" autoClose={3000} />
+          </CartProvider>
+        </WishlistProvider>
       </body>
     </html>
   );

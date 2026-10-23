@@ -1,5 +1,4 @@
 
-import HeaderOne from "@/components/header/HeaderOne";
 import AboutBanner from "@/components/banner/AboutBanner";
 import CounterOne from "@/components/counterup/CounterOne";
 import AboutOne from "@/components/about/AboutOne";
@@ -13,7 +12,6 @@ import FooterOne from "@/components/footer/FooterOne";
 export default function Home() {
     return (
         <div className="demo-one">
-            <HeaderOne />
 
             <>
   <div className="rts-navigation-area-breadcrumb bg_light-1">

@@ -1,5 +1,4 @@
 "use client"
-import HeaderOne from "@/components/header/HeaderOne";
 import { useState } from 'react';
 import ShopMain from "./ShopMain";
 import ShopMainList from "./ShopMainList";
@@ -46,7 +45,6 @@ export default function Home() {
 
   return (
     <div>
-      <HeaderOne />
 
       <div className="rts-navigation-area-breadcrumb bg_light-1">
         <div className="container">

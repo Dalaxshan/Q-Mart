@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useCart } from "@/components/header/CartContext";
-import { useCompare } from "@/components/header/CompareContext";
 import { useWishlist } from "@/components/header/WishlistContext";
 import Link from "next/link";
 import CompareModal from "@/components/modal/CompareModal";

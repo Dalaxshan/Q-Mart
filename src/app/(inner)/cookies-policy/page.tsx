@@ -1,5 +1,4 @@
 
-import HeaderOne from "@/components/header/HeaderOne";
 import AboutBanner from "@/components/banner/AboutBanner";
 import CounterOne from "@/components/counterup/CounterOne";
 import AboutOne from "@/components/about/AboutOne";
