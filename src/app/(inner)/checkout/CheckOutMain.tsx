@@ -46,7 +46,7 @@ export default function CheckOutMain() {
         street: data.streetAddress || "",
         city: data.city || "",
         state: data.province || data.state || "",
-        postalcode: data.postalcode || "",
+        postalcode: data.postalcode || data.postalCode || "",
         phoneNo: data.phoneNo || "",
       });
     } catch (err) {
@@ -96,7 +96,7 @@ export default function CheckOutMain() {
 
     setIsPlacing(true);
     try {
-      await orderApi.createOrder({
+      const order = await orderApi.createOrder({
         user: user?._id || null,
         channel: "online",
         items: cartItems.map((item) => ({
@@ -128,9 +128,14 @@ export default function CheckOutMain() {
         },
       });
 
+      try {
+        sessionStorage.setItem("lastOrder", JSON.stringify(order));
+      } catch (storageError) {
+        console.error("Could not save order confirmation locally", storageError);
+      }
       cartItems.forEach((item) => removeFromCart(item._id));
       toast.success("Order placed successfully!");
-      router.push("/");
+      router.push(`/order-confirmation?order=${encodeURIComponent(order._id)}`);
     } catch (error) {
       console.error("Order failed:", error);
       toast.error("Failed to place order. Please try again.");

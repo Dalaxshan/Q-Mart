@@ -9,6 +9,7 @@ export interface Order {
   discount: number;
   deliveryFee: number;
   total: number;
+  shippingAddress?: ShippingAddress;
   paymentMethod: string;
   paymentStatus: "pending" | "paid" | "failed" | string;
   orderStatus:
@@ -81,6 +82,7 @@ export interface ShippingAddress {
   city: string;
   state: string;
   postalcode: string;
+  postalCode?: string;
 }
 
 export interface Product {
