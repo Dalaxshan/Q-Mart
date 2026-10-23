@@ -57,7 +57,7 @@ function CategoryBannerBottom() {
               >
                 {categories?.map((cat, idx) => (
                   <SwiperSlide key={idx}>
-                    <Link href="/shop-grid-sidebar" className="single-category-one">
+                    <Link href={`shop/?category=${cat.slug}`} className="single-category-one">
                       <Image
                         src={cat.image}
                         alt={cat.name}
