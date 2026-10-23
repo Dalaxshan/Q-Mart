@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import HeaderTwo from "@/components/header/HeaderTwo";
 import FooterOne from "@/components/footer/FooterOne";
 import ShortService from "@/components/service/ShortService";
-import { orderApi } from "@/app/api/orders/route";
+import { orderApi } from "@/app/api/orders/client";
 import { Order } from "@/type";
 
 const formatMoney = (amount: number) => `LKR ${amount.toFixed(2)}`;

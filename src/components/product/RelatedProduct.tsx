@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import WeeklyBestSellingMain from "@/components/product-main/WeeklyBestSellingMain";
-import { productApi } from "@/app/api/products/route";
+import { productApi } from "@/app/api/products/client";
 import { Product } from "@/type";
 
 interface RelatedProductProps {
-  categoryName: string;
+  categoryName?: string;
 }
 
-function RelatedProduct({ categoryName }: RelatedProductProps) {
+function RelatedProduct({ categoryName = "" }: RelatedProductProps) {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {

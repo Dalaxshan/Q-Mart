@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useCart } from "@/components/header/CartContext";
-import { orderApi } from "@/app/api/orders/route";
+import { orderApi } from "@/app/api/orders/client";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
@@ -88,7 +88,7 @@ export default function CheckOutMain() {
       "phoneNo",
     ];
     for (const field of requiredFields) {
-      if (!billingInfo[field].trim()) {
+      if (!(billingInfo[field] ?? "").trim()) {
         toast.error(`Please fill in the ${field} field.`);
         return;
       }

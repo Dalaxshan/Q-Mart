@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { customerApi } from "@/app/api/customers/routes";
 import { useEffect, useState } from "react";
-import { orderApi } from "@/app/api/orders/route";
+import { orderApi } from "@/app/api/orders/client";
 import { Customer } from "@/type";
 
 // Change this to the key you used when saving the user in localStorage

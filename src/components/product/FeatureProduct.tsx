@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import WeeklyBestSellingMain from "@/components/product-main/WeeklyBestSellingMain";
 import { Product } from "@/type";
-import { productApi } from "@/app/api/products/route";
+import { productApi } from "@/app/api/products/client";
 
 function FeatureProduct() {
   const [products, setProducts] = useState<Product[]>([]);

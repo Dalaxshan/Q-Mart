@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import WeeklyBestSellingMain from "@/components/product-main/WeeklyBestSellingMain";
-import { productApi } from "@/app/api/products/route";
+import { productApi } from "@/app/api/products/client";
 import { Product } from "@/type";
 
 const TABS = [

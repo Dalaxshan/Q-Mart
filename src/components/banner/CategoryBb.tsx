@@ -9,22 +9,9 @@ import Link from "next/link";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
-import { categoryApi } from "@/app/api/categories/route";
+import { categoryApi } from "@/app/api/categories/client";
 import { Category } from "@/type";
 
-// const categories = [
-//   { img: "/assets/images/category/01.png", name: "Organic Vegetable" },
-//   { img: "/assets/images/category/02.png", name: "Organic Vegetable" },
-//   { img: "/assets/images/category/03.png", name: "Organic Vegetable" },
-//   { img: "/assets/images/category/04.png", name: "Organic Vegetable" },
-//   { img: "/assets/images/category/05.png", name: "Organic Vegetable" },
-//   { img: "/assets/images/category/06.png", name: "Organic Vegetable" },
-//   { img: "/assets/images/category/07.png", name: "Organic Vegetable" },
-//   { img: "/assets/images/category/08.png", name: "Organic Vegetable" },
-//   { img: "/assets/images/category/09.png", name: "Organic Vegetable" },
-//   { img: "/assets/images/category/10.png", name: "Organic Vegetable" },
-//   { img: "/assets/images/category/06.png", name: "Organic Vegetable" },
-// ];
 
 function CategoryBannerBottom() {
   const [categories, setCategories] = useState<Category[]>([]);

@@ -11,7 +11,7 @@ import { useCart } from "@/components/header/CartContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Product } from "@/type";
-import { productApi } from "@/app/api/products/route";
+import { productApi } from "@/app/api/products/client";
 import HeaderTwo from "@/components/header/HeaderTwo";
 
 const getRelationName = (

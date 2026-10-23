@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import DiscountProductMain from "@/components/product-main/DiscountProductMain";
 import { Product } from "@/type";
-import { productApi } from "@/app/api/products/route";
+import { productApi } from "@/app/api/products/client";
 interface PostType {
   category?: string;
   slug: string;
