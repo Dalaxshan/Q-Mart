@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from 'react';
 import { useCart } from "@/components/header/CartContext";
-import { useCompare } from '@/components/header/CompareContext';
 import { useWishlist } from "@/components/header/WishlistContext";
 import ProductDetails from "@/components/modal/ProductDetails";
 
@@ -47,22 +46,6 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
         });
     };
 
-
-    const { addToCompare } = useCompare();
-    const handleCompare = () => {
-        addToCompare({
-            image: `/assets/images/grocery/${ProductImage}`,
-            name: ProductTitle ?? 'Default Product Title',
-            price: Price ?? '0',
-            description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-            rating: 5,
-            ratingCount: 25,
-            weight: '500g',
-            inStock: true,
-        });
-    };
-
-
     const { addToWishlist } = useWishlist();
     const handleWishlist = () => {
         addToWishlist({
@@ -105,17 +88,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
                     >
                         <i className="fa-light fa-heart" />
                     </span>
-                    <span
-                        className="single-action openuptip"
-                        data-flow="up"
-                        title="Compare"
-                        onClick={() => {
-                            handleCompare();
-                            compare();
-                        }}
-                    >
-                        <i className="fa-solid fa-arrows-retweet" />
-                    </span>
+                   
                     <span
                         className="single-action openuptip cta-quickview product-details-popup-btn"
                         data-flow="up"
