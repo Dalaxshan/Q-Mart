@@ -21,12 +21,14 @@ const emptyForm = {
 };
 
 const AccountTabs = () => {
-  const [activeTab, setActiveTab] = useState("account");
+  const [activeTab, setActiveTab] = useState("order");
   const [user, setUser] = useState<Customer | null>(null);
   const [orders, setOrders] = useState<any[]>([]);
   const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [message, setMessage] = useState("");
+
+  console.log("Orders:", orders);
 
   // Load the logged-in user from localStorage
   useEffect(() => {
@@ -106,10 +108,9 @@ const AccountTabs = () => {
     fetchOrders();
   }, [user]);
 
-  console.log("orders:", orders);
-
   const handleLogout = () => {
     localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem("authToken");
   };
 
   return (
@@ -162,7 +163,16 @@ const AccountTabs = () => {
                           <>
                             <tr key={order._id}>
                               <td>{order.orderNumber}</td>
-                              <td>{new Date(order.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}</td>
+                              <td>
+                                {new Date(order.createdAt).toLocaleDateString(
+                                  "en-GB",
+                                  {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric",
+                                  },
+                                )}
+                              </td>
                               <td>LKR {order.subtotal.toFixed(2)}</td>
                               <td>LKR {order.deliveryFee.toFixed(2)}</td>
                               <td>LKR {order.total.toFixed(2)}</td>
@@ -170,17 +180,37 @@ const AccountTabs = () => {
                               <td>
                                 <button
                                   className="rts-btn btn-primary"
-                                  style={{ padding: "4px 12px", fontSize: "12px" }}
-                                  onClick={() => setExpandedOrder(expandedOrder === order._id ? null : order._id)}
+                                  style={{
+                                    padding: "4px 12px",
+                                    fontSize: "12px",
+                                  }}
+                                  onClick={() =>
+                                    setExpandedOrder(
+                                      expandedOrder === order._id
+                                        ? null
+                                        : order._id,
+                                    )
+                                  }
                                 >
-                                  {expandedOrder === order._id ? "Hide" : "View Items"}
+                                  {expandedOrder === order._id
+                                    ? "Hide"
+                                    : "View Items"}
                                 </button>
                               </td>
                             </tr>
                             {expandedOrder === order._id && (
                               <tr key={`${order._id}-items`}>
-                                <td colSpan={7} style={{ background: "#f9f9f9", padding: "12px 20px" }}>
-                                  <table className="table" style={{ marginBottom: 0 }}>
+                                <td
+                                  colSpan={7}
+                                  style={{
+                                    background: "#f9f9f9",
+                                    padding: "12px 20px",
+                                  }}
+                                >
+                                  <table
+                                    className="table"
+                                    style={{ marginBottom: 0 }}
+                                  >
                                     <thead>
                                       <tr>
                                         <th>Image</th>
@@ -194,12 +224,27 @@ const AccountTabs = () => {
                                     <tbody>
                                       {order.items.map((item: any) => (
                                         <tr key={item.product}>
-                                          <td><img src={item.image} alt={item.name} style={{ width: 48, height: 48, objectFit: "cover" }} /></td>
+                                          <td>
+                                            <img
+                                              src={item.image}
+                                              alt={item.name}
+                                              style={{
+                                                width: 48,
+                                                height: 48,
+                                                objectFit: "cover",
+                                              }}
+                                            />
+                                          </td>
                                           <td>{item.name}</td>
                                           <td>{item.sku}</td>
                                           <td>{item.quantity}</td>
                                           <td>LKR {item.price.toFixed(2)}</td>
-                                          <td>LKR {(item.price * item.quantity).toFixed(2)}</td>
+                                          <td>
+                                            LKR{" "}
+                                            {(
+                                              item.price * item.quantity
+                                            ).toFixed(2)}
+                                          </td>
                                         </tr>
                                       ))}
                                     </tbody>
