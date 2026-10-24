@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import ShortService from "@/components/service/ShortService";
-import FooterOne from "@/components/footer/FooterOne";
+import FooterThree from "@/components/footer/FooterThree";
 
 export default function Home() {
   const [orderId, setOrderId] = useState("");
@@ -76,7 +76,7 @@ export default function Home() {
         </div>
       </div>
       <ShortService />
-      <FooterOne />
+         <FooterThree/>
     </div>
   );
 }

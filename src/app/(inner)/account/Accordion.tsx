@@ -5,6 +5,7 @@ import { customerApi } from "@/app/api/customers/routes";
 import { useEffect, useState } from "react";
 import { orderApi } from "@/app/api/orders/client";
 import { Customer } from "@/type";
+import { formatPrice } from "@/app/lib/price-format";
 
 // Change this to the key you used when saving the user in localStorage
 const STORAGE_KEY = "customer";
@@ -173,9 +174,9 @@ const AccountTabs = () => {
                                   },
                                 )}
                               </td>
-                              <td>LKR {order.subtotal.toFixed(2)}</td>
-                              <td>LKR {order.deliveryFee.toFixed(2)}</td>
-                              <td>LKR {order.total.toFixed(2)}</td>
+                              <td>{formatPrice(order.subtotal)}</td>
+                              <td>{formatPrice(order.deliveryFee)}</td>
+                              <td>{formatPrice(order.total)}</td>
                               <td>{order.orderStatus?.toUpperCase()}</td>
                               <td>
                                 <button
@@ -238,12 +239,11 @@ const AccountTabs = () => {
                                           <td>{item.name}</td>
                                           <td>{item.sku}</td>
                                           <td>{item.quantity}</td>
-                                          <td>LKR {item.price.toFixed(2)}</td>
+                                          <td>{formatPrice(item.price)}</td>
                                           <td>
-                                            LKR{" "}
-                                            {(
-                                              item.price * item.quantity
-                                            ).toFixed(2)}
+                                            {formatPrice(
+                                              item.price * item.quantity,
+                                            )}
                                           </td>
                                         </tr>
                                       ))}

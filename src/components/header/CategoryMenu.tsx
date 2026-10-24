@@ -74,7 +74,7 @@ function CategoryMenu() {
       <ul className="category-sub-menu" id="category-active-four">
         {menuItems.map((cat, index) => (
           <li key={cat.label}>
-            <Link href={`/shop?search=${cat.slug}`} className="menu-item">
+            <Link href={`/shop?category=${cat.slug}`} className="menu-item">
               <img src={`/assets/images/icons/${cat.icon}`} alt={cat.label} />
               <span>{cat.label}</span>
             </Link>

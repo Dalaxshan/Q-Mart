@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { ShippingAddress } from "@/type";
+import { formatPrice } from "@/app/lib/price-format";
 
 const DEFAULT_SHIPPING_COST = 350;
 const STORAGE_KEY = "customer";
@@ -197,7 +198,7 @@ export default function CheckOutMain() {
                       </span>
                     </div>
                     <span className="price">
-                      LKR {(item.price * item.quantity).toFixed(2)}
+                      {formatPrice(item.price * item.quantity)}
                     </span>
                   </div>
                 ))
@@ -207,7 +208,7 @@ export default function CheckOutMain() {
                 <div className="left-area">
                   <span>Subtotal</span>
                 </div>
-                <span className="price">LKR {subtotal.toFixed(2)}</span>
+                <span className="price">{formatPrice(subtotal)}</span>
               </div>
 
               {discount > 0 && (
@@ -215,7 +216,7 @@ export default function CheckOutMain() {
                   <div className="left-area">
                     <span>Discount (25%)</span>
                   </div>
-                  <span className="price">-${discountAmount.toFixed(2)}</span>
+                  <span className="price">-{formatPrice(discountAmount)}</span>
                 </div>
               )}
 
@@ -223,7 +224,7 @@ export default function CheckOutMain() {
                 <div className="left-area">
                   <span>Shipping</span>
                 </div>
-                <span className="price">LKR {shippingCost.toFixed(2)}</span>
+                <span className="price">{formatPrice(shippingCost)}</span>
               </div>
 
               <div className="single-shop-list">
@@ -233,7 +234,7 @@ export default function CheckOutMain() {
                   </span>
                 </div>
                 <span className="price" style={{ color: "#629D23" }}>
-                  LKR {total.toFixed(2)}
+                  {formatPrice(total)}
                 </span>
               </div>
 

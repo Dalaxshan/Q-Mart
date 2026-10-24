@@ -3,12 +3,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import HeaderTwo from "@/components/header/HeaderTwo";
-import FooterOne from "@/components/footer/FooterOne";
+import FooterThree from "@/components/footer/FooterThree";
 import ShortService from "@/components/service/ShortService";
 import { orderApi } from "@/app/api/orders/client";
 import { Order } from "@/type";
-
-const formatMoney = (amount: number) => `LKR ${amount.toFixed(2)}`;
+import { formatPrice } from "@/app/lib/price-format";
 
 const formatDate = (value?: string) =>
   value
@@ -109,7 +108,7 @@ export default function OrderConfirmationPage() {
                               Unit: {item.unit} · Qty: {item.quantity}
                             </span>
                           </div>
-                          <strong>{formatMoney(item.price * item.quantity)}</strong>
+                          <strong>{formatPrice(item.price * item.quantity)}</strong>
                         </div>
                       ))}
                     </div>
@@ -173,7 +172,7 @@ export default function OrderConfirmationPage() {
         </div>
       </main>
       <ShortService />
-      <FooterOne />
+         <FooterThree/>
     </div>
   );
 }

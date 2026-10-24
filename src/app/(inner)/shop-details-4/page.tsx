@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import ShortService from "@/components/service/ShortService";
-import FooterOne from "@/components/footer/FooterOne";
+import FooterThree from "@/components/footer/FooterThree";
 import Link from "next/link";
 import HeaderTwo from "@/components/header/HeaderTwo";
 import RelatedProduct from "@/components/product/RelatedProduct";
@@ -547,7 +547,7 @@ export default function Home() {
       <RelatedProduct />
 
       <ShortService />
-      <FooterOne />
+         <FooterThree/>
     </div>
   );
 }

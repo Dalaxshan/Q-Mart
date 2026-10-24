@@ -8,6 +8,7 @@ import { useWishlist } from "@/components/header/WishlistContext";
 import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
+import { formatPrice } from "@/app/lib/price-format";
 
 interface BlogGridMainProps {
   ProductId?: string;
@@ -101,7 +102,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
     <>
       {/* ⛔ Don't render UI until DOM ready, but WITHOUT breaking hooks */}
       {!domReady ? null : (
-        <>
+        <div className="weekly-best-selling-card">
           <div className="image-and-action-area-wrapper">
             <Link href={`/shop/${Slug}`} className="thumbnail-preview">
               <div className="badge">
@@ -155,8 +156,8 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
             </Link>
             <span className="availability">{Unit ?? "1kg"}</span>
             <div className="price-area">
-              <span className="current">{`LKR ${SalePrice || Price}`}</span>
-              {SalePrice && <div className="previous">{`LKR ${Price}`}</div>}
+              <span className="current">{formatPrice(SalePrice ?? Price ?? 0)}</span>
+              {SalePrice && <div className="previous">{formatPrice(Price ?? 0)}</div>}
             </div>
 
             <div className="cart-counter-action">
@@ -199,7 +200,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
               </Link>
             </div>
           </div>
-        </>
+        </div>
       )}
 
       {/* Modals always mounted (does not affect swiper width) */}

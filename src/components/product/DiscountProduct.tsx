@@ -59,7 +59,7 @@ function DiscountProduct() {
                 <div className="row g-5">
                   <div className="col-xl-4 col-lg-12">
                     <a
-                      href="shop-details.html"
+                      href="shop"
                       className="single-discount-with-bg"
                     >
                       <div className="inner-content">
@@ -69,12 +69,12 @@ function DiscountProduct() {
                         </h4>
                         <div className="price-area">
                           <span>Only</span>
-                          <h4 className="title">LKR 2500.00</h4>
+                          <h4 className="title">LKR 2,500.00</h4>
                         </div>
                       </div>
                     </a>
                     <a
-                      href="shop-details.html"
+                      href="shop"
                       className="single-discount-with-bg bg-2"
                     >
                       <div className="inner-content">
@@ -84,7 +84,7 @@ function DiscountProduct() {
                         </h4>
                         <div className="price-area">
                           <span>Only</span>
-                          <h4 className="title">LKR 1500.00</h4>
+                          <h4 className="title">LKR 1,500.00</h4>
                         </div>
                       </div>
                     </a>

@@ -1,7 +1,7 @@
 "use client";
 import ShortService from "@/components/service/ShortService";
 import CartMain from "./CartMain";
-import FooterOne from "@/components/footer/FooterOne";
+import FooterThree from "@/components/footer/FooterThree";
 import HeaderTwo from "@/components/header/HeaderTwo";
 
 export default function Home() {
@@ -33,7 +33,7 @@ export default function Home() {
 
       <CartMain />
       <ShortService />
-      <FooterOne />
+         <FooterThree/>
     </div>
   );
 }

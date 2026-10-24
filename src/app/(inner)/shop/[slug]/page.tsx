@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import ShortService from "@/components/service/ShortService";
 import RelatedProduct from "@/components/product/RelatedProduct";
-import FooterOne from "@/components/footer/FooterOne";
+import FooterThree from "@/components/footer/FooterThree";
 // import Product from "@/data/Product.json";
 import { useParams } from "next/navigation";
 
@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Product } from "@/type";
 import { productApi } from "@/app/api/products/client";
 import HeaderTwo from "@/components/header/HeaderTwo";
+import { formatPrice } from "@/app/lib/price-format";
 
 const getRelationName = (
   relation: string | { name: string } | undefined,
@@ -133,10 +134,10 @@ const CompareElements: React.FC = () => {
                             className="product-price mb--15 d-block"
                             style={{ color: "#DC2626", fontWeight: 600 }}
                           >
-                            LKR {product.salePrice ?? product.price}
+                            {formatPrice(product.salePrice ?? product.price)}
                             {product.salePrice && (
                               <span className="old-price ml--15">
-                                LKR {product.price}
+                                {formatPrice(product.price)}
                               </span>
                             )}
                           </span>
@@ -332,7 +333,7 @@ const CompareElements: React.FC = () => {
 
       <RelatedProduct categoryName={categoryName} />
       <ShortService />
-      <FooterOne />
+         <FooterThree/>
       <ToastContainer />
     </div>
   );

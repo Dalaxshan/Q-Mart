@@ -1,7 +1,7 @@
 "use client";
 
 import ShortService from "@/components/service/ShortService";
-import FooterOne from "@/components/footer/FooterOne";
+import FooterThree from "@/components/footer/FooterThree";
 import Link from "next/link";
 import HeaderTwo from "@/components/header/HeaderTwo";
 import { customerApi } from "@/app/api/customers/routes";
@@ -107,7 +107,7 @@ export default function Home() {
       </>
 
       <ShortService />
-      <FooterOne />
+         <FooterThree/>
     </div>
   );
 }

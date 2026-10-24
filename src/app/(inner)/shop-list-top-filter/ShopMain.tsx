@@ -6,6 +6,7 @@ import ProductDetails from "@/components/modal/ProductDetails";
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { formatPrice } from "@/app/lib/price-format";
 
 
 interface BlogGridMainProps {
@@ -108,8 +109,8 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
                 </a>
                 <span className="availability">500g Pack</span>
                 <div className="price-area">
-                    <span className="current">{`$${Price}`}</span>
-                    <div className="previous">$36.00</div>
+                    <span className="current">{formatPrice(Price ?? 0)}</span>
+                    <div className="previous">{formatPrice(36)}</div>
                 </div>
 
                 <div className="cart-counter-action">

@@ -68,11 +68,13 @@ function HeaderTwo() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchTerm.trim()) {
-      router.push(`/shop?search=${encodeURIComponent(searchTerm.trim())}`);
-    } else {
-      router.push("/shop");
-    }
+    const params = new URLSearchParams(window.location.search);
+    const value = searchTerm.trim();
+
+    if (value) params.set("search", value);
+    else params.delete("search");
+
+    router.push(`/shop${params.toString() ? `?${params.toString()}` : ""}`);
   };
 
   return (

@@ -1,6 +1,6 @@
 import ShortService from "@/components/service/ShortService";
 import CheckOutMain from "./CheckOutMain";
-import FooterOne from "@/components/footer/FooterOne";
+import FooterThree from "@/components/footer/FooterThree";
 import HeaderTwo from "@/components/header/HeaderTwo";
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
       <HeaderTwo />
       <CheckOutMain />
       <ShortService />
-      <FooterOne />
+         <FooterThree/>
     </div>
   );
 }

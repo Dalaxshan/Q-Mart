@@ -5,11 +5,11 @@ import FeatureProduct from "@/components/product/FeatureProduct";
 import WeeklyBestSelling from "@/components/product/WeeklyBestSelling";
 import FeatureDiscount from "@/components/product/FeatureDiscount";
 import TrandingProduct from "@/components/product/TrandingProduct";
-import FooterOne from "@/components/footer/FooterOne";
 import { CartProvider } from "@/components/header/CartContext";
 import { WishlistProvider } from "@/components/header/WishlistContext";
 import { ToastContainer, toast } from "react-toastify";
 import HeaderTwo from "@/components/header/HeaderTwo";
+import FooterThree from "@/components/footer/FooterThree";
 
 export default function Home() {
   return (
@@ -26,7 +26,7 @@ export default function Home() {
           <FeatureDiscount />
           <TrandingProduct />
           {/* <BlogOne /> */}
-          <FooterOne />
+          <FooterThree/>
         </div>
       </CartProvider>
     </WishlistProvider>

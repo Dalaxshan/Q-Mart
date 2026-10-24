@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import ShortService from "@/components/service/ShortService";
-import FooterOne from "@/components/footer/FooterOne";
+import FooterThree from "@/components/footer/FooterThree";
 import HeaderTwo from "@/components/header/HeaderTwo";
 import { customerApi } from "@/app/api/customers/routes";
 import { useRouter } from "next/navigation";
@@ -163,7 +163,7 @@ export default function Home() {
       </>
 
       <ShortService />
-      <FooterOne />
+         <FooterThree/>
     </div>
   );
 }

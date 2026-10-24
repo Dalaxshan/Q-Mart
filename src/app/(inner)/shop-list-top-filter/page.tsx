@@ -5,7 +5,7 @@ import ShopMainList from "./ShopMainList";
 import Product from '@/data/Product.json';
 
 
-import FooterOne from "@/components/footer/FooterOne";
+import FooterThree from "@/components/footer/FooterThree";
 import Link from "next/link";
 
 
@@ -302,7 +302,7 @@ export default function Home() {
 
 
 
-      <FooterOne />
+         <FooterThree/>
 
     </div>
   );

@@ -6,6 +6,7 @@ import { useCart } from "@/components/header/CartContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from "next/link";
+import { formatPrice } from "@/app/lib/price-format";
 
 interface ModalProps {
   show: boolean;
@@ -51,7 +52,7 @@ const ProductDetails: React.FC<ModalProps> = ({
   const salePrice = productSalePrice ? parseFloat(productSalePrice) : NaN;
   const hasSalePrice = Number.isFinite(salePrice) && salePrice > 0 && salePrice < regularPrice;
   const currentPrice = hasSalePrice ? salePrice : regularPrice;
-  const totalPrice = (currentPrice * quantity).toFixed(2);
+  const totalPrice = currentPrice * quantity;
   const displayRating = rating ?? 3.5;
   const displayReviewCount = reviewCount ?? 10;
   const displayStock = stock ?? 1;
@@ -140,8 +141,8 @@ const ProductDetails: React.FC<ModalProps> = ({
                   </h2>
 
                   <span className="product-price">
-                    {hasSalePrice && <span className="old-price">LKR {regularPrice.toFixed(2)}</span>}
-                    LKR {totalPrice}
+                    {hasSalePrice && <span className="old-price">{formatPrice(regularPrice)}</span>}
+                    {formatPrice(totalPrice)}
                   </span>
 
                   <p>

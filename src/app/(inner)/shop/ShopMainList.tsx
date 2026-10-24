@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useCart } from "@/components/header/CartContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { formatPrice } from "@/app/lib/price-format";
 
 interface BlogGridMainProps {
   ProductId: string;
@@ -74,8 +75,8 @@ const ShopMainList: React.FC<BlogGridMainProps> = ({
             <span className="availability">{Unit ?? "1kg"}</span>
 
             <div className="price-area">
-              <span className="current">LKR {SalePrice || Price}</span>
-              {SalePrice && <div className="previous">LKR {Price}</div>}
+              <span className="current">{formatPrice(SalePrice || Price || 0)}</span>
+              {SalePrice && <div className="previous">{formatPrice(Price || 0)}</div>}
             </div>
 
             <div className="cart-counter-action">

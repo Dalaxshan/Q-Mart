@@ -25,7 +25,7 @@ function FeatureProduct() {
 
     void fetchProducts();
   }, []);
-  
+
   // number count up and down
   useEffect(() => {
     const handleQuantityClick = (e: Event) => {
@@ -122,7 +122,7 @@ function FeatureProduct() {
                       480: { slidesPerView: 3, spaceBetween: 30 },
                       640: { slidesPerView: 3, spaceBetween: 30 },
                       840: { slidesPerView: 4, spaceBetween: 30 },
-                      1140: { slidesPerView: 6, spaceBetween: 30 },
+                      1140: { slidesPerView: 5, spaceBetween: 30 },
                     }}
                   >
                     {products.map((post: Product) => (
@@ -138,7 +138,11 @@ function FeatureProduct() {
                               SalePrice={post.salePrice}
                               Unit={post.unit}
                               SKU={post.sku}
-                              CategoryName={typeof post.category === "string" ? post.category : post.category.name}
+                              CategoryName={
+                                typeof post.category === "string"
+                                  ? post.category
+                                  : post.category.name
+                              }
                               Stock={post.stock}
                               Rating={post.rating}
                               ReviewCount={post.reviewCount}

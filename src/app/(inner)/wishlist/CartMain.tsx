@@ -6,6 +6,7 @@ import { useCart } from "@/components/header/CartContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
+import { formatPrice } from "@/app/lib/price-format";
 
 const CartMain = () => {
   const { wishlistItems, removeFromWishlist, updateItemQuantity } =
@@ -59,7 +60,7 @@ const CartMain = () => {
             <div className="cart-area-main-wrapper">
               <div className="cart-top-area-note">
                 <p>
-                  Spend More <span>LKR {remaining.toFixed(2)}</span> to
+                  Spend More <span>{formatPrice(remaining)}</span> to
                   Reach{" "}Free Shipping.
                 </p>
                 <div className="bottom-content-deals mt--10">
@@ -121,7 +122,7 @@ const CartMain = () => {
                     </div>
                   </div>
                   <div className="price">
-                    <p>LKR {item.price.toFixed(2)}</p>
+                    <p>{formatPrice(item.price)}</p>
                   </div>
                   <div className="quantity">
                     <div className="quantity-edit">
@@ -153,7 +154,7 @@ const CartMain = () => {
                     </div>
                   </div>
                   <div className="subtotal">
-                    <p>LKR {(item.price * item.quantity).toFixed(2)}</p>
+                    <p>{formatPrice(item.price * item.quantity)}</p>
                   </div>
                   <div className="button-area">
                     <a

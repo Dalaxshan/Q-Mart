@@ -159,7 +159,7 @@ function FooterOne() {
                   </div>
                   <div className="payment-access">
                     <span>Payment Accepts:</span>
-                    <img src="assets/images/payment/01.png" alt="" />
+                    <img src="/assets/images/shop/03.png" alt="" />
                   </div>
                 </div>
               </div>
@@ -177,7 +177,6 @@ function FooterOne() {
                     Copyright 2025 <a href="#">©QuickMart</a>. All rights
                     reserved.
                   </p>
-                 
                 </div>
               </div>
             </div>

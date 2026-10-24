@@ -2,7 +2,7 @@
 import { useState } from "react";
 import ShortService from "@/components/service/ShortService";
 import RelatedProduct from "@/components/product/RelatedProduct";
-import FooterOne from "@/components/footer/FooterOne";
+import FooterThree from "@/components/footer/FooterThree";
 import Product from "@/data/Product.json";
 import { useParams } from "next/navigation";
 import Link from "next/link";
@@ -549,7 +549,7 @@ export default function Home() {
       <RelatedProduct />
 
       <ShortService />
-      <FooterOne />
+         <FooterThree/>
     </div>
   );
 }

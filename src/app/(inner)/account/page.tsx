@@ -1,7 +1,7 @@
 "use client";
 import ShortService from "@/components/service/ShortService";
 import Accordion from "./Accordion";
-import FooterOne from "@/components/footer/FooterOne";
+import FooterThree from "@/components/footer/FooterThree";
 import HeaderTwo from "@/components/header/HeaderTwo";
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
       </>
 
       <ShortService />
-      <FooterOne />
+         <FooterThree/>
     </div>
   );
 }

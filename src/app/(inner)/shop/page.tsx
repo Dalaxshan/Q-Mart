@@ -1,20 +1,41 @@
 "use client";
 import { useState, useEffect, Suspense, useCallback } from "react";
 import HeaderTwo from "@/components/header/HeaderTwo";
-import FooterOne from "@/components/footer/FooterOne";
+import FooterThree from "@/components/footer/FooterThree";
 import ShopMain from "./ShopMain";
 import ShopMainList from "./ShopMainList";
 import { productApi } from "@/app/api/products/client";
 import { categoryApi } from "@/app/api/categories/client";
 import { brandApi } from "@/app/api/brands/client";
 import { Product, Category, Brand } from "@/type";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 function ShopContent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get("search") || "";
   const categoryQuery = searchParams.get("category") || "";
+  const brandQuery = searchParams.get("brand") || "";
+  const minPriceQuery = searchParams.get("minPrice") || "";
+  const maxPriceQuery = searchParams.get("maxPrice") || "";
+  const pageQuery = searchParams.get("page") || "1";
+
+  const parseSlugs = (value: string) =>
+    value
+      .split(",")
+      .map((slug) => slug.trim().replace(/\/+$/, ""))
+      .filter(Boolean);
+  const parsedMinPrice = Number(minPriceQuery);
+  const parsedMaxPrice = Number(maxPriceQuery);
+  const urlMinPrice =
+    minPriceQuery && Number.isFinite(parsedMinPrice) ? parsedMinPrice : 0;
+  const urlMaxPrice =
+    maxPriceQuery && Number.isFinite(parsedMaxPrice) ? parsedMaxPrice : 9000;
+  const parsedPage = Number(pageQuery);
+  const requestedPage =
+    Number.isInteger(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+  const productsPerPage = 10;
 
   const [activeTab, setActiveTab] = useState<"tab1" | "tab2">("tab1");
   const [products, setProducts] = useState<Product[]>([]);
@@ -22,18 +43,25 @@ function ShopContent() {
   const [brands, setBrands] = useState<Brand[]>([]);
 
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
-    categoryQuery ? [categoryQuery] : [],
+    parseSlugs(categoryQuery),
   );
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-  const [minPrice, setMinPrice] = useState<number>(0);
-  const [maxPrice, setMaxPrice] = useState<number>(9000);
-  const [appliedMin, setAppliedMin] = useState<number>(0);
-  const [appliedMax, setAppliedMax] = useState<number>(9000);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>(
+    parseSlugs(brandQuery),
+  );
+  const [minPrice, setMinPrice] = useState<number>(urlMinPrice);
+  const [maxPrice, setMaxPrice] = useState<number>(urlMaxPrice);
+  const [appliedMin, setAppliedMin] = useState<number>(urlMinPrice);
+  const [appliedMax, setAppliedMax] = useState<number>(urlMaxPrice);
 
   // Fetch categories and brands once
   useEffect(() => {
-    setSelectedCategories(categoryQuery ? [categoryQuery] : []);
-  }, [categoryQuery]);
+    setSelectedCategories(parseSlugs(categoryQuery));
+    setSelectedBrands(parseSlugs(brandQuery));
+    setMinPrice(urlMinPrice);
+    setMaxPrice(urlMaxPrice);
+    setAppliedMin(urlMinPrice);
+    setAppliedMax(urlMaxPrice);
+  }, [categoryQuery, brandQuery, minPriceQuery, maxPriceQuery]);
 
   useEffect(() => {
     categoryApi.getAllCategory().then(setCategories).catch(console.error);
@@ -50,6 +78,7 @@ function ShopContent() {
       if (appliedMin > 0) query.minPrice = appliedMin;
       if (appliedMax < 9000) query.maxPrice = appliedMax;
       if (searchQuery) query.search = searchQuery;
+      query.limit = 200;
       const data = await productApi.getAllProducts(query);
       setProducts(data);
     } catch (error) {
@@ -62,21 +91,48 @@ function ShopContent() {
   }, [fetchProducts]);
 
   const handleCategoryChange = (slug: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(slug) ? prev.filter((c) => c !== slug) : [...prev, slug],
-    );
+    const next = selectedCategories.includes(slug)
+      ? selectedCategories.filter((category) => category !== slug)
+      : [...selectedCategories, slug];
+    setSelectedCategories(next);
+    updateUrl("category", next);
   };
 
   const handleBrandChange = (slug: string) => {
-    setSelectedBrands((prev) =>
-      prev.includes(slug) ? prev.filter((b) => b !== slug) : [...prev, slug],
-    );
+    const next = selectedBrands.includes(slug)
+      ? selectedBrands.filter((brand) => brand !== slug)
+      : [...selectedBrands, slug];
+    setSelectedBrands(next);
+    updateUrl("brand", next);
+  };
+
+  function updateUrl(name: string, values: string[] | number | "") {
+    const params = new URLSearchParams(searchParams.toString());
+    const value = Array.isArray(values) ? values.join(",") : String(values);
+
+    if (value) params.set(name, value);
+    else params.delete(name);
+    if (name !== "page") params.delete("page");
+
+    router.replace(`/shop${params.toString() ? `?${params.toString()}` : ""}`);
+  }
+
+  /* Keep all active filters shareable and restorable on refresh. */
+  const updatePriceUrl = (min: number, max: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (min > 0) params.set("minPrice", String(min));
+    else params.delete("minPrice");
+    if (max < 9000) params.set("maxPrice", String(max));
+    else params.delete("maxPrice");
+    params.delete("page");
+    router.replace(`/shop${params.toString() ? `?${params.toString()}` : ""}`);
   };
 
   const handlePriceFilterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setAppliedMin(minPrice);
     setAppliedMax(maxPrice);
+    updatePriceUrl(minPrice, maxPrice);
   };
 
   // Client-side filter for multiple selections (API may only support single values)
@@ -97,6 +153,23 @@ function ShopContent() {
 
     return true;
   });
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredProducts.length / productsPerPage),
+  );
+  const currentPage = Math.min(requestedPage, totalPages);
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage,
+  );
+
+  const goToPage = (page: number) => {
+    const nextPage = Math.max(1, Math.min(page, totalPages));
+    const params = new URLSearchParams(searchParams.toString());
+    if (nextPage === 1) params.delete("page");
+    else params.set("page", String(nextPage));
+    router.push(`/shop${params.toString() ? `?${params.toString()}` : ""}`);
+  };
 
   return (
     <div className="shop-page">
@@ -174,7 +247,6 @@ function ShopContent() {
                         }
                       />
                       <div className="filter-value-min-max">
-                       
                         <button type="submit" className="rts-btn btn-primary">
                           Filter
                         </button>
@@ -336,13 +408,13 @@ function ShopContent() {
                 {activeTab === "tab1" && (
                   <div className="product-area-wrapper-shopgrid-list mt--20">
                     <div className="row g-4">
-                      {filteredProducts.length > 0 ? (
-                        filteredProducts.map((product: Product) => (
+                      {paginatedProducts.length > 0 ? (
+                        paginatedProducts.map((product: Product) => (
                           <div
                             key={product._id}
-                            className="col-lg-4 col-md-6 col-sm-6 col-12"
+                            className="col-lg-4 col-md-6 col-sm-6 col-12 shop-product-column"
                           >
-                            <div className="single-shopping-card-one">
+                            <div className="single-shopping-card-one shop-product-card">
                               <ShopMain
                                 ProductId={product._id}
                                 Slug={product.slug}
@@ -368,10 +440,13 @@ function ShopContent() {
                 {activeTab === "tab2" && (
                   <div className="product-area-wrapper-shopgrid-list with-list mt--20">
                     <div className="row">
-                      {filteredProducts.length > 0 ? (
-                        filteredProducts.map((product: Product) => (
-                          <div key={product._id} className="col-lg-6">
-                            <div className="single-shopping-card-one discount-offer">
+                      {paginatedProducts.length > 0 ? (
+                        paginatedProducts.map((product: Product) => (
+                          <div
+                            key={product._id}
+                            className="col-lg-6 shop-product-column"
+                          >
+                            <div className="single-shopping-card-one discount-offer shop-product-card">
                               <ShopMainList
                                 ProductId={product._id}
                                 Slug={product.slug}
@@ -394,6 +469,66 @@ function ShopContent() {
                   </div>
                 )}
               </div>
+              {totalPages > 1 && (
+                <div
+                  className="rts-pagination-area mt--40"
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <nav>
+                    <ul
+                      className="pagination"
+                      style={{
+                        display: "flex",
+                        gap: "6px",
+                        listStyle: "none",
+                        padding: 0,
+                        margin: 0,
+                      }}
+                    >
+                      <li>
+                        <button
+                          className="page-link"
+                          onClick={() => goToPage(currentPage - 1)}
+                          disabled={currentPage === 1}
+                          style={{
+                            border: "1px solid #629D23",
+                            color: "#629D23",
+                            borderRadius: "4px",
+                            background: "#fff",
+                            padding: "6px 16px",
+                            cursor:
+                              currentPage === 1 ? "not-allowed" : "pointer",
+                            opacity: currentPage === 1 ? 0.5 : 1,
+                          }}
+                        >
+                          <i className="fa-regular fa-chevron-left" /> Previous
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          className="page-link"
+                          onClick={() => goToPage(currentPage + 1)}
+                          disabled={currentPage === totalPages}
+                          style={{
+                            border: "1px solid #629D23",
+                            color: "#629D23",
+                            borderRadius: "4px",
+                            background: "#fff",
+                            padding: "6px 16px",
+                            cursor:
+                              currentPage === totalPages
+                                ? "not-allowed"
+                                : "pointer",
+                            opacity: currentPage === totalPages ? 0.5 : 1,
+                          }}
+                        >
+                          Next <i className="fa-regular fa-chevron-right" />
+                        </button>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -409,7 +544,7 @@ export default function Home() {
       <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
         <ShopContent />
       </Suspense>
-      <FooterOne />
+      <FooterThree />
     </>
   );
 }

@@ -5,6 +5,7 @@ import { useCart } from "@/components/header/CartContext";
 import { useWishlist } from "@/components/header/WishlistContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { formatPrice } from "@/app/lib/price-format";
 
 interface BlogGridMainProps {
   Slug: string;
@@ -90,8 +91,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
         <span className="availability">{Unit ?? "500g Pack"}</span>
 
         <div className="price-area">
-          <span className="current">{`LKR ${SalePrice || Price}`}</span>
-        
+          <span className="current">{formatPrice(SalePrice ?? Price ?? 0)}</span>
         </div>
 
         <div className="cart-counter-action">
@@ -124,7 +124,6 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
             }}
           >
             <div className="btn-text">{added ? "Added" : "Add"}</div>
-
             <div className="arrow-icon">
               <i
                 className={`fa-regular ${added ? "fa-check" : "fa-cart-shopping"}`}
