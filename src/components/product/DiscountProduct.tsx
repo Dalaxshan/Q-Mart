@@ -1,17 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 import DiscountProductMain from "@/components/product-main/DiscountProductMain";
 import { Product } from "@/type";
 import { productApi } from "@/app/api/products/client";
-interface PostType {
-  category?: string;
-  slug: string;
-  image: string;
-  title?: string;
-  author?: string;
-  publishedDate?: string;
-  price?: string;
-}
 
 function DiscountProduct() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -21,6 +16,7 @@ function DiscountProduct() {
       try {
         const fetchedProducts = await productApi.getAllProducts({
           featured: true,
+          limit: 12,
         });
         setProducts(fetchedProducts);
       } catch (error) {
@@ -31,14 +27,17 @@ function DiscountProduct() {
     void fetchProducts();
   }, []);
 
-  const postIndicesSection1 = [1, 5, 6, 4];
-
-  // Helper function to get posts from indices
-  const getPostsByIndices = (indices: number[]): Product[] =>
-    indices.map((index) => products[index]).filter(Boolean);
-
-  // Prepare post groups
-  const postsSection1 = getPostsByIndices(postIndicesSection1);
+  const productGroups = products.reduce<Product[][]>(
+    (groups, product, index) => {
+      const groupIndex = Math.floor(index / 4);
+      if (!groups[groupIndex]) {
+        groups[groupIndex] = [];
+      }
+      groups[groupIndex].push(product);
+      return groups;
+    },
+    [],
+  );
 
   return (
     <div>
@@ -90,21 +89,55 @@ function DiscountProduct() {
                     </a>
                   </div>
                   <div className="col-xl-8 col-lg-12">
-                    <div className="row g-4">
-                      {postsSection1.map((post: Product, index: number) => (
-                        <div key={index} className="col-lg-6">
-                          <div className="single-shopping-card-one discount-offer">
-                            <DiscountProductMain
-                              Slug={post.slug}
-                              ProductImage={post.images[0]}
-                              ProductTitle={post.name}
-                              Price={post.price}
-                              SalePrice={post.salePrice}
-                              Unit={post.unit}
-                            />
-                          </div>
-                        </div>
-                      ))}
+                    <div className="discount-product-slider">
+                      <Swiper
+                        modules={[Navigation]}
+                        navigation={{
+                          nextEl: ".discount-product-next",
+                          prevEl: ".discount-product-prev",
+                        }}
+                        slidesPerView={1}
+                        slidesPerGroup={1}
+                        spaceBetween={24}
+                      >
+                        {productGroups.map((group, groupIndex) => (
+                          <SwiperSlide key={`discount-group-${groupIndex}`}>
+                            <div className="discount-product-grid">
+                              {group.map((post) => (
+                                <div
+                                  className="single-shopping-card-one discount-offer"
+                                  key={post._id}
+                                >
+                                  <DiscountProductMain
+                                    Slug={post.slug}
+                                    ProductImage={post.images[0]}
+                                    ProductTitle={post.name}
+                                    Price={post.price}
+                                    SalePrice={post.salePrice}
+                                    Unit={post.unit}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
+                      <div className="discount-product-slider-controls">
+                        <button
+                          type="button"
+                          className="swiper-button-prev discount-product-prev"
+                          aria-label="Previous discounted products"
+                        >
+                          <i className="fa-regular fa-chevron-left" />
+                        </button>
+                        <button
+                          type="button"
+                          className="swiper-button-next discount-product-next"
+                          aria-label="Next discounted products"
+                        >
+                          <i className="fa-regular fa-chevron-right" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

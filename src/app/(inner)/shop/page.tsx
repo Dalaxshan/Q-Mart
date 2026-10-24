@@ -412,7 +412,7 @@ function ShopContent() {
                         paginatedProducts.map((product: Product) => (
                           <div
                             key={product._id}
-                            className="col-lg-4 col-md-6 col-sm-6 col-12 shop-product-column"
+                            className="col-lg-3 col-md-6 col-sm-6 col-12 shop-product-column"
                           >
                             <div className="single-shopping-card-one shop-product-card">
                               <ShopMain

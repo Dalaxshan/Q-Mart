@@ -7,7 +7,7 @@ import FooterThree from "@/components/footer/FooterThree";
 import ShortService from "@/components/service/ShortService";
 import { orderApi } from "@/app/api/orders/client";
 import { Order } from "@/type";
-import { formatPrice } from "@/app/lib/price-format";
+import { formatPrice} from "@/app/lib/price-format";
 
 const formatDate = (value?: string) =>
   value
@@ -138,11 +138,11 @@ export default function OrderConfirmationPage() {
                 <div className="col-lg-4">
                   <section className="order-confirmation-card order-confirmation-summary">
                     <h3>Payment summary</h3>
-                    <div><span>Subtotal</span><strong>{formatMoney(order.subtotal)}</strong></div>
-                    <div><span>Discount</span><strong>- {formatMoney(order.discount)}</strong></div>
-                    <div><span>Delivery</span><strong>{formatMoney(order.deliveryFee)}</strong></div>
+                    <div><span>Subtotal</span><strong>{formatPrice(order.subtotal)}</strong></div>
+                    <div><span>Discount</span><strong>- {formatPrice(order.discount)}</strong></div>
+                    <div><span>Delivery</span><strong>{formatPrice(order.deliveryFee)}</strong></div>
                     <div className="order-confirmation-total">
-                      <span>Total</span><strong>{formatMoney(order.total)}</strong>
+                      <span>Total</span><strong>{formatPrice(order.total)}</strong>
                     </div>
                     <p>
                       Payment method:{" "}
