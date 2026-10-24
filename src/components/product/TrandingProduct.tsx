@@ -86,13 +86,11 @@ function TrandingProduct() {
                               </span>
                               <div className="price-area">
                                 <span className="current">
-                                  {formatPrice(
-                                    hasSalePrice ? salePrice : price,
-                                  )}
+                                 LKR { hasSalePrice ? salePrice : price}
                                 </span>
                                 {hasSalePrice && (
                                   <div className="previous">
-                                    {formatPrice(price ?? 0)}
+                                    LKR {price ?? 0}
                                   </div>
                                 )}
                               </div>

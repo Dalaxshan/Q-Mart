@@ -14,7 +14,7 @@ function BannerTwo() {
             <div className="banner-bg-iamge-area bg_banner-2 bg_image">
               <div className="content">
                 <span className="pre-title">
-                  Get up to 30% off on your first $150 purchase
+                  Get up to 30% off on your first LKR 5,000 purchase
                 </span>
                 <h1 className="title">
                   Feed Your Family at the <br />
