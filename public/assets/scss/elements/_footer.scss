@@ -12,14 +12,37 @@
         flex-wrap: wrap;
     }
     @media #{$md-layout} {
-        pad: 10px;
+        padding: 10px;
     }
     @media #{$sm-layout} {
         gap: 10px;
     }
 }
 
+.footer-three-main-content-wrapper{
+    @media #{$md-layout} {
+        gap: 30px;
+
+        .single-footer-wized{
+            flex: 0 0 calc(50% - 15px);
+        }
+    }
+    @media #{$sm-layout} {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 30px;
+
+        .single-footer-wized{
+            width: 100%;
+        }
+    }
+}
+
 .single-footer-wized{
+    iframe{
+        display: block;
+        max-width: 100%;
+    }
     .footer-title{
         font-size: 20px;
     }

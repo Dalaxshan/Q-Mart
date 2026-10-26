@@ -16,7 +16,10 @@ function RelatedProduct({ categoryName = "" }: RelatedProductProps) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const fetched = await productApi.getAllProducts({ category: categoryName, limit: 10 });
+        const fetched = await productApi.getAllProducts({
+          category: categoryName,
+          limit: 10,
+        });
         setProducts(fetched);
       } catch (error) {
         console.error("Error fetching related products:", error);

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { productApi } from "@/app/api/products/client";
 import { Product } from "@/type";
 import Link from "next/link";
-import { formatPrice } from "@/app/lib/price-format";
 
 function TrandingProduct() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -86,7 +85,7 @@ function TrandingProduct() {
                               </span>
                               <div className="price-area">
                                 <span className="current">
-                                 LKR { hasSalePrice ? salePrice : price}
+                                  LKR {hasSalePrice ? salePrice : price}
                                 </span>
                                 {hasSalePrice && (
                                   <div className="previous">

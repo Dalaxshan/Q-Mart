@@ -89,7 +89,7 @@ function HeaderTwo() {
                   <div className="hader-top-between-two">
                     <p>
                       {customerName
-                        ? `Welcome ${customerName} To Our Quick-Mart!`
+                        ? `Welcome ${customerName} To Quick-Mart!`
                         : "Welcome To Our Quick-Mart!"}
                     </p>
                     {!customerName && (

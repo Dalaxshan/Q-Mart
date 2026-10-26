@@ -39,7 +39,7 @@ export default function Home() {
             <div className="row">
               <div className="col-lg-12">
                 <div className="navigator-breadcrumb-wrapper">
-                  <a href="index.html">Home</a>
+                  <a href="/">Home</a>
                   <i className="fa-regular fa-chevron-right" />
                   <a className="current" href="register.html">
                     Register

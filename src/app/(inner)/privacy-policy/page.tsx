@@ -1,10 +1,3 @@
-
-import AboutBanner from "@/components/banner/AboutBanner";
-import CounterOne from "@/components/counterup/CounterOne";
-import AboutOne from "@/components/about/AboutOne";
-import Team from "@/components/about/Team";
-import ServiceOne from "@/components/service/ServiceOne";
-import TestimonilsOne from "@/components/testimonials/TestimonilsOne";
 import ShortService from "@/components/service/ShortService";
 
 import FooterThree from "@/components/footer/FooterThree";
@@ -19,7 +12,7 @@ export default function Home() {
       <div className="row">
         <div className="col-lg-12">
           <div className="navigator-breadcrumb-wrapper">
-            <a href="index.html">Home</a>
+            <a href="/">Home</a>
             <i className="fa-regular fa-chevron-right" />
             <a className="current" href="register.html">
               Privacy Policy
