@@ -150,7 +150,7 @@ body {
   display: block;
   width: 60%;
   position: absolute;
-  left:-12px;
+  left: 10px;
   top: -15px;
   height: 100%;
   object-fit: contain;
