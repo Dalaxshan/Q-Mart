@@ -9,6 +9,7 @@ import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import { formatPrice } from "@/app/lib/price-format";
+import Image from "next/image";
 
 interface BlogGridMainProps {
   ProductId?: string;
@@ -102,15 +103,18 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
     <>
       {/* ⛔ Don't render UI until DOM ready, but WITHOUT breaking hooks */}
       {!domReady ? null : (
-        <div className="weekly-best-selling-card">
+        <div className="weekly-best-selling-card" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
           <div className="image-and-action-area-wrapper">
             <Link href={`/shop/${Slug}`} className="thumbnail-preview">
+              {/* discount badge */}
               <div className="badge">
-                <span>
-                  25% <br />
-                  Off
-                </span>
-                <i className="fa-solid fa-bookmark" />
+                <Image
+                  src="/assets/images/badge.png"
+                  alt="Discount"
+                  width={156}
+                  height={103}
+                  className="discount-badge-image"
+                />
               </div>
               <img src={productImageSrc} alt="grocery" />
             </Link>

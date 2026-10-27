@@ -111,7 +111,7 @@ const Sidebar = () => {
         {/* button area wrapper end */}
       </div>
       <div className="search-input-area">
-        <div className="container">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
           <div className="search-input-inner">
             <div className="input-div">
               <input

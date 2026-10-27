@@ -6,13 +6,13 @@ function BannerFour() {
         <div>
             <>
                 {/* rts banenr area start */}
-                <div className="rts-banner-area rts-section-gap banner-bg_4 bg_image  d-flex align-items-center">
+                <div className="rts-banner-area rts-section-gap banner-bg_4 bg_image flex! items-center!">
                     <div className="transparent-person">
                         <img src="/assets/images/banner/transparent/01.png" alt="banenr" />
                     </div>
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12">
+                    <div className="w-full max-w-[1696px] m-auto px-[15px]">
+                        <div className="flex flex-wrap -mx-3">
+                            <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                                 {/* banner inner content area start */}
                                 <div className="banner-area-start-4">
                                     <span className="pre">Get up to -30% off on your purchase</span>

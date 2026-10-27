@@ -7,9 +7,9 @@ function ComponentName() {
 <>
   {/* rts banner area about */}
   <div className="about-banner-area-bg rts-section-gap bg_iamge">
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-12">
+    <div className="w-full max-w-[1696px] m-auto px-[15px]">
+      <div className="flex flex-wrap -mx-3">
+        <div className="w-full max-w-full shrink-0 px-[0.75rem]">
           <div className="inner-content-about-area">
             <h1 className="title">Do You Want To Know Us?</h1>
             <p className="disc">

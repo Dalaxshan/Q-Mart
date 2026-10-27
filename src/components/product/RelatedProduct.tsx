@@ -16,7 +16,10 @@ function RelatedProduct({ categoryName = "" }: RelatedProductProps) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const fetched = await productApi.getAllProducts({ category: categoryName, limit: 10 });
+        const fetched = await productApi.getAllProducts({
+          category: categoryName,
+          limit: 5,
+        });
         setProducts(fetched);
       } catch (error) {
         console.error("Error fetching related products:", error);
@@ -28,9 +31,9 @@ function RelatedProduct({ categoryName = "" }: RelatedProductProps) {
 
   return (
     <div className="rts-grocery-feature-area rts-section-gap">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
+      <div className="w-full max-w-[1696px] m-auto px-[15px]">
+        <div className="flex flex-wrap -mx-3">
+          <div className="w-full max-w-full shrink-0 px-[0.75rem]">
             <div className="title-area-between">
               <h2 className="title-left">Related Product</h2>
               <div className="next-prev-swiper-wrapper">
@@ -44,30 +47,30 @@ function RelatedProduct({ categoryName = "" }: RelatedProductProps) {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-lg-12">
+        <div className="flex flex-wrap -mx-3">
+          <div className="w-full max-w-full shrink-0 px-[0.75rem]">
             <div className="category-area-main-wrapper-one">
               <Swiper
                 modules={[Navigation, Autoplay]}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
-                loop={products.length >= 6}
+                loop={products.length >= 5}
                 navigation={{
                   nextEl: ".related-product-next",
                   prevEl: ".related-product-prev",
                 }}
                 className="mySwiper-category-1"
+                style={{ alignItems: "stretch" }}
                 breakpoints={{
-                  0: { slidesPerView: 1, spaceBetween: 30 },
-                  320: { slidesPerView: 2, spaceBetween: 30 },
-                  480: { slidesPerView: 3, spaceBetween: 30 },
-                  640: { slidesPerView: 3, spaceBetween: 30 },
-                  840: { slidesPerView: 4, spaceBetween: 30 },
-                  1140: { slidesPerView: 6, spaceBetween: 30 },
+                  0: { slidesPerView: 1, spaceBetween: 16 },
+                  480: { slidesPerView: 2, spaceBetween: 20 },
+                  640: { slidesPerView: 3, spaceBetween: 24 },
+                  840: { slidesPerView: 4, spaceBetween: 24 },
+                  1140: { slidesPerView: 5, spaceBetween: 30 },
                 }}
               >
                 {products.map((product: Product) => (
-                  <SwiperSlide key={product._id}>
-                    <div className="single-shopping-card-one">
+                  <SwiperSlide key={product._id} style={{ height: "auto" }}>
+                    <div className="single-shopping-card-one" style={{ height: "100%" }}>
                       <WeeklyBestSellingMain
                         ProductId={product._id}
                         Slug={product.slug}

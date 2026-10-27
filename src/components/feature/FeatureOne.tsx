@@ -5,9 +5,9 @@ function FeatureOne() {
   return (
     <div>
       <div className="rts-feature-area rts-section-gap">
-        <div className="container">
-          <div className="row g-4">
-            <div className="col-xl-20 col-lg-6 col-md-6 col-sm-6 col-12">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
+          <div className="flex flex-wrap -mx-3 -mt-6">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 xl:w-1/5">
               <div className="single-feature-area">
                 <div className="icon">
                   <svg
@@ -33,7 +33,7 @@ function FeatureOne() {
                 </div>
               </div>
             </div>
-            <div className="col-xl-20 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 xl:w-1/5">
               <div className="single-feature-area">
                 <div className="icon">
                   <svg
@@ -67,7 +67,7 @@ function FeatureOne() {
                 </div>
               </div>
             </div>
-            <div className="col-xl-20 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 xl:w-1/5">
               <div className="single-feature-area">
                 <div className="icon">
                   <svg
@@ -117,7 +117,7 @@ function FeatureOne() {
                 </div>
               </div>
             </div>
-            <div className="col-xl-20 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 xl:w-1/5">
               <div className="single-feature-area">
                 <div className="icon">
                   <svg
@@ -143,7 +143,7 @@ function FeatureOne() {
                 </div>
               </div>
             </div>
-            <div className="col-xl-20 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 xl:w-1/5">
               <div className="single-feature-area">
                 <div className="icon">
                   <svg

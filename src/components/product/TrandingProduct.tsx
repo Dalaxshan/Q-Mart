@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { productApi } from "@/app/api/products/client";
 import { Product } from "@/type";
 import Link from "next/link";
-import { formatPrice } from "@/app/lib/price-format";
 
 function TrandingProduct() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -29,18 +28,18 @@ function TrandingProduct() {
       <>
         {/* rts top tranding product area */}
         <div className="top-tranding-product rts-section-gap">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-12">
+          <div className="w-full max-w-[1696px] m-auto px-[15px]">
+            <div className="flex flex-wrap -mx-3">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                 <div className="title-area-between">
                   <h2 className="title-left mb--10">New Arrival Products</h2>
                 </div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-lg-12">
+            <div className="flex flex-wrap -mx-3">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                 <div className="cover-card-main-over">
-                  <div className="row g-4">
+                  <div className="flex flex-wrap -mx-3 -mt-6">
                     {products.map((product) => {
                       const price = Number(product.price);
                       const salePrice = product.salePrice
@@ -58,7 +57,7 @@ function TrandingProduct() {
 
                       return (
                         <div
-                          className="col-xl-3 col-md-6 col-sm-12 col-12"
+                          className="w-full max-w-full flex shrink-0 px-[0.75rem] mt-6 md:w-1/2 xl:w-1/4"
                           key={product._id}
                         >
                           <div className="single-shopping-card-one tranding-product">
@@ -86,7 +85,7 @@ function TrandingProduct() {
                               </span>
                               <div className="price-area">
                                 <span className="current">
-                                 LKR { hasSalePrice ? salePrice : price}
+                                  LKR {hasSalePrice ? salePrice : price}
                                 </span>
                                 {hasSalePrice && (
                                   <div className="previous">

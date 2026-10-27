@@ -43,20 +43,20 @@ function DiscountProduct() {
     <div>
       {/* rts grocery feature area start */}
       <div className="rts-grocery-feature-area rts-section-gapBottom">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
+          <div className="flex flex-wrap -mx-3">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem]">
               <div className="title-area-between">
                 <h2 className="title-left">Products With Discounts</h2>
                 
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-lg-12">
+          <div className="flex flex-wrap -mx-3">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem]">
               <div className="product-with-discount">
-                <div className="row g-5">
-                  <div className="col-xl-4 col-lg-12">
+                <div className="flex flex-wrap -mx-6 -mt-12">
+                  <div className="w-full max-w-full shrink-0 px-6 mt-12 xl:w-1/3">
                     <a
                       href="shop"
                       className="single-discount-with-bg"
@@ -88,7 +88,7 @@ function DiscountProduct() {
                       </div>
                     </a>
                   </div>
-                  <div className="col-xl-8 col-lg-12">
+                  <div className="w-full max-w-full shrink-0 px-6 mt-12 xl:w-2/3">
                     <div className="discount-product-slider">
                       <Swiper
                         modules={[Navigation]}

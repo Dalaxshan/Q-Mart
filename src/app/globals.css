@@ -1,3 +1,24 @@
+/*
+ * Tailwind CSS v4 - utilities only.
+ * - No Preflight: Bootstrap's reboot and the theme CSS in /public/assets/css still own base styles.
+ * - Breakpoints match Bootstrap 5 exactly so converted layouts switch at the same widths as before.
+ * - Class scanning is limited to app code (never /public), so no utilities are generated from vendor files.
+ * - Utilities are intentionally unlayered so cascade ties resolve the way Bootstrap's classes did.
+ */
+@import "tailwindcss/utilities.css" source(none);
+
+@source "../app";
+@source "../components";
+
+@theme {
+  --spacing: 0.25rem;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1400px;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -111,7 +132,28 @@ body {
 }
 
 .weekly-best-selling-card .thumbnail-preview {
+  position: relative;
   aspect-ratio: 1 / 1;
+}
+
+.single-shopping-card-one .weekly-best-selling-card .thumbnail-preview .badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 150px;
+  height: 100px;
+  line-height: 0;
+}
+
+.weekly-best-selling-card .thumbnail-preview .discount-badge-image {
+  display: block;
+  width: 60%;
+  position: absolute;
+  left:-12px;
+  top: -15px;
+  height: 100%;
+  object-fit: contain;
 }
 
 .weekly-best-selling-card .thumbnail-preview img {
@@ -137,6 +179,22 @@ body {
 
 .weekly-best-selling-card .cart-counter-action {
   margin-top: auto;
+}
+
+@media only screen and (max-width: 767px) {
+  .single-shopping-card-one .weekly-best-selling-card .thumbnail-preview .badge {
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 30px;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .single-shopping-card-one .weekly-best-selling-card .thumbnail-preview .badge {
+    width: 252px;
+    height: 134px;
+  }
 }
 
 .shop-product-column {

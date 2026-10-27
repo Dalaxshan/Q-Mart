@@ -59,12 +59,10 @@ function HeaderTwo() {
     }
   };
 
-
   // filter search action js start
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
-
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,15 +80,15 @@ function HeaderTwo() {
       <>
         {/* header style two start */}
         <header className="header-style-two bg-primary-header">
-          <div className="header-top-area-two">
+          {/* <div className="header-top-area-two">
             <div className="container-2">
-              <div className="row">
-                <div className="col-lg-12">
+              <div className="flex flex-wrap -mx-3">
+                <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                   <div className="hader-top-between-two">
                     <p>
                       {customerName
-                        ? `Welcome ${customerName} To Our Quick-Mart!`
-                        : "Welcome To Our Quick-Mart!"}
+                        ? `Welcome ${customerName} to Quick-Mart!`
+                        : "Welcome to Quick-Mart!"}
                     </p>
                     {!customerName && (
                       <ul className="nav-header-top">
@@ -106,11 +104,11 @@ function HeaderTwo() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="search-header-area-main">
             <div className="container-2">
-              <div className="row">
-                <div className="col-lg-12">
+              <div className="flex flex-wrap -mx-3">
+                <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                   <div className="logo-search-category-wrapper">
                     <a
                       href="/"
@@ -158,9 +156,12 @@ function HeaderTwo() {
                       </form>
                     </div>
                     <div className="accont-wishlist-cart-area-header">
-                      <Link href="/account" className="btn-border-only account">
+                      <Link
+                        href="/register"
+                        className="btn-border-only account"
+                      >
                         <i className="fa-light fa-user" />
-                        Account
+                        Register
                       </Link>
 
                       <WishList />
@@ -175,17 +176,14 @@ function HeaderTwo() {
             className={`rts-header-nav-area-one mobile-nav-background header--sticky  ${isSticky ? "sticky" : ""}`}
           >
             <div className="container-2">
-              <div className="row">
-                <div className="col-lg-12">
+              <div className="flex flex-wrap -mx-3">
+                <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                   <div className="nav-and-btn-wrapper">
                     <div className="nav-area">
                       <Nav />
                     </div>
                     {/* button-area */}
-                    <div className="right-location-area">
-                      <i className="fa-solid fa-location-dot" />
-                      <p>Delivery: Havelock Rd, Colombo -05</p>
-                    </div>
+
                     {/* button-area end */}
                   </div>
                   <div className="logo-search-category-wrapper">
@@ -221,7 +219,7 @@ function HeaderTwo() {
                         </a>
                       </form>
                     </div>
-                    <div className="main-wrapper-action-2 d-flex">
+                    <div className="main-wrapper-action-2 flex!">
                       <div className="actions-area">
                         <div
                           className="menu-btn"

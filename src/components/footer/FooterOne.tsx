@@ -6,9 +6,9 @@ function FooterOne() {
       <>
         {/* rts footer one area start */}
         <div className="rts-footer-area pt--80 bg_light-1">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-12">
+          <div className="w-full max-w-[1696px] m-auto px-[15px]">
+            <div className="flex flex-wrap -mx-3">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                 <div className="footer-main-content-wrapper pb--70 pb_sm--30">
                   {/* single footer area wrapper */}
                   <div className="single-footer-wized">
@@ -169,9 +169,9 @@ function FooterOne() {
         {/* rts footer one area end */}
         {/* rts copyright-area start */}
         <div className="rts-copyright-area">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-12">
+          <div className="w-full max-w-[1696px] m-auto px-[15px]">
+            <div className="flex flex-wrap -mx-3">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                 <div className="copyright-between-1">
                   <p className="disc">
                     Copyright 2025 <a href="#">©QuickMart</a>. All rights

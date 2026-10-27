@@ -7,9 +7,9 @@ function ComponentName() {
 <>
   {/* rts store area start */}
   <div className="rts-store-area-start rts-section-gap2">
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-12">
+    <div className="w-full max-w-[1696px] m-auto px-[15px]">
+      <div className="flex flex-wrap -mx-3">
+        <div className="w-full max-w-full shrink-0 px-[0.75rem]">
           {/* single store area start */}
           <div className="single-store-area-start">
             <Link href="#" className="thumbnail">

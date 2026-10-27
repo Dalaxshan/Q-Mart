@@ -174,9 +174,9 @@ function ShopContent() {
   return (
     <div className="shop-page">
       <div className="rts-navigation-area-breadcrumb bg_light-1">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
+          <div className="flex flex-wrap -mx-3">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem]">
               <div className="navigator-breadcrumb-wrapper">
                 <Link href="/">Home</Link>
                 <i className="fa-regular fa-chevron-right" />
@@ -190,16 +190,16 @@ function ShopContent() {
       </div>
 
       <div className="section-seperator bg_light-1">
-        <div className="container">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
           <hr className="section-seperator" />
         </div>
       </div>
 
       <div className="shop-grid-sidebar-area rts-section-gap">
-        <div className="container">
-          <div className="row g-0">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
+          <div className="flex flex-wrap">
             {/* Sidebar */}
-            <div className="col-xl-3 col-lg-12 pr--70 pr_lg--10 pr_sm--10 pr_md--5 rts-sticky-column-item">
+            <div className="w-full max-w-full shrink-0 xl:w-1/4 pr--70 pr_lg--10 pr_sm--10 pr_md--5 rts-sticky-column-item">
               <div className="sidebar-filter-main theiaStickySidebar">
                 {/* Price Filter */}
                 <div className="single-filter-box">
@@ -300,7 +300,7 @@ function ShopContent() {
             </div>
 
             {/* Main Content */}
-            <div className="col-xl-9 col-lg-12">
+            <div className="w-full max-w-full shrink-0 xl:w-3/4">
               <div className="filter-select-area">
                 <div className="top-filter">
                   <span>Showing {filteredProducts.length} results</span>
@@ -407,12 +407,12 @@ function ShopContent() {
               <div className="tab-content" id="myTabContent">
                 {activeTab === "tab1" && (
                   <div className="product-area-wrapper-shopgrid-list mt--20">
-                    <div className="row g-4">
+                    <div className="flex flex-wrap -mx-3 -mt-6">
                       {paginatedProducts.length > 0 ? (
                         paginatedProducts.map((product: Product) => (
                           <div
                             key={product._id}
-                            className="col-lg-3 col-md-6 col-sm-6 col-12 shop-product-column"
+                            className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 lg:w-1/4 shop-product-column"
                           >
                             <div className="single-shopping-card-one shop-product-card">
                               <ShopMain
@@ -429,7 +429,7 @@ function ShopContent() {
                           </div>
                         ))
                       ) : (
-                        <div className="col-12 text-center py-5">
+                        <div className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 text-center! py-12!">
                           <h2>No Product Found</h2>
                         </div>
                       )}
@@ -439,12 +439,12 @@ function ShopContent() {
 
                 {activeTab === "tab2" && (
                   <div className="product-area-wrapper-shopgrid-list with-list mt--20">
-                    <div className="row">
+                    <div className="flex flex-wrap -mx-3">
                       {paginatedProducts.length > 0 ? (
                         paginatedProducts.map((product: Product) => (
                           <div
                             key={product._id}
-                            className="col-lg-6 shop-product-column"
+                            className="w-full max-w-full shrink-0 px-[0.75rem] lg:w-1/2 shop-product-column"
                           >
                             <div className="single-shopping-card-one discount-offer shop-product-card">
                               <ShopMainList
@@ -461,7 +461,7 @@ function ShopContent() {
                           </div>
                         ))
                       ) : (
-                        <div className="col-12 text-center py-5">
+                        <div className="w-full max-w-full shrink-0 px-[0.75rem] text-center! py-12!">
                           <h2>No Product Found</h2>
                         </div>
                       )}
@@ -541,7 +541,7 @@ export default function Home() {
   return (
     <>
       <HeaderTwo />
-      <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
+      <Suspense fallback={<div className="text-center!">Loading...</div>}>
         <ShopContent />
       </Suspense>
       <FooterThree />

@@ -10,9 +10,9 @@ export default function Home() {
       <>
         {/* rts contact main wrapper */}
         <div className="rts-contact-main-wrapper-banner bg_image">
-          <div className="container">
-            <div className="row">
-              <div className="co-lg-12">
+          <div className="w-full max-w-[1696px] m-auto px-[15px]">
+            <div className="flex flex-wrap -mx-3">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem] co-lg-12">
                 <div className="contact-banner-content">
                   <h1 className="title">Ask Us Question</h1>
                   <p className="disc">
@@ -28,9 +28,9 @@ export default function Home() {
         {/* rts contact main wrapper end */}
 
         <div className="rts-map-contact-area rts-section-gap2">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-4">
+          <div className="w-full max-w-[1696px] m-auto px-[15px]">
+            <div className="flex flex-wrap -mx-3">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem] lg:w-1/3">
                 <div className="contact-left-area-main-wrapper">
                   <h2 className="title">You can ask us questions !</h2>
                   <p className="disc">
@@ -70,7 +70,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-8 pl--50 pl_sm--5 pl_md--5">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem] lg:w-2/3 pl--50 pl_sm--5 pl_md--5">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.9600807539487!2d79.8580971735071!3d6.895378418733227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25b003c81c2eb%3A0x79578609d5d5f0f6!2sQmart!5e0!3m2!1sen!2slk!4v1792477366413!5m2!1sen!2slk"
                   width={600}
@@ -86,12 +86,12 @@ export default function Home() {
         </div>
         {/* rts contact-form area start */}
         <div className="rts-contact-form-area rts-section-gapBottom">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-12">
+          <div className="w-full max-w-[1696px] m-auto px-[15px]">
+            <div className="flex flex-wrap -mx-3">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                 <div className="bg_light-1 contact-form-wrapper-bg">
-                  <div className="row">
-                    <div className="col-lg-7 pr--30 pr_md--10 pr_sm--5">
+                  <div className="flex flex-wrap -mx-3">
+                    <div className="w-full max-w-full shrink-0 px-[0.75rem] lg:w-7/12 pr--30 pr_md--10 pr_sm--5">
                       <div className="contact-form-wrapper-1">
                         <h3 className="title mb--50">
                           Fill Up The Form If You Have Any Question
@@ -126,7 +126,7 @@ export default function Home() {
                         </form>
                       </div>
                     </div>
-                    <div className="col-lg-5 mt_md--30 mt_sm--30">
+                    <div className="w-full max-w-full shrink-0 px-[0.75rem] lg:w-5/12 mt_md--30 mt_sm--30">
                       <div className="thumbnail-area">
                         <img
                           src="assets/images/contact/02.jpg"

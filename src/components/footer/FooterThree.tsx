@@ -1,13 +1,14 @@
+import Image from "next/image";
 import React from "react";
 
 function FooterThree() {
   return (
     <div>
       <div className="rts-footer-area pt--80 bg_blue-footer">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="footer-main-content-wrapper pb--70">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
+          <div className="flex flex-wrap -mx-3">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem]">
+              <div className="footer-main-content-wrapper footer-three-main-content-wrapper pb--70">
                 {/* single footer area wrapper */}
                 <div className="single-footer-wized">
                   <h3 className="footer-title animated fadeIn">
@@ -20,7 +21,7 @@ function FooterThree() {
                     <div className="info">
                       <span>Have Question? Call Us 24/7</span>
                       <a href="#" className="number">
-                         011 (250) 1109 <br /> 070 (150) 7075
+                        011 (250) 1109 <br /> 070 (150) 7075
                       </a>
                     </div>
                   </div>
@@ -35,34 +36,9 @@ function FooterThree() {
                         Saturday & Sunday: <span>7:00am - 11:00pm</span>
                       </p>
                     </div>
-                   
                   </div>
                 </div>
-                {/* single footer area wrapper */}
-                {/* single footer area wrapper */}
-                <div className="single-footer-wized">
-                  <h3 className="footer-title animated fadeIn">Our Stores</h3>
-                  <div className="footer-nav">
-                    <ul>
-                      <li>
-                        <a href="#">Delivery Information</a>
-                      </li>
-                      <li>
-                        <a href="#">Privacy Policy</a>
-                      </li>
-                      <li>
-                        <a href="#">Terms &amp; Conditions</a>
-                      </li>
-                      <li>
-                        <a href="#">Support Center</a>
-                      </li>
-                      <li>
-                        <a href="#">Careers</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                {/* single footer area wrapper */}
+
                 {/* single footer area wrapper */}
                 <div className="single-footer-wized">
                   <h3 className="footer-title animated fadeIn">
@@ -71,64 +47,73 @@ function FooterThree() {
                   <div className="footer-nav">
                     <ul>
                       <li>
-                        <a href="contact">Contact Us</a>
+                        <a href="shop?category=organic-products">
+                          Organic Products
+                        </a>
                       </li>
                       <li>
-                        <a href="#">Information</a>
+                        <a href="shop?category=fruits-vegetables">
+                          Fruits &amp; Vegetables
+                        </a>
                       </li>
                       <li>
-                        <a href="#">About Us</a>
-                      </li>
-                      <li>
-                        <a href="#">Careers</a>
-                      </li>
-                      <li>
-                        <a href="#">Nest Stories</a>
+                        <a href="shop?category=meat-seafood">
+                          Meats &amp; Seafoods
+                        </a>
                       </li>
                     </ul>
                   </div>
                 </div>
+
                 {/* single footer area wrapper */}
+                <div className="single-footer-wized">
+                  <h3 className="footer-title animated fadeIn">Our Stores</h3>
+                  <div className="footer-nav">
+                    <ul>
+                      <li>
+                        <a href="#">FAQ</a>
+                      </li>
+                      <li>
+                        <a href="#">Contact Us</a>
+                      </li>
+
+                      <li>
+                        <a href="#">Careers</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
                 {/* single footer area wrapper */}
                 <div className="single-footer-wized">
                   <h3 className="footer-title animated fadeIn">Useful Links</h3>
                   <div className="footer-nav">
                     <ul>
                       <li>
+                        <a href="/privacy-policy">Privacy &amp; Policy</a>
+                      </li>
+                      <li>
+                        <a href="/terms-condition">Terms &amp; Conditions</a>
+                      </li>
+                      <li>
                         <a href="#">Cancellation &amp; Returns</a>
-                      </li>
-                      <li>
-                        <a href="#">Report Infringement</a>
-                      </li>
-                      <li>
-                        <a href="#">Payments</a>
-                      </li>
-                      <li>
-                        <a href="#">Shipping</a>
-                      </li>
-                      <li>
-                        <a href="#">FAQ</a>
                       </li>
                     </ul>
                   </div>
                 </div>
-                {/* single footer area wrapper */}
-                {/* single footer area wrapper */}
+                {/* Location Iframe */}
                 <div className="single-footer-wized">
-                  <h3 className="footer-title animated fadeIn">
-                    Our Newsletter
-                  </h3>
-                  <p className="disc-news-letter">
-                    Subscribe to the mailing list to receive updates one <br />{" "}
-                    the new arrivals and other discounts
-                  </p>
-                  <form className="footersubscribe-form" action="#">
-                    <input type="email" placeholder="Your email address" />
-                    <button className="rts-btn btn-primary">Subscribe</button>
-                  </form>
-                  <p className="dsic">
-                    I would like to receive news and special offer
-                  </p>
+                  <h3 className="footer-title animated fadeIn">Find Us</h3>
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3143.819893819119!2d79.85794683064151!3d6.8947935229105415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25b003c81c2eb%3A0x79578609d5d5f0f6!2sQmart!5e0!3m2!1sen!2slk!4v1792989826280!5m2!1sen!2slk"
+                    title="QuickMart location"
+                    width="100%"
+                    height="170"
+                    style={{ border: 0, borderRadius: "10px" }}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allowFullScreen
+                  />
                 </div>
                 {/* single footer area wrapper */}
               </div>
@@ -165,7 +150,7 @@ function FooterThree() {
                 </div>
                 <div className="payment-access">
                   <span>Payment Accepts:</span>
-                  <img src="assets/images/payment/06.png" alt="" />
+                  <Image height={80} width={200} src="/assets/images/shop/03.png" alt="payment" />
                 </div>
               </div>
             </div>

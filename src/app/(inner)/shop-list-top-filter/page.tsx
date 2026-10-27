@@ -47,9 +47,9 @@ export default function Home() {
     <div>
 
       <div className="rts-navigation-area-breadcrumb bg_light-1">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
+          <div className="flex flex-wrap -mx-3">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem]">
               <div className="navigator-breadcrumb-wrapper">
                 <Link href="/">Home</Link>
                 <i className="fa-regular fa-chevron-right" />
@@ -62,17 +62,17 @@ export default function Home() {
         </div>
       </div>
       <div className="section-seperator bg_light-1">
-        <div className="container">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
           <hr className="section-seperator" />
         </div>
       </div>
       <>
         {/* shop[ grid sidebar wrapper */}
         <div className="shop-grid-sidebar-area rts-section-gap">
-          <div className="container">
-            <div className="row g-0">
+          <div className="w-full max-w-[1696px] m-auto px-[15px]">
+            <div className="flex flex-wrap">
 
-              <div className="col-xl-12 col-lg-12">
+              <div className="w-full max-w-full shrink-0">
                 <div className="filter-select-area">
                   <div className="top-filter">
                     <span>Showing 1–20 of 57 results</span>
@@ -237,12 +237,12 @@ export default function Home() {
 
                     {activeTab === 'tab1' &&
                       <div>
-                        <div className="row g-4">
+                        <div className="flex flex-wrap -mx-3 -mt-6">
 
                           {postsSection1.map((post: PostType, index: number) => (
                             <div
                               key={index}
-                              className="col-lg-20 col-lg-4 col-md-6 col-sm-6 col-12"
+                              className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 lg:w-1/5"
                             >
                               <div className="single-shopping-card-one">
                                 <ShopMain
@@ -266,11 +266,11 @@ export default function Home() {
                     className="product-area-wrapper-shopgrid-list with-list mt--20">
                     {activeTab === 'tab2' &&
                       <div>
-                        <div className="row">
+                        <div className="flex flex-wrap -mx-3">
                           {postsSection2.map((post: PostType, index: number) => (
                             <div
                               key={index}
-                              className="col-lg-6"
+                              className="w-full max-w-full shrink-0 px-[0.75rem] lg:w-1/2"
                             >
                               <div className="single-shopping-card-one discount-offer">
                                 <ShopMainList

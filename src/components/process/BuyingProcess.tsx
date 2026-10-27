@@ -6,7 +6,7 @@ const MyComponent = () => (
   {/* buying easy way tips */}
   <div className="buying-easyway-process">
     <div className="container-2">
-      <div className="col-lg-12">
+      <div className="lg:flex-none lg:w-full">
         {/* wasy-way buying area */}
         <div className="easyway-buying-area-wrapper">
           {/* single easyway buying area start */}

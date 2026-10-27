@@ -54,9 +54,9 @@ export default function Home() {
 
       <>
         <div className="rts-navigation-area-breadcrumb bg_light-1">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-12">
+          <div className="w-full max-w-[1696px] m-auto px-[15px]">
+            <div className="flex flex-wrap -mx-3">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                 <div className="navigator-breadcrumb-wrapper">
                   <Link href="/">Home</Link>
                   <i className="fa-regular fa-chevron-right" />
@@ -69,17 +69,17 @@ export default function Home() {
           </div>
         </div>
         <div className="section-seperator bg_light-1">
-          <div className="container">
+          <div className="w-full max-w-[1696px] m-auto px-[15px]">
             <hr className="section-seperator" />
           </div>
         </div>
       </>
 
       <div className="rts-chop-details-area rts-section-gap bg_light-1">
-        <div className="container">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
           <div className="shopdetails-style-1-wrapper">
-            <div className="row g-5">
-              <div className="col-xl-8 col-lg-8 col-md-12">
+            <div className="flex flex-wrap -mx-6 -mt-12">
+              <div className="w-full max-w-full shrink-0 px-6 mt-12 lg:w-2/3">
                 <div className="product-details-popup-wrapper in-shopdetails">
                   <div className="rts-product-details-section rts-product-details-section2 product-details-popup-section">
                     <div className="product-details-popup">
@@ -105,7 +105,7 @@ export default function Home() {
                             ))}
                           </div>
                         </div>
-                        <div className="contents">
+                        <div className="product-contents">
                           <div className="product-status">
                             <span className="product-catagory">Dress</span>
                             <div className="rating-stars-group">
@@ -132,7 +132,7 @@ export default function Home() {
                             it at the best price.
                           </p>
                           <span
-                            className="product-price mb--15 d-block"
+                            className="product-price mb--15 block!"
                             style={{ color: "#DC2626", fontWeight: 600 }}
                           >
                             {" "}
@@ -541,7 +541,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="col-xl-3 col-lg-4 col-md-12 offset-xl-1  rts-sticky-column-item">
+              <div className="w-full max-w-full shrink-0 px-6 mt-12 lg:w-1/3 xl:w-1/4 xl:ml-[8.33333333%] rts-sticky-column-item">
                 <div className="sidebar-filter-main shop-single-area-filter">
                   <div className="single-filter-box">
                     <h5 className="title">Widget Price Filter</h5>

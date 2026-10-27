@@ -38,8 +38,8 @@ const BannerThreeSwiper = () => {
         <SwiperSlide>
           <div className="rts-section-gap rts-banner-area-three banner-bg-full_1">
             <div className="container-2">
-              <div className="row">
-                <div className="col-lg-12">
+              <div className="flex flex-wrap -mx-3">
+                <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                   <div className="banner-inner-content-three">
                     <span className="pre">
                       Get up to 30% off on your first LKR 5,000 purchase
@@ -67,8 +67,8 @@ const BannerThreeSwiper = () => {
         <SwiperSlide>
           <div className="rts-section-gap rts-banner-area-three img-two banner-bg-full_1">
             <div className="container-2">
-              <div className="row">
-                <div className="col-lg-12">
+              <div className="flex flex-wrap -mx-3">
+                <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                   <div className="banner-inner-content-three">
                     <span className="pre">
                       Get up to 10% off on your first $250 purchase

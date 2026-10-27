@@ -9,9 +9,9 @@ const BannerOne = () => {
     <div className="background-light-gray-color rts-section-gap bg_light-1 pt_sm--20">
       {/* rts banner area start */}
       <div className="rts-banner-area-one mb--30">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
+          <div className="flex flex-wrap -mx-3">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem]">
               <div className="category-area-main-wrapper-one">
                 <Swiper
                   modules={[Navigation, Autoplay]}

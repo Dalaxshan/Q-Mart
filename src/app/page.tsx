@@ -10,6 +10,8 @@ import { WishlistProvider } from "@/components/header/WishlistContext";
 import { ToastContainer, toast } from "react-toastify";
 import HeaderTwo from "@/components/header/HeaderTwo";
 import FooterThree from "@/components/footer/FooterThree";
+import CategoryOne from "@/components/category/CategoryOne";
+import { GroceryHero } from "@/components/banner/GroceryHero";
 
 export default function Home() {
   return (
@@ -18,15 +20,16 @@ export default function Home() {
         <div className="demo-one">
           <ToastContainer position="top-right" autoClose={3000} />
           <HeaderTwo />
-          <BannerOne />
+          <GroceryHero />
           <FeatureOne />
           <FeatureProduct />
           <DiscountProduct />
           <WeeklyBestSelling />
           <FeatureDiscount />
           <TrandingProduct />
+          <CategoryOne />
           {/* <BlogOne /> */}
-          <FooterThree/>
+          <FooterThree />
         </div>
       </CartProvider>
     </WishlistProvider>
