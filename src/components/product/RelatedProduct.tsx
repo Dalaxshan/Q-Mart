@@ -18,7 +18,7 @@ function RelatedProduct({ categoryName = "" }: RelatedProductProps) {
       try {
         const fetched = await productApi.getAllProducts({
           category: categoryName,
-          limit: 10,
+          limit: 5,
         });
         setProducts(fetched);
       } catch (error) {
@@ -53,24 +53,24 @@ function RelatedProduct({ categoryName = "" }: RelatedProductProps) {
               <Swiper
                 modules={[Navigation, Autoplay]}
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
-                loop={products.length >= 6}
+                loop={products.length >= 5}
                 navigation={{
                   nextEl: ".related-product-next",
                   prevEl: ".related-product-prev",
                 }}
                 className="mySwiper-category-1"
+                style={{ alignItems: "stretch" }}
                 breakpoints={{
-                  0: { slidesPerView: 1, spaceBetween: 30 },
-                  320: { slidesPerView: 2, spaceBetween: 30 },
-                  480: { slidesPerView: 3, spaceBetween: 30 },
-                  640: { slidesPerView: 3, spaceBetween: 30 },
-                  840: { slidesPerView: 4, spaceBetween: 30 },
-                  1140: { slidesPerView: 6, spaceBetween: 30 },
+                  0: { slidesPerView: 1, spaceBetween: 16 },
+                  480: { slidesPerView: 2, spaceBetween: 20 },
+                  640: { slidesPerView: 3, spaceBetween: 24 },
+                  840: { slidesPerView: 4, spaceBetween: 24 },
+                  1140: { slidesPerView: 5, spaceBetween: 30 },
                 }}
               >
                 {products.map((product: Product) => (
-                  <SwiperSlide key={product._id}>
-                    <div className="single-shopping-card-one">
+                  <SwiperSlide key={product._id} style={{ height: "auto" }}>
+                    <div className="single-shopping-card-one" style={{ height: "100%" }}>
                       <WeeklyBestSellingMain
                         ProductId={product._id}
                         Slug={product.slug}

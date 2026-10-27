@@ -80,15 +80,15 @@ function HeaderTwo() {
       <>
         {/* header style two start */}
         <header className="header-style-two bg-primary-header">
-          <div className="header-top-area-two">
+          {/* <div className="header-top-area-two">
             <div className="container-2">
               <div className="flex flex-wrap -mx-3">
                 <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                   <div className="hader-top-between-two">
                     <p>
                       {customerName
-                        ? `Welcome ${customerName} To Quick-Mart!`
-                        : "Welcome To Our Quick-Mart!"}
+                        ? `Welcome ${customerName} to Quick-Mart!`
+                        : "Welcome to Quick-Mart!"}
                     </p>
                     {!customerName && (
                       <ul className="nav-header-top">
@@ -104,7 +104,7 @@ function HeaderTwo() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="search-header-area-main">
             <div className="container-2">
               <div className="flex flex-wrap -mx-3">
@@ -156,9 +156,12 @@ function HeaderTwo() {
                       </form>
                     </div>
                     <div className="accont-wishlist-cart-area-header">
-                      <Link href="/account" className="btn-border-only account">
+                      <Link
+                        href="/register"
+                        className="btn-border-only account"
+                      >
                         <i className="fa-light fa-user" />
-                        Account
+                        Register
                       </Link>
 
                       <WishList />
@@ -180,10 +183,7 @@ function HeaderTwo() {
                       <Nav />
                     </div>
                     {/* button-area */}
-                    <div className="right-location-area">
-                      <i className="fa-solid fa-location-dot" />
-                      <p>Delivery: Havelock Rd, Colombo -05</p>
-                    </div>
+
                     {/* button-area end */}
                   </div>
                   <div className="logo-search-category-wrapper">

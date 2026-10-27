@@ -100,7 +100,7 @@ const WeeklyBestSelling: React.FC = () => {
                                 (post: PostType, index: number) => (
                                   <div
                                     key={index}
-                                    className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 md:w-1/3 xl:w-1/4 2xl:w-1/6"
+                                    className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 md:w-1/3 xl:w-1/4 2xl:w-1/6"
                                   >
                                     <div className="single-shopping-card-one">
                                       <WeeklyBestSellingMain
@@ -123,7 +123,7 @@ const WeeklyBestSelling: React.FC = () => {
                                 (post: PostType, index: number) => (
                                   <div
                                     key={index}
-                                    className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 md:w-1/3 xl:w-1/4 2xl:w-1/6"
+                                    className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 md:w-1/3 xl:w-1/4 2xl:w-1/6"
                                   >
                                     <div className="single-shopping-card-one">
                                       <WeeklyBestSellingMain
@@ -146,7 +146,7 @@ const WeeklyBestSelling: React.FC = () => {
                                 (post: PostType, index: number) => (
                                   <div
                                     key={index}
-                                    className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 md:w-1/3 xl:w-1/4 2xl:w-1/6"
+                                    className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 md:w-1/3 xl:w-1/4 2xl:w-1/6"
                                   >
                                     <div className="single-shopping-card-one">
                                       <WeeklyBestSellingMain
@@ -169,7 +169,7 @@ const WeeklyBestSelling: React.FC = () => {
                                 (post: PostType, index: number) => (
                                   <div
                                     key={index}
-                                    className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 md:w-1/3 xl:w-1/4 2xl:w-1/6"
+                                    className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 md:w-1/3 xl:w-1/4 2xl:w-1/6"
                                   >
                                     <div className="single-shopping-card-one">
                                       <WeeklyBestSellingMain

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 function FooterThree() {
@@ -149,7 +150,7 @@ function FooterThree() {
                 </div>
                 <div className="payment-access">
                   <span>Payment Accepts:</span>
-                  <img src="assets/images/payment/06.png" alt="" />
+                  <Image height={80} width={200} src="/assets/images/shop/03.png" alt="payment" />
                 </div>
               </div>
             </div>

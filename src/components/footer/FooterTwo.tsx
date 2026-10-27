@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -163,7 +164,7 @@ function FooterTwo() {
                                     </p>
                                     <div className="payment-processw-area">
                                         <span>Payment Accepts:</span>
-                                        <img src="assets/images/payment/04.png" alt="payment" />
+                                        <Image height={20} width={80} src="assets/images/shop/03.png" alt="payment" />
                                     </div>
                                 </div>
                             </div>

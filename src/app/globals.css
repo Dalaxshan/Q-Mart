@@ -132,7 +132,28 @@ body {
 }
 
 .weekly-best-selling-card .thumbnail-preview {
+  position: relative;
   aspect-ratio: 1 / 1;
+}
+
+.single-shopping-card-one .weekly-best-selling-card .thumbnail-preview .badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 150px;
+  height: 100px;
+  line-height: 0;
+}
+
+.weekly-best-selling-card .thumbnail-preview .discount-badge-image {
+  display: block;
+  width: 60%;
+  position: absolute;
+  left:-12px;
+  top: -15px;
+  height: 100%;
+  object-fit: contain;
 }
 
 .weekly-best-selling-card .thumbnail-preview img {
@@ -158,6 +179,22 @@ body {
 
 .weekly-best-selling-card .cart-counter-action {
   margin-top: auto;
+}
+
+@media only screen and (max-width: 767px) {
+  .single-shopping-card-one .weekly-best-selling-card .thumbnail-preview .badge {
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 30px;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .single-shopping-card-one .weekly-best-selling-card .thumbnail-preview .badge {
+    width: 252px;
+    height: 134px;
+  }
 }
 
 .shop-product-column {

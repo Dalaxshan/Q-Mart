@@ -118,7 +118,7 @@ function FeatureProduct() {
                     className="mySwiper-category-1"
                     breakpoints={{
                       0: { slidesPerView: 1, spaceBetween: 30 },
-                      320: { slidesPerView: 2, spaceBetween: 30 },
+                      320: { slidesPerView: 1, spaceBetween: 30 },
                       480: { slidesPerView: 3, spaceBetween: 30 },
                       640: { slidesPerView: 3, spaceBetween: 30 },
                       840: { slidesPerView: 4, spaceBetween: 30 },

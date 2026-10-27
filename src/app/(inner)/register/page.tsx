@@ -150,7 +150,7 @@ export default function Home() {
                         <span>Or</span>
                       </div>
                       <p>
-                        Already Have Account? <a href="#">Login</a>
+                        Already Have Account? <a href="login">Login</a>
                       </p>
                     </div>
                   </form>
