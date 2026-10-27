@@ -42,9 +42,9 @@ export default function Home() {
 
       <>
         <div className="rts-navigation-area-breadcrumb bg_light-1">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-12">
+          <div className="w-full max-w-[1696px] m-auto px-[15px]">
+            <div className="flex flex-wrap -mx-3">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                 <div className="navigator-breadcrumb-wrapper">
                   <Link href="/">Home</Link>
                   <i className="fa-regular fa-chevron-right" />
@@ -57,14 +57,14 @@ export default function Home() {
           </div>
         </div>
         <div className="section-seperator bg_light-1">
-          <div className="container">
+          <div className="w-full max-w-[1696px] m-auto px-[15px]">
             <hr className="section-seperator" />
           </div>
         </div>
         <div className="rts-register-area rts-section-gap bg_light-1">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-12">
+          <div className="w-full max-w-[1696px] m-auto px-[15px]">
+            <div className="flex flex-wrap -mx-3">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                 <div className="registration-wrapper-1">
                   {/* <div className="logo-area mb--0">
                     <img

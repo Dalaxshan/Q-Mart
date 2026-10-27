@@ -6,8 +6,8 @@ function MethodOne() {
             {/* rts shorts service area start */}
             <div className="rts-shorts-service-area rts-section-gap bg_primary">
                 <div className="container-2">
-                    <div className="row g-5">
-                        <div className="col-lg-3 col-md-6 col-sm-12 col-12">
+                    <div className="flex flex-wrap -mx-6 -mt-12">
+                        <div className="w-full max-w-full shrink-0 px-6 mt-12 md:w-1/2 lg:w-1/4">
                             {/* single service area start */}
                             <div className="single-short-service-area-start">
                                 <div className="icon-area">
@@ -41,7 +41,7 @@ function MethodOne() {
                             </div>
                             {/* single service area end */}
                         </div>
-                        <div className="col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div className="w-full max-w-full shrink-0 px-6 mt-12 md:w-1/2 lg:w-1/4">
                             {/* single service area start */}
                             <div className="single-short-service-area-start">
                                 <div className="icon-area">
@@ -83,7 +83,7 @@ function MethodOne() {
                             </div>
                             {/* single service area end */}
                         </div>
-                        <div className="col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div className="w-full max-w-full shrink-0 px-6 mt-12 md:w-1/2 lg:w-1/4">
                             {/* single service area start */}
                             <div className="single-short-service-area-start">
                                 <div className="icon-area">
@@ -129,7 +129,7 @@ function MethodOne() {
                             </div>
                             {/* single service area end */}
                         </div>
-                        <div className="col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div className="w-full max-w-full shrink-0 px-6 mt-12 md:w-1/2 lg:w-1/4">
                             {/* single service area start */}
                             <div className="single-short-service-area-start">
                                 <div className="icon-area">

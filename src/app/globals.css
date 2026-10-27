@@ -1,3 +1,24 @@
+/*
+ * Tailwind CSS v4 - utilities only.
+ * - No Preflight: Bootstrap's reboot and the theme CSS in /public/assets/css still own base styles.
+ * - Breakpoints match Bootstrap 5 exactly so converted layouts switch at the same widths as before.
+ * - Class scanning is limited to app code (never /public), so no utilities are generated from vendor files.
+ * - Utilities are intentionally unlayered so cascade ties resolve the way Bootstrap's classes did.
+ */
+@import "tailwindcss/utilities.css" source(none);
+
+@source "../app";
+@source "../components";
+
+@theme {
+  --spacing: 0.25rem;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1400px;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

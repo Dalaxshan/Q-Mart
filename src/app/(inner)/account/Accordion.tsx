@@ -117,10 +117,10 @@ const AccountTabs = () => {
   return (
     <div className="account-tab-area-start rts-section-gap">
       <div className="container-2">
-        <div className="row">
-          <div className="col-lg-3">
+        <div className="flex flex-wrap -mx-3">
+          <div className="w-full max-w-full shrink-0 px-[0.75rem] lg:w-1/4">
             <div
-              className="nav accout-dashborard-nav flex-column nav-pills me-3"
+              className="nav accout-dashborard-nav flex-col! nav-pills mr-4!"
               role="tablist"
             >
               <button
@@ -141,7 +141,7 @@ const AccountTabs = () => {
             </div>
           </div>
 
-          <div className="col-lg-9 pl--50 pl_md--10 pl_sm--10 pt_md--30 pt_sm--30">
+          <div className="w-full max-w-full shrink-0 px-[0.75rem] lg:w-3/4 pl--50 pl_md--10 pl_sm--10 pt_md--30 pt_sm--30">
             <div className="tab-content">
               {activeTab === "order" && (
                 <div className="order-table-account">

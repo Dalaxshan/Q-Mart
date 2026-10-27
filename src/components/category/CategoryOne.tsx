@@ -11,8 +11,8 @@ function CategoryOne() {
                 {/* rts category area satart */}
                 <div className="rts-caregory-area-two rts-section-gap">
                     <div className="container-2">
-                        <div className="row">
-                            <div className="col-lg-12">
+                        <div className="flex flex-wrap -mx-3">
+                            <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                                 <div className="category-area-main-wrapper-two">
                                     <Swiper
                                         modules={[Navigation, Autoplay]}

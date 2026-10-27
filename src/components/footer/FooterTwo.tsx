@@ -8,8 +8,8 @@ function FooterTwo() {
                 {/* rts footer area start */}
                 <div className="rts-footer-area-two">
                     <div className="container-2">
-                        <div className="row">
-                            <div className="coll-lg-12">
+                        <div className="flex flex-wrap -mx-3">
+                            <div className="w-full max-w-full shrink-0 px-[0.75rem] coll-lg-12">
                                 <div className="footer-two-main-wrapper">
                                     <div className="footer-single-wixed-two start">
                                         <Link href="#" className="logo-area">
@@ -155,8 +155,8 @@ function FooterTwo() {
                 {/* rts copyright area start */}
                 <div className="rts-copyright-area-two">
                     <div className="container-2">
-                        <div className="row">
-                            <div className="col-lg-12">
+                        <div className="flex flex-wrap -mx-3">
+                            <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                                 <div className="copyright-arae-two-wrapper">
                                     <p className="disc">
                                         Copyright 2025 <a href="#">©QuickMart</a>. All rights reserved.

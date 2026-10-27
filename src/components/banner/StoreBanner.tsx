@@ -6,9 +6,9 @@ function ComponentName() {
 <>
   {/* rts banner store area start */}
   <div className="rts-banner-store-area bg_store-banner bg_image">
-    <div className="container">
-      <div className="row">
-        <div className="col-gl-12">
+    <div className="w-full max-w-[1696px] m-auto px-[15px]">
+      <div className="flex flex-wrap -mx-3">
+        <div className="w-full max-w-full shrink-0 px-[0.75rem] col-gl-12">
           <div className="banner-content-store">
             <h1 className="title">Visit Our Stores</h1>
             <p className="disc">

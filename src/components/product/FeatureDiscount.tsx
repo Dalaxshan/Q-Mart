@@ -8,9 +8,9 @@ function FeatureDiscount() {
       <>
         {/* rts category feature area start */}
         <div className="category-feature-area rts-section-gapTop">
-          <div className="container">
-            <div className="row g-4">
-              <div className="col-lg-3 col-md-6 col-sm-12 col-12">
+          <div className="w-full max-w-[1696px] m-auto px-[15px]">
+            <div className="flex flex-wrap -mx-3 -mt-6">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 md:w-1/2 lg:w-1/4">
                 <div className="single-feature-card bg_image one">
                   <div className="content-area">
                     <Link href="/shop" className="rts-btn btn-primary">
@@ -32,7 +32,7 @@ function FeatureDiscount() {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-3 col-md-6 col-sm-12 col-12">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 md:w-1/2 lg:w-1/4">
                 <div className="single-feature-card bg_image two">
                   <div className="content-area">
                     <Link href="/shop" className="rts-btn btn-primary">
@@ -54,7 +54,7 @@ function FeatureDiscount() {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-3 col-md-6 col-sm-12 col-12">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 md:w-1/2 lg:w-1/4">
                 <div className="single-feature-card bg_image three">
                   <div className="content-area">
                     <a href="/shop" className="rts-btn btn-primary">
@@ -76,7 +76,7 @@ function FeatureDiscount() {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-3 col-md-6 col-sm-12 col-12">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 md:w-1/2 lg:w-1/4">
                 <div className="single-feature-card bg_image four">
                   <div className="content-area">
                     <a href="/shop" className="rts-btn btn-primary">

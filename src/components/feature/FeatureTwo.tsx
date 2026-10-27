@@ -6,8 +6,8 @@ function FeatureTwo() {
     <div>
       <div className="rts-section-gapBottom pt--20 feature-product-area">
         <div className="container-2">
-          <div className="row g-5">
-            <div className="col-lg-6">
+          <div className="flex flex-wrap -mx-6 -mt-12">
+            <div className="w-full max-w-full shrink-0 px-6 mt-12 lg:w-1/2">
               {/* single feature product area */}
               <div className="feature-product-area-single bg_image">
                 <div className="inner-image">
@@ -26,7 +26,7 @@ function FeatureTwo() {
               </div>
               {/* single feature product area end */}
             </div>
-            <div className="col-lg-6">
+            <div className="w-full max-w-full shrink-0 px-6 mt-12 lg:w-1/2">
               {/* single feature product area */}
               <div className="feature-product-area-single two bg_image">
                 <div className="inner-image">

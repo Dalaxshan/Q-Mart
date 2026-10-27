@@ -7,8 +7,8 @@ const MyComponent = () => (
   <div>
     <div className="category-feature-area rts-section-gap">
       <div className="container-2">
-        <div className="row g-24">
-          <div className="col-lg-4 col-md-6 col-sm-12 col-12">
+        <div className="flex flex-wrap -mx-[12px] -mt-[24px]">
+          <div className="w-full max-w-full shrink-0 px-[12px] mt-[24px] md:w-1/2 lg:w-1/3">
             <div className="single-feature-card ssthree style-three bg_image one">
               <div className="content-area">
                 <Link
@@ -33,7 +33,7 @@ const MyComponent = () => (
               </div>
             </div>
           </div>
-          <div className="col-lg-4 col-md-6 col-sm-12 col-12">
+          <div className="w-full max-w-full shrink-0 px-[12px] mt-[24px] md:w-1/2 lg:w-1/3">
             <div className="single-feature-card ssthree style-three bg_image two">
               <div className="content-area">
                 <Link
@@ -58,7 +58,7 @@ const MyComponent = () => (
               </div>
             </div>
           </div>
-          <div className="col-lg-4 col-md-6 col-sm-12 col-12">
+          <div className="w-full max-w-full shrink-0 px-[12px] mt-[24px] md:w-1/2 lg:w-1/3">
             <div className="single-feature-card ssthree style-three bg_image three">
               <div className="content-area">
                 <Link

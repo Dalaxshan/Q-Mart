@@ -59,7 +59,7 @@ export default function OrderConfirmationPage() {
     <div className="demo-one">
       <HeaderTwo />
       <main className="order-confirmation-area rts-section-gap">
-        <div className="container">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
           {isLoading ? (
             <div className="order-confirmation-empty">
               <h2>Loading your order...</h2>
@@ -93,8 +93,8 @@ export default function OrderConfirmationPage() {
                 </div>
               </section>
 
-              <div className="row g-5">
-                <div className="col-lg-8">
+              <div className="flex flex-wrap -mx-6 -mt-12">
+                <div className="w-full max-w-full shrink-0 px-6 mt-12 lg:w-2/3">
                   <section className="order-confirmation-card">
                     <h3>Order details</h3>
                     <div className="order-confirmation-items">
@@ -135,7 +135,7 @@ export default function OrderConfirmationPage() {
                   )}
                 </div>
 
-                <div className="col-lg-4">
+                <div className="w-full max-w-full shrink-0 px-6 mt-12 lg:w-1/3">
                   <section className="order-confirmation-card order-confirmation-summary">
                     <h3>Payment summary</h3>
                     <div><span>Subtotal</span><strong>{formatPrice(order.subtotal)}</strong></div>

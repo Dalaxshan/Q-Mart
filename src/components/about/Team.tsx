@@ -14,8 +14,8 @@ function ComponentName() {
   {/* meet our expart team */}
   <div className="meet-our-expart-team rts-section-gap2">
     <div className="container-3">
-      <div className="row">
-        <div className="col-lg-12">
+      <div className="flex flex-wrap -mx-3">
+        <div className="w-full max-w-full shrink-0 px-[0.75rem]">
           <div className="title-center-area-main">
             <h2 className="title">Meet Our Expert Team</h2>
             <p className="disc">
@@ -26,8 +26,8 @@ function ComponentName() {
           </div>
         </div>
       </div>
-      <div className="row g-5 mt--40">
-        <div className="col-lg-3 col-md-6 col-sm-12 col-12">
+      <div className="flex flex-wrap -mx-6 -mt-12 mt--40">
+        <div className="w-full max-w-full shrink-0 px-6 mt-12 md:w-1/2 lg:w-1/4">
           {/* single team area start */}
           <div className="single-team-style-one">
             <a href="#" className="thumbnail">
@@ -48,7 +48,7 @@ function ComponentName() {
           </div>
           {/* single team area end */}
         </div>
-        <div className="col-lg-3 col-md-6 col-sm-12 col-12">
+        <div className="w-full max-w-full shrink-0 px-6 mt-12 md:w-1/2 lg:w-1/4">
           {/* single team area start */}
           <div className="single-team-style-one">
             <a href="#" className="thumbnail">
@@ -69,7 +69,7 @@ function ComponentName() {
           </div>
           {/* single team area end */}
         </div>
-        <div className="col-lg-3 col-md-6 col-sm-12 col-12">
+        <div className="w-full max-w-full shrink-0 px-6 mt-12 md:w-1/2 lg:w-1/4">
           {/* single team area start */}
           <div className="single-team-style-one">
             <a href="#" className="thumbnail">
@@ -90,7 +90,7 @@ function ComponentName() {
           </div>
           {/* single team area end */}
         </div>
-        <div className="col-lg-3 col-md-6 col-sm-12 col-12">
+        <div className="w-full max-w-full shrink-0 px-6 mt-12 md:w-1/2 lg:w-1/4">
           {/* single team area start */}
           <div className="single-team-style-one">
             <a href="#" className="thumbnail">

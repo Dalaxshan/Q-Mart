@@ -8,9 +8,9 @@ export default function Home() {
   return (
     <div className="demo-one">
       <div className="error-area-main-wrapper rts-section-gap2">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
+          <div className="flex flex-wrap -mx-3">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem]">
               <div className="error-main-wrapper">
                 <div className="thumbnail">
                   <img src="/assets/images/contact/01.png" alt="error" />

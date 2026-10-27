@@ -38,14 +38,14 @@ const WeeklyBestSelling: React.FC = () => {
   return (
     <div>
       <>
-        <div className="popular-product-col-7-area rts-section-gapBottom container">
-          <div className="container cover-card-main-over-white mt--60 ">
-            <div className="row">
-              <div className="col-lg-12">
+        <div className="popular-product-col-7-area rts-section-gapBottom w-full max-w-[1696px] m-auto px-[15px] pb-0!">
+          <div className="w-full max-w-[1696px] m-auto px-[15px] cover-card-main-over-white mt--60">
+            <div className="flex flex-wrap -mx-3">
+              <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                 <div className="cover-card-main-over-1">
-                  <div className="container">
-                    <div className="row">
-                      <div className="col-lg-12">
+                  <div className="w-full max-w-[1696px] m-auto px-[15px]">
+                    <div className="flex flex-wrap -mx-3">
+                      <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                         <div className="title-area-between">
                           <h2 className="title-left">
                             Weekly Best Selling Groceries
@@ -91,16 +91,16 @@ const WeeklyBestSelling: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="row plr--30 plr_sm--5">
-                      <div className="col-lg-12">
+                    <div className="flex flex-wrap -mx-3 plr--30 plr_sm--5">
+                      <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                         {activeTab === "tab1" && (
                           <div>
-                            <div className="row g-4">
+                            <div className="flex flex-wrap -mx-3 -mt-6">
                               {postsSection1.map(
                                 (post: PostType, index: number) => (
                                   <div
                                     key={index}
-                                    className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12"
+                                    className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 md:w-1/3 xl:w-1/4 2xl:w-1/6"
                                   >
                                     <div className="single-shopping-card-one">
                                       <WeeklyBestSellingMain
@@ -118,12 +118,12 @@ const WeeklyBestSelling: React.FC = () => {
                         )}
                         {activeTab === "tab2" && (
                           <div>
-                            <div className="row g-4">
+                            <div className="flex flex-wrap -mx-3 -mt-6">
                               {postsSection2.map(
                                 (post: PostType, index: number) => (
                                   <div
                                     key={index}
-                                    className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12"
+                                    className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 md:w-1/3 xl:w-1/4 2xl:w-1/6"
                                   >
                                     <div className="single-shopping-card-one">
                                       <WeeklyBestSellingMain
@@ -141,12 +141,12 @@ const WeeklyBestSelling: React.FC = () => {
                         )}
                         {activeTab === "tab3" && (
                           <div>
-                            <div className="row g-4">
+                            <div className="flex flex-wrap -mx-3 -mt-6">
                               {postsSection3.map(
                                 (post: PostType, index: number) => (
                                   <div
                                     key={index}
-                                    className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12"
+                                    className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 md:w-1/3 xl:w-1/4 2xl:w-1/6"
                                   >
                                     <div className="single-shopping-card-one">
                                       <WeeklyBestSellingMain
@@ -164,12 +164,12 @@ const WeeklyBestSelling: React.FC = () => {
                         )}
                         {activeTab === "tab4" && (
                           <div>
-                            <div className="row g-4">
+                            <div className="flex flex-wrap -mx-3 -mt-6">
                               {postsSection4.map(
                                 (post: PostType, index: number) => (
                                   <div
                                     key={index}
-                                    className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12"
+                                    className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 md:w-1/3 xl:w-1/4 2xl:w-1/6"
                                   >
                                     <div className="single-shopping-card-one">
                                       <WeeklyBestSellingMain

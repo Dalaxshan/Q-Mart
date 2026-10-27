@@ -15,9 +15,9 @@ export default function Home() {
 
             <>
   <div className="rts-navigation-area-breadcrumb bg_light-1">
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-12">
+    <div className="w-full max-w-[1696px] m-auto px-[15px]">
+      <div className="flex flex-wrap -mx-3">
+        <div className="w-full max-w-full shrink-0 px-[0.75rem]">
           <div className="navigator-breadcrumb-wrapper">
             <a href="/">Home</a>
             <i className="fa-regular fa-chevron-right" />
@@ -30,15 +30,15 @@ export default function Home() {
     </div>
   </div>
   <div className="section-seperator bg_light-1">
-    <div className="container">
+    <div className="w-full max-w-[1696px] m-auto px-[15px]">
       <hr className="section-seperator" />
     </div>
   </div>
 {/* Terms & Condition area start */}
 <div className="rts-pricavy-policy-area rts-section-gap">
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-12">
+    <div className="w-full max-w-[1696px] m-auto px-[15px]">
+      <div className="flex flex-wrap -mx-3">
+        <div className="w-full max-w-full shrink-0 px-[0.75rem]">
           <div className="container-privacy-policy">
             <h1 className="title mb--40">Terms &amp; Condition</h1>
             <p className="disc">

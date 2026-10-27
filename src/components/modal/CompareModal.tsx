@@ -1,6 +1,5 @@
 "use client"
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import Modal from '@/components/ui/Modal';
 interface ModalProps {
     show: boolean;
     handleClose: () => void;
@@ -13,7 +12,7 @@ const ModalComponent: React.FC<ModalProps> = ({ show, handleClose }) => {
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
-                dialogClassName="modal-compare"
+                maxWidthClassName="max-w-[1800px]"
             >
                 <Modal.Header closeButton>
                 </Modal.Header>

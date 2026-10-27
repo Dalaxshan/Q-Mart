@@ -53,10 +53,10 @@ const CartMain = () => {
 
   return (
     <div className="rts-cart-area rts-section-gap bg_light-1">
-      <div className="container">
-        <div className="row g-5">
+      <div className="w-full max-w-[1696px] m-auto px-[15px]">
+        <div className="flex flex-wrap -mx-6 -mt-12">
           {/* Cart Items */}
-          <div className="col-xl-12 col-12 order-2 order-xl-1">
+          <div className="w-full max-w-full shrink-0 px-6 mt-12 order-2! xl:order-1!">
             <div className="cart-area-main-wrapper">
               <div className="cart-top-area-note">
                 <p>

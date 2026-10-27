@@ -4,9 +4,9 @@ function FooterThree() {
   return (
     <div>
       <div className="rts-footer-area pt--80 bg_blue-footer">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
+          <div className="flex flex-wrap -mx-3">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem]">
               <div className="footer-main-content-wrapper footer-three-main-content-wrapper pb--70">
                 {/* single footer area wrapper */}
                 <div className="single-footer-wized">

@@ -7,8 +7,8 @@ function BannerTwo() {
   {/* banner area two start */}
   <div className="rts-banner-area-two mt--60">
     <div className="container-2">
-      <div className="row">
-        <div className="col-lg-12">
+      <div className="flex flex-wrap -mx-3">
+        <div className="w-full max-w-full shrink-0 px-[0.75rem]">
           {/* banner area start */}
           <div className="banner-area-two-start">
             <div className="banner-bg-iamge-area bg_banner-2 bg_image">

@@ -31,9 +31,9 @@ function RelatedProduct({ categoryName = "" }: RelatedProductProps) {
 
   return (
     <div className="rts-grocery-feature-area rts-section-gap">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
+      <div className="w-full max-w-[1696px] m-auto px-[15px]">
+        <div className="flex flex-wrap -mx-3">
+          <div className="w-full max-w-full shrink-0 px-[0.75rem]">
             <div className="title-area-between">
               <h2 className="title-left">Related Product</h2>
               <div className="next-prev-swiper-wrapper">
@@ -47,8 +47,8 @@ function RelatedProduct({ categoryName = "" }: RelatedProductProps) {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-lg-12">
+        <div className="flex flex-wrap -mx-3">
+          <div className="w-full max-w-full shrink-0 px-[0.75rem]">
             <div className="category-area-main-wrapper-one">
               <Swiper
                 modules={[Navigation, Autoplay]}

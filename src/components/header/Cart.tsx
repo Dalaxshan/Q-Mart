@@ -29,7 +29,7 @@ const CartDropdown: React.FC = () => {
         </h5>
 
         {activeItems.map((item) => (
-          <div key={item._id} className="cart-item-1 border-top">
+          <div key={item._id} className="cart-item-1 [border-top:1px_solid_#dee2e6]!">
             <div className="img-name">
               <div
                 className="close section-activation"
@@ -83,7 +83,7 @@ const CartDropdown: React.FC = () => {
             )}
           </div>
 
-          <div className="button-wrapper d-flex align-items-center justify-content-between">
+          <div className="button-wrapper flex! items-center! justify-between!">
             <Link href="/cart" className="rts-btn btn-primary">
               View Cart
             </Link>

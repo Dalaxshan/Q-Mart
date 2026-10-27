@@ -14,8 +14,8 @@ const CounterArea = () => {
   return (
     <div className="rts-counter-area">
       <div className="container-3">
-        <div className="row">
-          <div className="col-lg-12">
+        <div className="flex flex-wrap -mx-3">
+          <div className="w-full max-w-full shrink-0 px-[0.75rem]">
             <div className="counter-area-main-wrapper">
               {counters.map((item, index) => (
                 <div className="single-counter-area" key={index}>

@@ -33,9 +33,9 @@ const WeeklyBestSelling: React.FC = () => {
 
   return (
     <div className="weekly-best-selling-area rts-section-gap bg_light-1">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
+      <div className="w-full max-w-[1696px] m-auto px-[15px]">
+        <div className="flex flex-wrap -mx-3">
+          <div className="w-full max-w-full shrink-0 px-[0.75rem]">
             <div className="title-area-between">
               <h2 className="title-left">Weekly Best Selling Groceries</h2>
               <ul
@@ -57,11 +57,11 @@ const WeeklyBestSelling: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="row g-4">
+        <div className="flex flex-wrap -mx-3 -mt-6">
           {products.map((product: Product) => (
             <div
               key={product._id}
-              className="col-xxl-2 col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12"
+              className="w-full max-w-full shrink-0 px-[0.75rem] mt-6 sm:w-1/2 md:w-1/3 xl:w-1/4 2xl:w-1/6"
             >
               <div className="single-shopping-card-one">
                 <WeeklyBestSellingMain

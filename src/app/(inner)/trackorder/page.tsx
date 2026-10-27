@@ -16,9 +16,9 @@ export default function Home() {
   return (
     <div className="demo-one">
       <div className="rts-navigation-area-breadcrumb bg_light-1">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
+        <div className="w-full max-w-[1696px] m-auto px-[15px]">
+          <div className="flex flex-wrap -mx-3">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem]">
               <div className="navigator-breadcrumb-wrapper">
                 <a href="/">Home</a>
                 <i className="fa-regular fa-chevron-right" />
@@ -33,8 +33,8 @@ export default function Home() {
 
       <div className="track-order-area rts-section-gap">
         <div className="container-2">
-          <div className="row">
-            <div className="col-lg-12">
+          <div className="flex flex-wrap -mx-3">
+            <div className="w-full max-w-full shrink-0 px-[0.75rem]">
               <div className="tracing-order-account">
                 <h2 className="title">Orders tracking</h2>
                 <p>

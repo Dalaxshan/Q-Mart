@@ -7,13 +7,13 @@ function ComponentName() {
   {/* about area start */}
   <div className="rts-about-area rts-section-gap2">
     <div className="container-3">
-      <div className="row align-items-center">
-        <div className="col-lg-4">
+      <div className="flex flex-wrap -mx-3 items-center!">
+        <div className="w-full max-w-full shrink-0 px-[0.75rem] lg:w-1/3">
           <div className="thumbnail-left">
             <img src="assets/images/about/02.jpg" alt="" />
           </div>
         </div>
-        <div className="col-lg-8 pl--60 pl_md--10 pt_md--30 pl_sm--10 pt_sm--30">
+        <div className="w-full max-w-full shrink-0 px-[0.75rem] lg:w-2/3 pl--60 pl_md--10 pt_md--30 pl_sm--10 pt_sm--30">
           <div className="about-content-area-1">
             <h2 className="title">
               Your Destination for Quality Produce <br /> and Pantry Essentials

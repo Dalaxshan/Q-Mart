@@ -11,20 +11,20 @@ const CustomerFeedback = () => {
     return (
         <div className="rts-cuystomers-feedback-area rts-section-gap2">
             <div className="container-3">
-                <div className="row">
-                    <div className="col-lg-12">
+                <div className="flex flex-wrap -mx-3">
+                    <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                         <div className="title-area-left pl--0">
                             <h2 className="title-left mb--0">Customer Feedbacks</h2>
                         </div>
                     </div>
                 </div>
 
-                <div className="row mt--50">
-                    <div className="col-lg-12">
+                <div className="flex flex-wrap -mx-3 mt--50">
+                    <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                         <div className="customers-feedback-area-main-wrapper">
                             <div className="rts-caregory-area-one">
-                                <div className="row">
-                                    <div className="col-lg-12">
+                                <div className="flex flex-wrap -mx-3">
+                                    <div className="w-full max-w-full shrink-0 px-[0.75rem]">
                                         <div className="category-area-main-wrapper-one">
                                             <Swiper
                                                 modules={[Autoplay]}
