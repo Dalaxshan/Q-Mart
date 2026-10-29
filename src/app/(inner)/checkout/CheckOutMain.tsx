@@ -150,7 +150,7 @@ export default function CheckOutMain() {
       <div className="w-full max-w-[1696px] m-auto px-[15px]">
         <div className="flex flex-wrap -mx-3">
           {/* Left: Billing Details */}
-          <div className="w-full max-w-full shrink-0 px-[0.75rem] order-2! lg:w-2/3 xl:order-1! pr--40">
+          <div className="w-full max-w-full shrink-0 px-[0.75rem] order-1! lg:w-2/3 xl:order-1! pr--40">
             <div className="rts-billing-details-area">
               <h3 className="title">Shipping Details</h3>
               <form onSubmit={handlePlaceOrder}>
@@ -178,7 +178,7 @@ export default function CheckOutMain() {
           </div>
 
           {/* Right: Order Summary */}
-          <div className="w-full max-w-full shrink-0 px-[0.75rem] order-1! lg:w-1/3 xl:order-2!">
+          <div className="w-full max-w-full shrink-0 px-[0.75rem] order-2! lg:w-1/3 xl:order-2!">
             <h3 className="title-checkout">Your Order</h3>
             <div className="right-card-sidebar-checkout">
               <div className="top-wrapper">

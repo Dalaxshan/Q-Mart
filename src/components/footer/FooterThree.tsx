@@ -148,9 +148,15 @@ function FooterThree() {
                     </li>
                   </ul>
                 </div>
+
                 <div className="payment-access">
-                  <span>Payment Accepts:</span>
-                  <Image height={80} width={200} src="/assets/images/shop/03.png" alt="payment" />
+                  <span className="payment-title">Payment Accepts:</span>
+                  <Image
+                    height={80}
+                    width={200}
+                    src="/assets/images/shop/03.png"
+                    alt="payment"
+                  />
                 </div>
               </div>
             </div>

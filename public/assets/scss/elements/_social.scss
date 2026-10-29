@@ -1,6 +1,6 @@
 
 .social-and-payment-area-wrapper{
-    padding: 25px 0;
+    padding: 12px 0;
     border-top: 1px solid #E2E2E2;
     display: flex;
     align-items: center;
@@ -22,6 +22,9 @@
         @media #{$large-mobile} {
             flex-direction: column;
             align-items: center;
+            .payment-title{
+                padding-top: 10px;
+            }
             p{
                 margin: 0;
             }
@@ -38,6 +41,7 @@
         font-weight: 400;
         @media #{$large-mobile} {
             display: none;
+            
         }
     }
     ul{

@@ -31,6 +31,59 @@
   }
 }
 
+.social-and-payment-area-wrapper {
+  padding: 12px 0 !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .social-and-payment-area-wrapper .payment-access .payment-title {
+    padding-top: 10px;
+  }
+
+  .checkout-area .title-checkout {
+    margin-bottom: 16px;
+  }
+
+  .checkout-area .right-card-sidebar-checkout .top-wrapper,
+  .checkout-area .right-card-sidebar-checkout .single-shop-list {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .checkout-area .right-card-sidebar-checkout .top-wrapper {
+    padding: 20px 0 16px;
+  }
+
+  .checkout-area .right-card-sidebar-checkout .single-shop-list {
+    flex-direction: row;
+    align-items: center;
+    padding: 18px 0;
+  }
+
+  .checkout-area .right-card-sidebar-checkout .single-shop-list .left-area {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .checkout-area .right-card-sidebar-checkout .single-shop-list .title {
+    max-width: none;
+    overflow-wrap: anywhere;
+  }
+
+  .checkout-area .right-card-sidebar-checkout .single-shop-list .price {
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .checkout-area .right-card-sidebar-checkout .cottom-cart-right-area {
+    padding: 20px 16px;
+  }
+
+  .checkout-area .right-card-sidebar-checkout .cottom-cart-right-area .rts-btn {
+    width: 100%;
+  }
+}
+
 html,
 body {
   max-width: 100vw;
@@ -74,11 +127,11 @@ body {
 
 .discount-product-grid > .discount-offer .thumbnail-preview .badge {
   position: absolute;
-  top: 0;
+  top: 20px;
   left: 0;
   z-index: 5;
-  width: 110px;
-  height: 73px;
+  width: 120px;
+  height: 100px;
   line-height: 0;
 }
 
@@ -132,7 +185,7 @@ body {
   }
 
   .discount-product-grid > .discount-offer .thumbnail-preview {
-    flex-basis: 140px;
+    flex-basis: 240px;
     width: 140px;
     height: 160px;
   }

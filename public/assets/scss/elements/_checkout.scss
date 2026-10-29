@@ -63,6 +63,47 @@
     }
 }
 
+@media #{$large-mobile} {
+    .checkout-area{
+        .title-checkout{
+            margin-bottom: 16px;
+        }
+        .right-card-sidebar-checkout{
+            .top-wrapper,
+            .single-shop-list{
+                margin-left: 16px;
+                margin-right: 16px;
+            }
+            .top-wrapper{
+                padding: 20px 0 16px;
+            }
+            .single-shop-list{
+                flex-direction: row;
+                align-items: center;
+                padding: 18px 0;
+                .left-area{
+                    min-width: 0;
+                    flex: 1;
+                }
+                .title{
+                    max-width: none;
+                    overflow-wrap: anywhere;
+                }
+                .price{
+                    flex-shrink: 0;
+                    text-align: right;
+                }
+            }
+            .cottom-cart-right-area{
+                padding: 20px 16px;
+                .rts-btn{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
 
 
 .coupon-input-area-1{

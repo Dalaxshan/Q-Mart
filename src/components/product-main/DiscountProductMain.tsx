@@ -82,7 +82,13 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
           />
         </div>
         {/* product image */}
-        <Image width={220} height={120} src={productImageSrc} alt="grocery" style={{ width: "100%", height: "100%", objectFit: "cover"}} />
+        <Image
+          width={220}
+          height={120}
+          src={productImageSrc}
+          alt="grocery"
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        />
       </Link>
 
       <div className="body-content">
@@ -95,7 +101,9 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
         <span className="availability">{Unit ?? "500g Pack"}</span>
 
         <div className="price-area">
-          <span className="current">{formatPrice(SalePrice ?? Price ?? 0)}</span>
+          <span className="current">
+            {formatPrice(SalePrice ?? Price ?? 0)}
+          </span>
         </div>
 
         <div className="cart-counter-action">

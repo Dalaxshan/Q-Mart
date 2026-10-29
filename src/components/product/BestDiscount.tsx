@@ -13,7 +13,7 @@ function BestDiscount() {
               <div className="col-lg-6">
                 <div className="feature-product-area-large-2 bg_image">
                   <div className="inner-feature-product-content">
-                    <span>Weekend Discount</span>
+                    <span>Big Friday Discount</span>
                     <h2 className="title">
                       Feed The Best Energy <br />
                       Drink Booster
@@ -28,7 +28,7 @@ function BestDiscount() {
               <div className="col-lg-6">
                 <div className="feature-product-area-large-2 bg_2 bg_image">
                   <div className="inner-feature-product-content">
-                    <span>Weekend Discount</span>
+                    <span>Christmas Offers</span>
                     <h2 className="title">
                       Our Garden Fresh <br />
                       Vegetables

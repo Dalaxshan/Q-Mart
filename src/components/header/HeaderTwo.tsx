@@ -157,11 +157,11 @@ function HeaderTwo() {
                     </div>
                     <div className="accont-wishlist-cart-area-header">
                       <Link
-                        href="/register"
+                        href="/login"
                         className="btn-border-only account"
                       >
                         <i className="fa-light fa-user" />
-                        Register
+                        Login
                       </Link>
 
                       <WishList />

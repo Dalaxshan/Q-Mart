@@ -164,7 +164,7 @@ function FooterTwo() {
                                     </p>
                                     <div className="payment-processw-area">
                                         <span>Payment Accepts:</span>
-                                        <Image height={20} width={80} src="assets/images/shop/03.png" alt="payment" />
+                                        <Image height={10} width={80} src="assets/images/shop/03.png" alt="payment" />
                                     </div>
                                 </div>
                             </div>
