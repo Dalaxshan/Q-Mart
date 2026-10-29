@@ -88,6 +88,7 @@ function DiscountProduct() {
                       </div>
                     </a>
                   </div>
+                  
                   <div className="w-full max-w-full shrink-0 px-6 mt-12 xl:w-2/3">
                     <div className="discount-product-slider">
                       <Swiper

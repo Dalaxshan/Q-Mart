@@ -6,6 +6,7 @@ import { useWishlist } from "@/components/header/WishlistContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { formatPrice } from "@/app/lib/price-format";
+import Image from "next/image";
 
 interface BlogGridMainProps {
   Slug: string;
@@ -72,13 +73,16 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
     <>
       <Link href={`/shop/${Slug}`} className="thumbnail-preview">
         <div className="badge">
-          <span>
-            25% <br />
-            Off
-          </span>
-          <i className="fa-solid fa-bookmark" />
+          <Image
+            src="/assets/images/badge.png"
+            alt="Discount"
+            width={196}
+            height={223}
+            className="discount-badge-image"
+          />
         </div>
-        <img src={productImageSrc} alt="grocery" />
+        {/* product image */}
+        <Image width={220} height={120} src={productImageSrc} alt="grocery" style={{ width: "100%", height: "100%", objectFit: "cover"}} />
       </Link>
 
       <div className="body-content">

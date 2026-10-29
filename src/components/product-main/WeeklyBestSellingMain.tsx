@@ -106,17 +106,8 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
         <div className="weekly-best-selling-card" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
           <div className="image-and-action-area-wrapper">
             <Link href={`/shop/${Slug}`} className="thumbnail-preview">
-              {/* discount badge */}
-              <div className="badge">
-                <Image
-                  src="/assets/images/badge.png"
-                  alt="Discount"
-                  width={156}
-                  height={103}
-                  className="discount-badge-image"
-                />
-              </div>
-              <img src={productImageSrc} alt="grocery" />
+             
+              <Image width={120} height={120} src={productImageSrc} alt="grocery" />
             </Link>
             <div className="action-share-option">
               <span

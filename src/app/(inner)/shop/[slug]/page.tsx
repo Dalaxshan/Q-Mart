@@ -1195,7 +1195,7 @@ const CompareElements: React.FC = () => {
                       <p className="m-0 text-xs text-gray-500">Your email address will not be published.</p>
                       <button
                         type="submit"
-                        className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#629d23] px-7 text-sm font-semibold text-white transition hover:brightness-110 focus:outline-none focus:ring-4 focus:ring-[#629d23]/25"
+                        className="inline-flex h-20 items-center justify-center gap-2 rounded-xl bg-[#629d23] px-7 text-sm font-semibold text-white transition hover:brightness-110 focus:outline-none focus:ring-4 focus:ring-[#629d23]/25"
                       >
                         <i className="fa-regular fa-paper-plane" />
                         Submit review

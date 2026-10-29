@@ -96,7 +96,7 @@ const Sidebar = () => {
             </div>
             <div className="phone">
               <i className="fa-light fa-envelope" />
-              <a href="#">070 (150) 7075</a>
+              <a href="#">info@qmart.com</a>
             </div>
           </div>
           <div className="buton-area-bottom">

@@ -12,6 +12,7 @@ import HeaderTwo from "@/components/header/HeaderTwo";
 import FooterThree from "@/components/footer/FooterThree";
 import CategoryOne from "@/components/category/CategoryOne";
 import { GroceryHero } from "@/components/banner/GroceryHero";
+import BestDiscount from "@/components/product/BestDiscount";
 
 export default function Home() {
   return (
@@ -27,6 +28,7 @@ export default function Home() {
           <WeeklyBestSelling />
           <FeatureDiscount />
           <TrandingProduct />
+          <BestDiscount/>
           <CategoryOne />
           {/* <BlogOne /> */}
           <FooterThree />

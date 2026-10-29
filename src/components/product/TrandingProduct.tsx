@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { productApi } from "@/app/api/products/client";
 import { Product } from "@/type";
 import Link from "next/link";
+import Image from "next/image";
 
 function TrandingProduct() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -74,7 +75,7 @@ function TrandingProduct() {
                                   <i className="fa-solid fa-bookmark" />
                                 </div>
                               )}
-                              <img src={imageSrc} alt={product.name} />
+                              <Image width={196} height={180} src={imageSrc} alt={product.name} />
                             </Link>
                             <div className="body-content">
                               <Link href={`/shop/${product.slug}`}>

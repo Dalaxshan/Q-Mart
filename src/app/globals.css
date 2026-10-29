@@ -61,8 +61,8 @@ body {
 }
 
 .discount-product-grid > .discount-offer .thumbnail-preview {
-  flex: 0 0 130px;
-  width: 130px;
+  flex: 0 0 190px;
+  width: 190px;
   height: 175px;
 }
 
@@ -70,6 +70,23 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.discount-product-grid > .discount-offer .thumbnail-preview .badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 110px;
+  height: 73px;
+  line-height: 0;
+}
+
+.discount-product-grid > .discount-offer .thumbnail-preview .discount-badge-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .discount-product-grid > .discount-offer .body-content {
@@ -115,8 +132,8 @@ body {
   }
 
   .discount-product-grid > .discount-offer .thumbnail-preview {
-    flex-basis: 120px;
-    width: 120px;
+    flex-basis: 140px;
+    width: 140px;
     height: 160px;
   }
 }
@@ -262,6 +279,29 @@ body {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.top-tranding-product .single-shopping-card-one.tranding-product .thumbnail-preview {
+  height: 120px;
+}
+
+.top-tranding-product
+  .single-shopping-card-one.tranding-product
+  .thumbnail-preview
+  img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 1199px) {
+  .top-tranding-product .single-shopping-card-one.tranding-product .thumbnail-preview,
+  .top-tranding-product
+    .single-shopping-card-one.tranding-product
+    .thumbnail-preview
+    img {
+    height: auto;
+  }
 }
 
 .shop-pagination {
