@@ -10,6 +10,7 @@ import Link from "next/link";
 
 
 interface PostType {
+  id?: number;
   category?: string;
   slug: string;
   image: string;
@@ -246,7 +247,7 @@ export default function Home() {
                             >
                               <div className="single-shopping-card-one">
                                 <ShopMain
-                                  ProductId={post.id}
+                                  ProductId={post.id ?? 0}
                                   Slug={post.slug}
                                   ProductImage={post.image}
                                   ProductTitle={post.title}
