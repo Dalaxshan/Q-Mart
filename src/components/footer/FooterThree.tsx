@@ -61,6 +61,11 @@ function FooterThree() {
                           Meats &amp; Seafoods
                         </a>
                       </li>
+                      <li>
+                        <a href="shop?category=personal-care">
+                          Medical &amp; Healthcare
+                        </a>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -71,14 +76,14 @@ function FooterThree() {
                   <div className="footer-nav">
                     <ul>
                       <li>
-                        <a href="#">FAQ</a>
+                        <a href="faq">FAQ</a>
                       </li>
                       <li>
-                        <a href="#">Contact Us</a>
+                        <a href="contact">Contact Us</a>
                       </li>
 
                       <li>
-                        <a href="#">Careers</a>
+                        <a href="careers">Careers</a>
                       </li>
                     </ul>
                   </div>

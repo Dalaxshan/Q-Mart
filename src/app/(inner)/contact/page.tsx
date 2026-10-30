@@ -16,9 +16,9 @@ export default function Home() {
                 <div className="contact-banner-content">
                   <h1 className="title">Ask Us Question</h1>
                   <p className="disc">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Quisque pretium mollis ex, vel interdum augue faucibus sit
-                    amet. Proin tempor purus ac suscipit...
+                    Have a question about your order, delivery, payment, or
+                    products? We're here to help! Send us your questions, and
+                    our customer support team will be happy to assist you.
                   </p>
                 </div>
               </div>
@@ -46,7 +46,7 @@ export default function Home() {
                       <h3 className="title">QuickMart Store</h3>
                       <p>No 48, Havelock Rd, Colombo 05</p>
                       <a href="#" className="number">
-                          +94 (11) 250 1109 / +94 (70) 150 7075
+                        +94 (11) 250 1109 / +94 (70) 150 7075
                       </a>
                       <a href="#" className="email">
                         info@quickmart.com
@@ -144,7 +144,7 @@ export default function Home() {
       </>
 
       <ShortService />
-         <FooterThree/>
+      <FooterThree />
     </div>
   );
 }
