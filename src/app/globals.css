@@ -36,6 +36,74 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .cart-product-list .single-cart-area-list.head {
+    display: none;
+  }
+
+  .cart-product-list .single-cart-area-list.main {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: center;
+    padding: 20px 16px;
+  }
+
+  .cart-product-list .single-cart-area-list.main .product-main-cart {
+    grid-column: 1 / -1;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .cart-product-list .single-cart-area-list.main .product-main-cart .thumbnail {
+    flex: 0 0 64px;
+  }
+
+  .cart-product-list .single-cart-area-list.main .product-main-cart .information {
+    min-width: 0;
+  }
+
+  .cart-product-list .single-cart-area-list.main .product-main-cart .information .title {
+    overflow-wrap: anywhere;
+  }
+
+  .cart-product-list .single-cart-area-list.main .price,
+  .cart-product-list .single-cart-area-list.main .quantity,
+  .cart-product-list .single-cart-area-list.main .subtotal {
+    flex-basis: auto;
+    min-width: 0;
+  }
+
+  .cart-product-list .single-cart-area-list.main .price::before,
+  .cart-product-list .single-cart-area-list.main .quantity::before,
+  .cart-product-list .single-cart-area-list.main .subtotal::before {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--color-body);
+    content: "";
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .cart-product-list .single-cart-area-list.main .price::before {
+    content: "Price";
+  }
+
+  .cart-product-list .single-cart-area-list.main .quantity::before {
+    content: "Quantity";
+  }
+
+  .cart-product-list .single-cart-area-list.main .subtotal::before {
+    content: "Subtotal";
+  }
+
+  .cart-product-list .single-cart-area-list.main .quantity-edit {
+    width: 86px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
   .social-and-payment-area-wrapper .payment-access .payment-title {
     padding-top: 10px;
   }
@@ -580,6 +648,7 @@ a {
   flex: 1;
   flex-direction: column;
   gap: 5px;
+  min-width: 0;
 }
 
 .order-confirmation-item-info span,
@@ -657,11 +726,20 @@ a {
   }
 
   .order-confirmation-item {
-    align-items: flex-start;
-    flex-wrap: wrap;
+    align-items: start;
+    column-gap: 16px;
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    row-gap: 8px;
   }
 
   .order-confirmation-item > strong {
-    margin-left: 80px;
+    grid-column: 2;
+    justify-self: end;
+    margin-left: 0;
+  }
+
+  .order-confirmation-item-info span {
+    overflow-wrap: anywhere;
   }
 }

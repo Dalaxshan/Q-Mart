@@ -262,7 +262,7 @@ export default function CheckOutMain() {
                   ))}
                 </ul>
                
-                <button type="submit" className="rts-btn btn-primary" disabled={isPlacing}>
+                <button type="submit" className="rts-btn btn-primary mt-10" disabled={isPlacing}>
                   {isPlacing ? "Placing Order..." : "Place Order"}
                 </button>
               </div>
