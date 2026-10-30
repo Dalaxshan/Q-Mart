@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import HeaderTwo from "@/components/header/HeaderTwo";
 import FooterThree from "@/components/footer/FooterThree";
 import ShortService from "@/components/service/ShortService";
 import { orderApi } from "@/app/api/orders/client";
 import { Order } from "@/type";
-import { formatPrice} from "@/app/lib/price-format";
+import { formatPrice } from "@/app/lib/price-format";
 
 const formatDate = (value?: string) =>
   value
@@ -17,6 +18,19 @@ const formatDate = (value?: string) =>
         year: "numeric",
       })
     : "Just now";
+
+function ViewOrdersButton() {
+  const router = useRouter();
+  const handleClick = () => {
+    const isLoggedIn = !!localStorage.getItem("customer");
+    router.push(isLoggedIn ? "/account" : "/login");
+  };
+  return (
+    <button type="button" className="rts-btn btn-primary" onClick={handleClick}>
+      View My Orders
+    </button>
+  );
+}
 
 export default function OrderConfirmationPage() {
   const [order, setOrder] = useState<Order | null>(null);
@@ -80,8 +94,8 @@ export default function OrderConfirmationPage() {
                 </div>
                 <h1>Thank you! Your order has been placed.</h1>
                 <p>
-                  We have received your order and will notify you when it is
-                  on its way.
+                  We have received your order and will notify you when it is on
+                  its way.
                 </p>
                 <div className="order-confirmation-meta">
                   <span>
@@ -95,11 +109,15 @@ export default function OrderConfirmationPage() {
 
               <div className="flex flex-wrap -mx-6 -mt-12">
                 <div className="w-full max-w-full shrink-0 px-6 mt-12 lg:w-2/3">
+                  {/* order details */}
                   <section className="order-confirmation-card">
                     <h3>Order details</h3>
                     <div className="order-confirmation-items">
                       {order.items.map((item) => (
-                        <div className="order-confirmation-item" key={`${item.product}-${item.sku}`}>
+                        <div
+                          className="order-confirmation-item"
+                          key={`${item.product}-${item.sku}`}
+                        >
                           <img src={item.image} alt={item.name} />
                           <div className="order-confirmation-item-info">
                             <strong>{item.name}</strong>
@@ -108,7 +126,9 @@ export default function OrderConfirmationPage() {
                               Unit: {item.unit} · Qty: {item.quantity}
                             </span>
                           </div>
-                          <strong>{formatPrice(item.price * item.quantity)}</strong>
+                          <strong>
+                            {formatPrice(item.price * item.quantity)}
+                          </strong>
                         </div>
                       ))}
                     </div>
@@ -138,22 +158,33 @@ export default function OrderConfirmationPage() {
                 <div className="w-full max-w-full shrink-0 px-6 mt-12 lg:w-1/3">
                   <section className="order-confirmation-card order-confirmation-summary">
                     <h3>Payment summary</h3>
-                    <div><span>Subtotal</span><strong>{formatPrice(order.subtotal)}</strong></div>
-                    <div><span>Discount</span><strong>- {formatPrice(order.discount)}</strong></div>
-                    <div><span>Delivery</span><strong>{formatPrice(order.deliveryFee)}</strong></div>
+                    <div>
+                      <span>Subtotal</span>
+                      <strong>{formatPrice(order.subtotal)}</strong>
+                    </div>
+                    <div>
+                      <span>Discount</span>
+                      <strong>- {formatPrice(order.discount)}</strong>
+                    </div>
+                    <div>
+                      <span>Delivery</span>
+                      <strong>{formatPrice(order.deliveryFee)}</strong>
+                    </div>
                     <div className="order-confirmation-total">
-                      <span>Total</span><strong>{formatPrice(order.total)}</strong>
+                      <span>Total</span>
+                      <strong>{formatPrice(order.total)}</strong>
                     </div>
                     <p>
                       Payment method:{" "}
                       <strong>
                         {order.paymentMethod === "cod"
-                          ? "Cash on Delivery"
-                          : order.paymentMethod}
+                          ? "CASH ON DELIVERY"
+                          : order.paymentMethod.toUpperCase()}
                       </strong>
                     </p>
                     <p>
-                      Payment status: <strong>{order.paymentStatus}</strong>
+                      Payment status:{" "}
+                      <strong>{order.paymentStatus.toUpperCase()}</strong>
                     </p>
                   </section>
                 </div>
@@ -163,16 +194,14 @@ export default function OrderConfirmationPage() {
                 <Link href="/shop" className="rts-btn btn-primary">
                   Continue Shopping
                 </Link>
-                <Link href="/account" className="rts-btn btn-primary">
-                  View My Orders
-                </Link>
+                <ViewOrdersButton />
               </div>
             </>
           )}
         </div>
       </main>
       <ShortService />
-         <FooterThree/>
+      <FooterThree />
     </div>
   );
 }

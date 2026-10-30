@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useCart } from "@/components/header/CartContext";
 import { formatPrice } from "@/app/lib/price-format";
+import Link from "next/link";
 
 const CartMain = () => {
   const { cartItems, removeFromCart, updateItemQuantity } = useCart();
@@ -56,7 +57,7 @@ const CartMain = () => {
       <div className="w-full max-w-[1696px] m-auto px-[15px]">
         <div className="flex flex-wrap -mx-6 -mt-12">
           {/* Cart Items */}
-          <div className="w-full max-w-full shrink-0 px-6 mt-12 order-2! xl:w-3/4 xl:order-1!">
+          <div className="w-full max-w-full shrink-0 px-6 mt-12 order-1! xl:w-3/4 xl:order-1!">
             <div className="cart-area-main-wrapper">
               <div className="cart-top-area-note">
                 <p>
@@ -79,7 +80,8 @@ const CartMain = () => {
               </div>
             </div>
 
-            <div className="rts-cart-list-area">
+            {/* product list */}
+            <div className="rts-cart-list-area cart-product-list">
               <div className="single-cart-area-list head">
                 <div className="product-main">
                   <p>Products</p>
@@ -156,30 +158,7 @@ const CartMain = () => {
 
               {/* Coupon + Clear */}
               <div className="bottom-cupon-code-cart-area">
-                <form onSubmit={applyCoupon}>
-                  <input
-                    type="text"
-                    placeholder="Coupon Code"
-                    value={coupon}
-                    onChange={(e) => {
-                      setCoupon(e.target.value);
-                      setCouponMessage("");
-                    }}
-                  />
-                  <button type="submit" className="rts-btn btn-primary">
-                    Apply Coupon
-                  </button>
-                  {couponMessage && (
-                    <p
-                      style={{
-                        color: coupon === "12345" ? "green" : "red",
-                        marginTop: "8px",
-                      }}
-                    >
-                      {couponMessage}
-                    </p>
-                  )}
-                </form>
+              
                 <button
                   onClick={clearCart}
                   className="rts-btn btn-primary mr--50"
@@ -191,14 +170,18 @@ const CartMain = () => {
           </div>
 
           {/* Summary Area */}
-          <div className="w-full max-w-full shrink-0 px-6 mt-12 order-1! xl:w-1/4 xl:order-2!">
+          <div className="w-full max-w-full shrink-0 px-6 mt-12 order-2! xl:w-1/4 xl:order-2!">
             <div className="cart-total-area-start-right">
               <h5 className="title">Cart Totals</h5>
               <div className="subtotal">
                 <span>Subtotal</span>
                 <h6 className="price">{formatPrice(subtotal)}</h6>
               </div>
-              <div className="shipping">
+               <div className="subtotal">
+                <span>Discount</span>
+                <h6 className="price">{formatPrice(discount)}</h6>
+              </div>
+              {/* <div className="shipping">
                 <span>Shipping</span>
                 <ul>
                   <li>
@@ -218,16 +201,16 @@ const CartMain = () => {
                     <p className="bold">Calculate Shipping</p>
                   </li>
                 </ul>
-              </div>
+              </div> */}
               <div className="bottom">
                 <div className="wrapper">
                   <span>Total</span>
                   <h6 className="price">{formatPrice(finalTotal)}</h6>
                 </div>
                 <div className="button-area">
-                  <button className="rts-btn btn-primary">
+                  <Link href="/checkout"  className="rts-btn btn-primary text-center w-full">
                     Proceed To Checkout
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -103,11 +103,10 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
     <>
       {/* ⛔ Don't render UI until DOM ready, but WITHOUT breaking hooks */}
       {!domReady ? null : (
-        <div className="weekly-best-selling-card" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+        <div className="weekly-best-selling-card">
           <div className="image-and-action-area-wrapper">
             <Link href={`/shop/${Slug}`} className="thumbnail-preview">
-             
-              <Image width={120} height={120} src={productImageSrc} alt="grocery" />
+              <Image width={250} height={150} src={productImageSrc} alt="grocery" />
             </Link>
             <div className="action-share-option">
               <span
