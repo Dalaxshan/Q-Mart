@@ -246,6 +246,7 @@ export default function Home() {
                             >
                               <div className="single-shopping-card-one">
                                 <ShopMain
+                                  ProductId={post.id}
                                   Slug={post.slug}
                                   ProductImage={post.image}
                                   ProductTitle={post.title}

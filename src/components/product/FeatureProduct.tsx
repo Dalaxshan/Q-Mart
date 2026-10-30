@@ -108,7 +108,7 @@ function FeatureProduct() {
                     }}
                     autoplay={{
                       delay: 3000,
-                      disableOnInteraction: false, // Continue autoplay after user interactions
+                      disableOnInteraction: false,
                     }}
                     loop={products.length >= 6}
                     navigation={{

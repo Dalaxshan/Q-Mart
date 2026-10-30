@@ -10,6 +10,7 @@ import { formatPrice } from "@/app/lib/price-format";
 
 
 interface BlogGridMainProps {
+    ProductId: string | number;
     Slug: string;
     ProductImage: string;
     ProductTitle?: string;
@@ -17,6 +18,7 @@ interface BlogGridMainProps {
 }
 
 const BlogGridMain: React.FC<BlogGridMainProps> = ({
+    ProductId,
     Slug,
     ProductImage,
     ProductTitle,
@@ -152,6 +154,7 @@ const BlogGridMain: React.FC<BlogGridMainProps> = ({
             </div>
 
             <ProductDetails
+                productId={ProductId}
                 show={activeModal === 'two'}
                 handleClose={handleClose}
                 productImage={`/assets/images/grocery/${ProductImage}`}
